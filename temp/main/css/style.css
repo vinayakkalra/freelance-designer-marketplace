@@ -6123,7 +6123,7 @@ a.mytooltip {
 }
 
 .carousel-item-next, .carousel-item-prev, .carousel-item.active {
-    display: block
+    display: flex
 }
 
 .plugin-details {

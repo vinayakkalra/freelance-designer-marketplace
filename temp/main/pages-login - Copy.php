@@ -82,9 +82,7 @@
                             if($tablename == "client"){
                             header("Location: client_dashboard.php");
                             }else{
-                                ?>
-                                    <script>alert("Please login AS Client")</script>
-                                <?php
+                                header("Location: designer_dashboard.php");
                             }
                             
                         } else {

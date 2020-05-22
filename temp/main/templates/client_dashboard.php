@@ -1,19 +1,5 @@
 <?php
 session_start();
-if (array_key_exists("logout", $_GET)) {
-    // check logout value 1 or not
-            
-             $_COOKIE["iddashboard"] = "";  
-             $_COOKIE["signupas"] = "";
-            
-            session_destroy();
-            
-            setcookie("iddashboard", "", time() - 60*60);
-            setcookie("signupas", "", time() - 60*60);
-            header("Refresh:0; url=client_dashboard.php");
-    //        $_COOKIE["id"] = "";  
-    // destroy cookie and session
-        }
 include("./php/config.php");
 // $_SESSION['iddashboard'] $_SESSION['signupas']
 if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "client") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "client" )) {
@@ -230,201 +216,10 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
 </style>
 
 <body class="fix-header fix-sidebar card-no-border">
+<div id="header-desktop" ></div>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="client_dashboard.php">
-                        <!-- Logo icon --><b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo">
-                            <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo">
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text --><span>
-                            <!-- dark Logo text -->
-                            <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo">
-                            <!-- Light Logo text -->
-                            <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage"></span>
-                    </a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto mt-md-0">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a
-                                class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a
-                                class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Comment -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Comment -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- User profile and search -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav my-lg-0">
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item hidden-sm-down search-box">
-                            <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark"
-                                href="client_dashboard.php?logout=1">
-                                <p style="color: #fff;margin: 0;">Logout</p>
-                            </a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                    class="srh-btn"><i class="ti-close"></i></a> </form>
-                        </li>
-                        <!-- mob -->
-                        <li class="nav-item"> <a
-                                class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
-                                href="client_dashboard.php?logout=1">
-                                <p style="color: #fff;margin: 0;">Logout</p>
-                            </a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Language -->
-                        <!-- ============================================================== -->
-                        <!-- <li class="nav-item dropdown">
-
-                            <div class="dropdown-menu dropdown-menu-right scale-up"> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                        </li> -->
-                        <!-- ============================================================== -->
-                        <!-- Profile -->
-                        <!-- ============================================================== -->
-                        <!-- <li class="nav-item dropdown">
-
-                            <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
-                                    <li>
-                                        <div class="dw-user-box">
-                                            <div class="u-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
-                                            <div class="u-text">
-                                                <h4>Steave Jobs</h4>
-                                                <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html"
-                                                    class="btn btn-rounded btn-danger btn-sm">View Profile</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </li> -->
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <!-- <li class="nav-small-cap">PERSONAL</li> -->
-                        <li class="active">
-                            <a href="client_dashboard.php">
-                                <i class="mdi mdi-gauge ">
-                                </i><span class="hide-menu">Dashboard </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="design_request_sheet.php">
-                                <i class="mdi mdi-file ">
-                                </i><span class="hide-menu">Design Request Sheet </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="client_processing_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Processing Requests </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="client_accepted_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Accepted Requests </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="client_completed_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Completed Requests </span>
-                            </a>
-                        </li>
-                        <!-- <li>
-                            <a href="client_processing_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Design Requests </span>
-                            </a>
-                        </li> -->
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -435,7 +230,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="row page-titles">
+            <div class="row page-titles" style="margin-top: 63px;" >
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-themecolor">Dashboard</h3>
                 </div>
@@ -735,7 +530,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -766,7 +561,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -842,7 +637,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -873,7 +668,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -909,7 +704,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 50%;border-left: 4px solid #e6e6e6;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -940,7 +735,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -983,7 +778,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1014,7 +809,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1090,7 +885,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1121,7 +916,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1157,7 +952,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 50%;border-left: 4px solid #e6e6e6;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1188,7 +983,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='form-wizard - Copy.php';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1407,7 +1202,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1439,7 +1234,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1520,7 +1315,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1552,7 +1347,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1589,7 +1384,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1621,7 +1416,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1665,7 +1460,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1697,7 +1492,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1778,7 +1573,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1810,7 +1605,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1847,7 +1642,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1879,7 +1674,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='form-wizard - Copy.php';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1975,6 +1770,13 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script>
+        // header and footer
+        $("#header-desktop").load('templates/client_header.html');
+        // $("#footer-desktop").load('templates/footer_finwin.html');
+        // $("#footer-mobile").load('templates/footer_mobile.html');
+        // $("#header-mobile").load('templates/header_mobile_finwin.php'); 
+    </script>
     <script>
         $(".designed_buttom").click(function () {
             var index = $(".designed_buttom").index(this);

@@ -120,9 +120,8 @@
                         if($tablename == "client"){
                             header("Location: client_dashboard.php");
                             }else{
-                                ?>
-                                    <script>alert("Please SignUp AS Client")</script>
-                                <?php
+                                header("Location: designer_dashboard.php");
+                               
                             }
                         // header("Location: My_Courses");
 

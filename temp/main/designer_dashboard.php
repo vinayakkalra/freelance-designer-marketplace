@@ -21,7 +21,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
 }
  else {
     // echo '<script type="text/javascript">alert("hello!");</script>';
-    header('location:pages-register - Copy.php');
+    header('location:index.php');
 }
 if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
     // getting id of customer
@@ -114,6 +114,18 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
         -webkit-transform: scale(1.01, 1.01);
         transform: scale(1.01, 1.01);
     }
+    .dashboard{
+        background: #242933 !important;
+        color: #1976d2 !important;
+        }
+    #dashboard i 
+    {
+        width: 27px;
+        font-size: 19px;
+        display: inline-block;
+        vertical-align: middle;
+        color: #1976d2;
+    }
 </style>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -168,32 +180,8 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         <li class="nav-item m-l-10"> <a
                                 class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Comment -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Comment -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
                     </ul>
-                    <!-- ============================================================== -->
-                    <!-- User profile and search -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
                         <li class="nav-item hidden-sm-down search-box">
                             <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark"
                                 href="designer_dashboard.php?logout=1">
@@ -209,104 +197,12 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                 href="designer_dashboard.php?logout=1">
                                 <p style="color: #fff;margin: 0;">Logout</p>
                             </a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Language -->
-                        <!-- ============================================================== -->
-                        <!-- <li class="nav-item dropdown">
-
-                            <div class="dropdown-menu dropdown-menu-right scale-up"> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                        </li> -->
-                        <!-- ============================================================== -->
-                        <!-- Profile -->
-                        <!-- ============================================================== -->
-                        <!-- <li class="nav-item dropdown">
-
-                            <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
-                                    <li>
-                                        <div class="dw-user-box">
-                                            <div class="u-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
-                                            <div class="u-text">
-                                                <h4>Steave Jobs</h4>
-                                                <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html"
-                                                    class="btn btn-rounded btn-danger btn-sm">View Profile</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </li> -->
+                        </li> 
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <!-- <li class="nav-small-cap">PERSONAL</li> -->
-                        <li class="active">
-                            <a href="designer_dashboard.php">
-                                <i class="mdi mdi-gauge ">
-                                </i><span class="hide-menu">Dashboard </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="designer_accepted_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Accepted Requests </span>
-                            </a>
-                        </li>
-                        <li >
-                            <a href="designer_completed_request .php">
-                                <i class="mdi mdi-file ">
-                                </i><span class="hide-menu">Completed Requests </span>
-                            </a>
-                        </li>
-                       
-
-                        <!-- <li>
-                            <a href="client_processing_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Accepted Requests </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="client_processing_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Design Requests </span>
-                            </a>
-                        </li> -->
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+        <div id="header-desktop" ></div>
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
@@ -614,6 +510,9 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
 
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script type="text/javascript">
+        $("#header-desktop").load('templates/designer_header.php');
+    </script>
     <script>
          $(document).ready(function () {
             $('.addItemBtn').click(function (e) {

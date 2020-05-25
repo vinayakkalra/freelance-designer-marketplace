@@ -16,7 +16,7 @@ if(isset($_POST['cid'])){
                         if ($resultsec = mysqli_query($conn, $querysec)) {
                           while( $rowsec = mysqli_fetch_array($resultsec)){
 
-                              if( $rowsec['status'] != "processing"){  
+                              if( $rowsec['status'] != "Submitted"){  
                                 $data['status'] = 201;
                                 // $data['id'] = $id;
                                 echo json_encode($data);
@@ -24,7 +24,7 @@ if(isset($_POST['cid'])){
 
                               }else{
                                 $status = "status";
-                                $accepted = "accepted";
+                                $accepted = "Processing";
                                 $designer_accept_email = "designer_accept_email";
                                 $designer_accept_name = "designer_accept_name";
                                 $designer_accept_id = "designer_accept_id";

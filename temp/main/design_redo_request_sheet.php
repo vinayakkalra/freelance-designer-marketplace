@@ -49,6 +49,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
 }
 ?>
 <?php
+$request_id = $_GET['request_id'];
  $error="";
  if (array_key_exists("submit", $_POST)) {
       // connection.php for connecting to database
@@ -81,7 +82,9 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     $inspirationlink = $_POST['inspirationlink'];
     $yourpageurl = $_POST['yourpageurl'];
     $messageconvey = $_POST['messageconvey'];
-    $status = "Submitted";
+    $status = "Redo";
+    $order_number = $_POST['order_number'];
+    $what_change = $_POST['what_change'];
     $error="";
     // check file uploaded or not
     $total = count($_FILES['images']['name']);
@@ -203,7 +206,7 @@ $inspimages = implode("++--", $itemss);
 $inspimages = "";
 }
 // upload inspiration img end
-$query = "INSERT INTO `requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_be_used`,`Main_tagline`,`Age_Group`,`Image_Size`,`Image_Format`,`Describe_your_project`,`Due_Date`,`credits_pay`,`link_to_any_inspiration`,`Your_Page_Url`,`message_convey`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $maintagline)."','".mysqli_real_escape_string($conn, $agegroup)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."','".mysqli_real_escape_string($conn, $budget)."','".mysqli_real_escape_string($conn, $inspirationlink)."','".mysqli_real_escape_string($conn, $yourpageurl)."','".mysqli_real_escape_string($conn, $messageconvey)."','".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."')";
+$query = "INSERT INTO `redo` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_be_used`,`Main_tagline`,`Age_Group`,`Image_Size`,`Image_Format`,`Describe_your_project`,`Due_Date`,`credits_pay`,`link_to_any_inspiration`,`Your_Page_Url`,`message_convey`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`order_number`,`what_u_want_change`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $maintagline)."','".mysqli_real_escape_string($conn, $agegroup)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."','".mysqli_real_escape_string($conn, $budget)."','".mysqli_real_escape_string($conn, $inspirationlink)."','".mysqli_real_escape_string($conn, $yourpageurl)."','".mysqli_real_escape_string($conn, $messageconvey)."','".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $order_number)."','".mysqli_real_escape_string($conn, $what_change)."')";
 
 // $query = "INSERT INTO `requests` (`name`, `email`,`phone`, `project_name`,`type_of_design`, `how_design_be_used`,`Main_tagline` , `Age_Group`, `Image_Size`,`Image_Format`,`Describe_your_project`,`Due_Date`,`credits_pay`,`link_to_any_inspiration`,`Your_Page_Url`,`message_convey`,`reference_files`,`inspiration_files`,`status` , `from_ip`,`from_browser`,`time`) VALUES ('".mysqli_real_escape_string($conn, $name)."', '".mysqli_real_escape_string($conn, $email)."','".mysqli_real_escape_string($conn, $phone)."','".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $maintagline)."','".mysqli_real_escape_string($conn, $agegroup)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."','".mysqli_real_escape_string($conn, $budget)."','".mysqli_real_escape_string($conn, $inspirationlink)."','".mysqli_real_escape_string($conn, $yourpageurl)."','".mysqli_real_escape_string($conn, $messageconvey)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $images)."','".mysqli_real_escape_string($conn, $refimages)."','$from_ip','$from_browser','$date_now')";
 
@@ -215,11 +218,68 @@ if (!mysqli_query($conn, $query)) {
 <?php
 
 } else {
+    echo $customeremail;
+    echo $request_id;
+    $querysec = "SELECT * FROM `designer_completed_requests` WHERE client_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id  order by id desc limit 1 ";
+    if ($resultsec = mysqli_query($conn, $querysec)) {
+      while( $rowsec = mysqli_fetch_array($resultsec)){
+          $designer_email = $rowsec['designer_email'];
+          $employe_table = $rowsec['employer_tablename'];
+            $redo = "Redo";
+            $querysec = "UPDATE `designer_completed_requests` SET `status` =  '".mysqli_real_escape_string($conn, $redo)."' WHERE client_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id  order by id desc limit 1";
+            if(!$result = mysqli_query($conn, $querysec)){
+            
+            }else{ 
+                        
+                        $querysec = "SELECT * FROM `$employe_table` WHERE email = '".mysqli_real_escape_string($conn, $designer_email)."'";
+                            if ($resultsec = mysqli_query($conn, $querysec)) {
+                            while( $rowsec = mysqli_fetch_array($resultsec)){
+                                $no_of_redo = $rowsec['no_of_redo'];
+                                echo $no_of_redo ;
+                                $no_of_redos = $no_of_redo + 1 ;
+                                $query = "UPDATE `$employe_table` SET `no_of_redo` =  $no_of_redos  WHERE email = '".mysqli_real_escape_string($conn, $designer_email)."'";
+                                if($result = mysqli_query($conn, $query)){
+                                    $querysec = "SELECT * FROM `requests` WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' AND id = $request_id ";
+                                    if ($resultsec = mysqli_query($conn, $querysec)) {
+                                    while( $rowsec = mysqli_fetch_array($resultsec)){
+                                        $no_of_redo = $rowsec['no_of_redo'];
+                                        echo $no_of_redo ;
+                                        $no_of_redos = $no_of_redo + 1 ;
+                                        $redo = "Redo";
+                                        $query = "UPDATE `requests` SET `no_of_redo` =  $no_of_redos , `status` =  '".mysqli_real_escape_string($conn, $redo)."' , `redo_status` = '".mysqli_real_escape_string($conn, $redo)."'  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' AND id = $request_id ";
+                                        if($result = mysqli_query($conn, $query)){
+                                            ?>
+                                            <script>
+                                            alert('form submitted successfully!');
+                                             window.location = 'client_all_requests.php';</script>
+                                            <?php
+                                        }else{
+
+                                        }
+                                    }
+                                    }
+                                    
+                                    // header('location:designer_accepted_request.php');
+                                    
+                                }else{
+                                    ?>
+                                    <script>alert('error in form')</script>
+                                    <?php
+                                }
+                            }
+                            }
+                        
+                    
+            }
+        }
+    }else{
     ?>
-<script>
-alert('form submitted successfully!');
- window.location = 'client_all_requests.php';</script>
-<?php
+    <script>
+    alert('Error in form!');
+    //  window.location = 'client_all_requests.php';</script>
+    <?php
+    }
+   
 // header('location:client_processing_request.php');
 
 }
@@ -349,7 +409,7 @@ alert('form submitted successfully!');
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Design Request Form</h3>
+                    <h3 class="text-themecolor">Redo Request Form</h3>
                 </div>
                 <!-- <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -401,6 +461,17 @@ alert('form submitted successfully!');
                                     
                                     <section class="form_option" >
                                     <h6 style="margin-bottom:30px;" >Step 1</h6>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="order_number"> Order Number : <span class="danger">*</span>
+                                                </label>
+                                                <input type="text" value="<?= $request_id ?>"
+                                                    class="form-control required" id="order_number" name="order_number"
+                                                    readonly> 
+                                            </div>
+                                        </div>
+                                    </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -593,13 +664,13 @@ alert('form submitted successfully!');
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="messageconvey">Anything else you'd like to share
-                                                        with your designer? :</label>
-                                                    <textarea name="messageconvey" id="messageconvey" rows="6"
-                                                        class="form-control "></textarea>
+                                                    <label for="what_u_want_change">What is it you Want to change?  :</label>
+                                                    <textarea name="what_change" id="what_u_want_change" rows="6"
+                                                        class="form-control required"></textarea>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <a class="btn btn-primary btn btn-info  waves-effect waves-light previous" style="color:#fff;" type="button">Previous
                                         </a>
                                         <a class="btn btn-primary btn btn-info  waves-effect waves-light addItemBtn" style="color:#fff;padding: 7px 25px;" type="button">Next
@@ -609,6 +680,16 @@ alert('form submitted successfully!');
                                     <!-- Step 4 -->
                                     <section class="form_option" style="display:none">
                                     <h6 style="margin-bottom:30px;" >Step 4</h6>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="messageconvey">Anything else you'd like to share
+                                                        with your designer? :</label>
+                                                    <textarea name="messageconvey" id="messageconvey" rows="6"
+                                                        class="form-control "></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -729,6 +810,15 @@ alert('form submitted successfully!');
                 } else {
                     return false;
                 }
+            }
+            if ($("#order_number").val() == "") {
+                $("#order_number").css('border-color', 'red');
+                $("#order_number").css('border-width', '2px');
+                $("#order_number").attr('placeholder', 'Required Field');
+                error = error + 'name';
+            } else {
+                // $("#order_number").css('border-color','white');
+                // $("#order_number").css('border-width','1px');
             }
             if ($("#wfirstName2").val() == "") {
                 $("#wfirstName2").css('border-color', 'red');
@@ -921,6 +1011,15 @@ alert('form submitted successfully!');
                 $("#budget").css('border-width', '2px');
                 $("#budget").attr('placeholder', 'Required Field');
                 error = error + 'budget';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#what_u_want_change").val() == "") {
+                $("#what_u_want_change").css('border-color', 'red');
+                $("#what_u_want_change").css('border-width', '2px');
+                $("#what_u_want_change").attr('placeholder', 'Required Field');
+                error = error + 'what_u_want_change';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
@@ -1118,6 +1217,15 @@ alert('form submitted successfully!');
                 $("#budget").css('border-width', '2px');
                 $("#budget").attr('placeholder', 'Required Field');
                 error = error + 'budget';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#what_u_want_change").val() == "") {
+                $("#what_u_want_change").css('border-color', 'red');
+                $("#what_u_want_change").css('border-width', '2px');
+                $("#what_u_want_change").attr('placeholder', 'Required Field');
+                error = error + 'what_u_want_change';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');

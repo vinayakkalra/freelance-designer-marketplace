@@ -2,7 +2,7 @@
 session_start();
 include("./php/config.php");
 // $_SESSION['iddashboard'] $_SESSION['signupas']
-if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "client") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "client" )) {
+if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "designer") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "designer" )) {
    
 }
  else {
@@ -100,11 +100,11 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
         -webkit-transform: scale(1.01, 1.01);
         transform: scale(1.01, 1.01);
     }
-    .Completed_Requests{
+    .completed_requests{
         background: #242933 !important;
         color: #1976d2 !important;
-    }
-    #Completed_Requests i 
+        }
+    #completed_requests i 
     {
         width: 27px;
         font-size: 19px;
@@ -170,7 +170,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item hidden-sm-down search-box">
                             <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark"
-                                href="client_dashboard.php?logout=1">
+                                href="designer_dashboard.php?logout=1">
                                 <p style="color: #fff;margin: 0;">Logout</p>
                             </a>
                             <form class="app-search">
@@ -180,7 +180,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         <!-- mob -->
                         <li class="nav-item"> <a
                                 class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
-                                href="client_dashboard.php?logout=1">
+                                href="designer_dashboard.php?logout=1">
                                 <p style="color: #fff;margin: 0;">Logout</p>
                             </a> </li>
                         </li> 
@@ -189,6 +189,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             </nav>
         </header>
         <div id="header-desktop" ></div>
+
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
@@ -197,7 +198,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">All Completed Requests</h3>
+                    <h3 class="text-themecolor">Completed Requests</h3>
                 </div>
                 <!-- <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -239,7 +240,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         </div>
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE	email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'completed'";
+                        $querysec = "SELECT * FROM `requests` WHERE designer_completed_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'completed' order by id desc limit 10";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
@@ -271,7 +272,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             <h2 style="margin-left: 40px;"><?= $i ?></h2>
                         </div>
                         <div style="width:40%">
-                            <p><span style="font-size: 16px;font-weight: 700;">Order No:
+                            <p><span style="font-size: 16px;font-weight: 700;">Order Number:
                                 </span><?= $rowsec['id'] ?></p>
                             <p><span style="font-size: 16px;font-weight: 700;">Project Name:
                                 </span><?= $rowsec['project_name'] ?></p>
@@ -281,13 +282,13 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                 </span><?= $rowsec['how_design_be_used'] ?></p>
                         </div>
                         <div style="width:20%">
-                            <a class="btn btn-primary" href="client_view_request.php?requestid=<?= $rowsec['id']?>"
+                            <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
                                 data-purpose="keep-shopping-action">
                                 View Request
                             </a>
                         </div>
                         <div style="width:20%;text-align: center;">
-                                <a class="btn btn-primary addItemBtn" href="client_view_completed_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
+                                <a class="btn btn-primary addItemBtn" href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
                                 View Design
                                 </a>
                         </div>
@@ -334,7 +335,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         </div> -->
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'completed'";
+                        $querysec = "SELECT * FROM `requests` WHERE designer_completed_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'completed'";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
@@ -374,12 +375,12 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         </div>
                         <div style="width:40%">
                             <p>
-                                <a class="btn btn-primary" href="client_view_request.php?requestid=<?= $rowsec['id']?>"
+                                <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
                                     data-purpose="keep-shopping-action">
                                     View
                                 </a>
                             </p>
-                                <a class="btn btn-primary addItemBtn"  href="client_view_completed_request.php?request_id=<?=$rowsec['id']?>"  style="color:#fff;" type="button">
+                                <a class="btn btn-primary addItemBtn"  href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
                                     View design
                                 </a>
                             
@@ -458,7 +459,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
     <script type="text/javascript">
-        $("#header-desktop").load('templates/client_header.php');
+        $("#header-desktop").load('templates/designer_header.php');
     </script>
     <!-- <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script> -->
     <!-- <script>

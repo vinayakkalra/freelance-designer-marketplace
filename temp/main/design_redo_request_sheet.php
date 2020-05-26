@@ -218,8 +218,8 @@ if (!mysqli_query($conn, $query)) {
 <?php
 
 } else {
-    echo $customeremail;
-    echo $request_id;
+    // echo $customeremail;
+    // echo $request_id;
     $querysec = "SELECT * FROM `designer_completed_requests` WHERE client_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id  order by id desc limit 1 ";
     if ($resultsec = mysqli_query($conn, $querysec)) {
       while( $rowsec = mysqli_fetch_array($resultsec)){
@@ -235,7 +235,7 @@ if (!mysqli_query($conn, $query)) {
                             if ($resultsec = mysqli_query($conn, $querysec)) {
                             while( $rowsec = mysqli_fetch_array($resultsec)){
                                 $no_of_redo = $rowsec['no_of_redo'];
-                                echo $no_of_redo ;
+                                // echo $no_of_redo ;
                                 $no_of_redos = $no_of_redo + 1 ;
                                 $query = "UPDATE `$employe_table` SET `no_of_redo` =  $no_of_redos  WHERE email = '".mysqli_real_escape_string($conn, $designer_email)."'";
                                 if($result = mysqli_query($conn, $query)){
@@ -243,7 +243,7 @@ if (!mysqli_query($conn, $query)) {
                                     if ($resultsec = mysqli_query($conn, $querysec)) {
                                     while( $rowsec = mysqli_fetch_array($resultsec)){
                                         $no_of_redo = $rowsec['no_of_redo'];
-                                        echo $no_of_redo ;
+                                        // echo $no_of_redo ;
                                         $no_of_redos = $no_of_redo + 1 ;
                                         $redo = "Redo";
                                         $query = "UPDATE `requests` SET `no_of_redo` =  $no_of_redos , `status` =  '".mysqli_real_escape_string($conn, $redo)."' , `redo_status` = '".mysqli_real_escape_string($conn, $redo)."'  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' AND id = $request_id ";

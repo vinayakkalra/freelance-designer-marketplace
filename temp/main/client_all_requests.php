@@ -40,7 +40,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                  $customeremail = $row['email'] ;
                  $customername = $row['name'] ;
                  $customerphone = $row['phone'] ;
-                 echo $customeremail ;
+                //  echo $customeremail ;
                     }
                  }
                  else{

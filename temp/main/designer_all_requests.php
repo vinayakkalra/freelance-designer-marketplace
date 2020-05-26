@@ -1,19 +1,5 @@
 <?php
 session_start();
-if (array_key_exists("logout", $_GET)) {
-    // check logout value 1 or not
-            
-             $_COOKIE["iddashboard"] = "";  
-             $_COOKIE["signupas"] = "";
-            
-            session_destroy();
-            
-            setcookie("iddashboard", "", time() - 60*60);
-            setcookie("signupas", "", time() - 60*60);
-            header("Refresh:0; url=designer_dashboard.php");
-    //        $_COOKIE["id"] = "";  
-    // destroy cookie and session
-        }
 include("./php/config.php");
 // $_SESSION['iddashboard'] $_SESSION['signupas']
 if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "designer") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "designer" )) {
@@ -27,6 +13,7 @@ if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
     // getting id of customer
     $customerid =  $_COOKIE['iddashboard'];
     $tablename = $_COOKIE['signupas'];
+  
     $query = "SELECT * FROM `$tablename` WHERE id = $customerid";
 //getting email of customer
          if ($result = mysqli_query($conn, $query)) {
@@ -34,11 +21,11 @@ if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
                 $customeremail = $row['email'] ;
                 $customername = $row['name'] ;
                 $customerphone = $row['phone'] ;
-               
+                // echo $customeremail ;
                    }
                 }
                 else{
-                    // echo "hello";
+                    echo "hello";
                 }
 }
 elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard']) 
@@ -53,11 +40,11 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                  $customeremail = $row['email'] ;
                  $customername = $row['name'] ;
                  $customerphone = $row['phone'] ;
-                
+                //  echo $customeremail ;
                     }
                  }
                  else{
-                    //  echo "hello";
+                     echo "hello";
                  }
 
 }
@@ -109,16 +96,16 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
 
     .request_show:hover {
         background: linear-gradient(to right, #fff 0, #f6f6f6 35%, #f6f6f6 65%, #fff 100%);
-        /* cursor: pointer; */
+        cursor: pointer;
         box-shadow: 0 7px 21px 0 rgba(0, 0, 0, .1);
         -webkit-transform: scale(1.01, 1.01);
         transform: scale(1.01, 1.01);
     }
-    .dashboard{
+    .all_requests{
         background: #242933 !important;
         color: #1976d2 !important;
-        }
-    #dashboard i 
+    }
+    #all_requests i 
     {
         width: 27px;
         font-size: 19px;
@@ -211,7 +198,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">All Design Requests</h3>
+                    <h3 class="text-themecolor">All Requests</h3>
                 </div>
                 <!-- <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -234,17 +221,13 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <div class="d-none d-lg-block">
                 <div class="container-fluid" style="background-color:#fff;padding-top:20px;">
-                    <h1>Welcome back, <?= $customername ?></h1>
-                </div>
-                <div class="container-fluid" style="background-color:#fff;padding-top:20px;">
                     <!-- ============================================================== -->
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
                     <!-- Validation wizard -->
                     <div class="row" style="display:flex;padding-bottom:20px;">
-                    <!--  -->
-                    <div style="width:15%">
-                            <h3 style="margin-left: 10px;">Order No :</h3>
+                        <div style="width:15%">
+                            <h3 style="margin-left: 10px;">Order No</h3>
                         </div>
                         <div style="width:25%">
                             <h3>Request Information</h3>
@@ -256,206 +239,391 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             <h3>Status</h3>
                         </div>
                             <div style="width:20%">
-                            <h3>Accept Request</h3>
+                            <h3>View Design</h3>
                         </div>
-                    <!--  -->
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE status = 'Submitted'";
+                    $variablle = 0;
+                    $variablless = 0;
+                        
+                           $querysec = "SELECT * FROM `requests` WHERE (designer_accept_email = '".mysqli_real_escape_string($conn, $customeremail)."') AND (status = 'Submitted' OR status = 'Processing' OR status = 'redo' OR status = 'Pending' ) ";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
+                            $variablle = 1;
                             ?>
-                    <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
-                        <div class="container-fluid" style="margin-top:0px">
+                    <!-- <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                        <div class="container-fluid" style="margin-top:0px"> -->
                             <!-- main -->
-                            <div class="emptycartdiv">
+                            <!-- <div class="emptycartdiv">
 
                                 <h1>No Request in the works</h1>
-                                <!-- <h2>Launch a request or hire your favorite designer to get your design needs done.</h2> -->
-                                <!-- <a class="btn btn-primary" href="form-wizard - Copy.php"
-                                    data-purpose="keep-shopping-action">Click here</a> -->
-                            </div>
+                                <h2>Launch a request or hire your favorite designer to get your design needs done.</h2>
+                                <a class="btn btn-primary" href="design_request_sheet.php"
+                                    data-purpose="keep-shopping-action">Click here</a>
+                            </div> -->
                             <!--  -->
-                        </div>
-                    </div>
+                        <!-- </div> -->
+                    <!-- </div> -->
                     <?php
                         }else{
                             $i = 1;
                             while( $rowsec = mysqli_fetch_array($resultsec)){
 
-                                if( $rowsec['status'] == "Submitted")
-                            {  
+                                if( $rowsec['status'] == "Redo"  or $rowsec['status'] == "Processing")
+                            {
                                 ?>
                     <!--  -->
                     <div class="row request_show">
                         <div style="width:15%">
                             <h3 style="margin-left: 10px;"><?= $rowsec['id'] ?></h3>
                         </div>
-                        <!--  -->
                         <div style="width:25%">
                             <p><span style="font-size: 16px;font-weight: 700;">Project Name:
                                     </span><?= $rowsec['project_name'] ?></p>
                             <p><span style="font-size: 16px;font-weight: 700;">Design Type:
                                     </span><?= $rowsec['type_of_design'] ?></p>
                         </div>
-                        <!--  -->
                         <div style="width:20%">
                             <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
                                 data-purpose="keep-shopping-action">
                                 View Request
                             </a>
                         </div>
-                        <div style="width:20%">
+                            <div style="width:20%">
                             <h3><?= $rowsec['status'] ?></h3>
                         </div>
-                        <div style="width:20%;text-align: center;">
-                            <form action="" class="form-submit" style="margin-right: 5px;">
-                                <input type="hidden" class="cid" value="<?= $rowsec['id'] ?>">
-                                <input type="hidden" class="cname"
-                                    value="<?= $rowsec['name'] ?>">
-                                <input type="hidden" class="cemail"
-                                    value="<?= $rowsec['email'] ?>">
-                                <input type="hidden" class="demail"
-                                    value="<?= $customeremail?>">
-                                <input type="hidden" class="dname"
-                                    value="<?= $customername ?>">
-                                <input type="hidden" class="did" value="<?= $customerid ?>">
-                                <input type="hidden" class="dtablename" value="<?= $tablename ?>">
-                                <!-- <button style="width: 100%;"
-                                    class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
-                                    to cart</button> -->
-                                <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
-                                    Accept
-                                </a>
-                            </form>
-                           
+                        <div style="width:20%">
+                        <a class="btn btn-primary addItemBtn" href="designer_submission_sheet.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
+                                            Submit Design
+                                            </a>
                         </div>
                     </div>
                     <!--  -->
 
                     <?php
                             }
+                            else if($rowsec['status'] == "Pending")
+                            {
+                                ?>
+                                            <!--  -->
+                                <div class="row request_show">
+                                    <div style="width:15%">
+                                        <h3 style="margin-left: 10px;"><?= $rowsec['id'] ?></h3>
+                                    </div>
+                                    <div style="width:25%">
+                                        <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                                </span><?= $rowsec['project_name'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                                </span><?= $rowsec['type_of_design'] ?></p>
+                                    </div>
+                                    <div style="width:20%">
+                                        <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Request
+                                        </a>
+                                    </div>
+                                        <div style="width:20%">
+                                        <h3><?= $rowsec['status'] ?></h3>
+                                    </div>
+                                        <div style="width:20%">
+                                        <a class="btn btn-primary addItemBtn" href="designer_view_pending_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
+                                            View Design
+                                            </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <?php
+                            }
                             $i++ ;
                             }
                         }
                     }
                     ?>
-                    <!-- ============================================================== -->
-                    <!-- End PAge Content -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Right sidebar -->
-                    <!-- ============================================================== -->
-                    <!-- .right-sidebar -->
+                    <!-- completed -->
+                     <?php
+                           $querysec = "SELECT * FROM `requests` WHERE designer_accept_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'Completed' order by id desc limit 10";
+                        if ($resultsec = mysqli_query($conn, $querysec)) {
 
-                    <!-- ============================================================== -->
-                    <!-- End Right sidebar -->
-                    <!-- ============================================================== -->
+                        if( ! mysqli_num_rows($resultsec) ) {
+                            $variablless = 1;
+                            ?>
+
+                    <!-- <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                        <div class="container-fluid" style="margin-top:0px"> -->
+                            <!-- main -->
+                            <!-- <div class="emptycartdiv">
+
+                                <h1>No Request in the works</h1>
+                                <h2>Launch a request or hire your favorite designer to get your design needs done.</h2>
+                                <a class="btn btn-primary" href="design_request_sheet.php"
+                                    data-purpose="keep-shopping-action">Click here</a>
+                            </div> -->
+                            <!--  -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                    <?php
+                        }else{
+                            $i = 1;
+                            while( $rowsec = mysqli_fetch_array($resultsec)){
+
+                                if( $rowsec['status'] == "Completed")
+                            {
+                                ?>
+                                <!--  -->
+                                <div class="row request_show">
+                                    <div style="width:15%">
+                                        <h3 style="margin-left: 10px;"><?= $rowsec['id'] ?></h3>
+                                    </div>
+                                    <div style="width:25%">
+                                        <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                                </span><?= $rowsec['project_name'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                                </span><?= $rowsec['type_of_design'] ?></p>
+                                    </div>
+                                    <div style="width:20%">
+                                        <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Request
+                                        </a>
+                                    </div>
+                                        <div style="width:20%">
+                                        <h3><?= $rowsec['status'] ?></h3>
+                                    </div>
+                                    <div style="width:20%">
+                                        <a class="btn btn-primary addItemBtn" href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
+                                            View Design
+                                            </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+
+                    <?php
+                            }
+                            $i++ ;
+                            }
+                            ?>
+                            <div class="row" style="padding: 20px;text-align: initial;">
+                                <div style="width: 100%;">
+                                    <a href="designer_all_completed_requests.php" class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                                        View all completed requests
+                                    </a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
+                            <?php
+                                if( $variablle == 1 AND $variablless == 1 )
+                                {
+                            ?>
+                                <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                                    <div class="container-fluid" style="margin-top:0px">
+                                        <!-- main -->
+                                        <div class="emptycartdiv">
+
+                                            <h1>No Request in the works</h1>
+                                            <!-- <h2>Launch a request or hire your favorite designer to get your design needs done.</h2>
+                                            <a class="btn btn-primary" href="client_dashboard.php"
+                                                data-purpose="keep-shopping-action">Click here</a> -->
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
                 </div>
             </div>
             <!-- desk end -->
             <!-- mobile -->
             <div class="d-lg-none">
                 <div class="container-fluid" style="background-color:#fff;padding-top:20px;">
-                    <h2>Welcome back, <?= $customername ?></h2>
-                </div>
-                <div class="container-fluid" style="background-color:#fff;padding-top:20px;">
                     <!-- ============================================================== -->
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
                     <!-- Validation wizard -->
                     <div class="row" style="display:flex;padding-bottom:20px;">
-                    <!--  -->
                         <div style="width:55%">
                             <h4>Request Information</h4>
                         </div>
                         <div style="width:45%">
-                            <h4>View & Accept Request </h4>
+                            <h4>View Request,Status & Design </h4>
                         </div>
-                        <!-- <div style="width:30%">
-                            <h3>Accept Request</h3>
-                        </div> -->
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE  status = 'Submitted'";
+                     $variablle = 0;
+                     $variablless = 0;
+                        $querysec = "SELECT * FROM `requests` WHERE (designer_accept_email = '".mysqli_real_escape_string($conn, $customeremail)."') AND (status = 'Submitted' OR status = 'Processing' OR status = 'redo' OR status = 'Pending' ) ";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
+                            $variablle = 1;
                             ?>
-                    <div class="container " style="margin-bottom:20px;text-align: center;">
-                        <div class="container-fluid" style="margin-top:0px;padding:0px;">
-                            <!-- main -->
-                            <div style="width:100%;">
 
-                                <h2>No Request in the works</h2>
+                    <!-- <div class="container " style="margin-bottom:20px;text-align: center;"> -->
+                        <!-- <div class="container-fluid" style="margin-top:0px;padding:0px;"> -->
+                            <!-- main -->
+                            <!-- <div style="width:100%;"> -->
+
+                                <!-- <h2>No Request in the works</h2> -->
                                 <!-- <h4>Launch a request or hire your favorite designer to get your design needs done.</h4> -->
-                                <!-- <a class="btn btn-primary" href="form-wizard - Copy.php"
-                                    data-purpose="keep-shopping-action">Click here</a> -->
-                            </div>
+                                <!-- <a class="btn btn-primary" href="design_request_sheet.php"
+                                    data-purpose="keep-shopping-action">Click here</a>
+                            </div> -->
                             <!--  -->
-                        </div>
-                    </div>
+                        <!-- </div> -->
+                    <!-- </div> -->
                     <?php
                         }else{
                             $i = 1;
                             while( $rowsec = mysqli_fetch_array($resultsec)){
 
-                                if( $rowsec['status'] == "Submitted")
+                                if( $rowsec['status'] == "Redo" or $rowsec['status'] == "Processing")
                             {  
                                 ?>
                     <!--  -->
-                    <div class="row request_show">
-                            <div style="width:55%">
+                            <div class="row request_show">
+                                <div style="width:55%">
                                     <p><span style="font-size: 16px;font-weight: 700;">Order Number:
                                         </span><?= $rowsec['id'] ?></p>
                                     <p><span style="font-size: 16px;font-weight: 700;">Project Name:
                                         </span><?= $rowsec['project_name'] ?></p>
                                     <p><span style="font-size: 16px;font-weight: 700;">Design Type:
                                         </span><?= $rowsec['type_of_design'] ?></p>
-                            </div>
-                            <!--  -->
-                        <div style="width:45%">
-                            <p>
-                                <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
-                                    data-purpose="keep-shopping-action">
-                                    View
-                                </a>
-                            </p>
-                            <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                </div>
+                                <div style="width:45%">
+                                    <p>
+                                        <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                                        data-purpose="keep-shopping-action">
+                                        View Request
+                                        </a>
+                                    </p>
+                                    <p><span style="font-size: 16px;font-weight: 700;">Status:
                                         </span><?= $rowsec['status'] ?>
                                     </p>
-                            <form action="" class="form-submit" style="margin-right: 5px;">
-                                <input type="hidden" class="cid" value="<?= $rowsec['id'] ?>">
-                                <input type="hidden" class="cname"
-                                    value="<?= $rowsec['name'] ?>">
-                                <input type="hidden" class="cemail"
-                                    value="<?= $rowsec['email'] ?>">
-                                <input type="hidden" class="demail"
-                                    value="<?= $customeremail?>">
-                                <input type="hidden" class="dname"
-                                    value="<?= $customername ?>">
-                                <input type="hidden" class="did" value="<?= $customerid ?>">
-                                <input type="hidden" class="dtablename" value="<?= $tablename ?>">
-                                <!-- <button style="width: 100%;"
-                                    class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
-                                    to cart</button> -->
-                                <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
-                                    Accept
-                                </a>
-                            </form>
-
-                        </div>
-                    </div>
+                                    <p>
+                                    <a class="btn btn-primary addItemBtn" href="designer_submission_sheet.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
+                                            Submit Design
+                                            </a>
+                                    </p>
+                                </div>
+                            </div>
                     <!--  -->
 
                     <?php
-                            }
+                            } else if($rowsec['status'] == "Pending")
+                            {
+                                ?>
+                                <div class="row request_show">
+                                    <div style="width:55%">
+                                        <p><span style="font-size: 16px;font-weight: 700;">Order Number:
+                                            </span><?= $rowsec['id'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                            </span><?= $rowsec['project_name'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                            </span><?= $rowsec['type_of_design'] ?></p>
+                                    </div>
+                                    <div style="width:45%">
+                                        <p>
+                                            <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Request
+                                            </a>
+                                        </p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                            </span><?= $rowsec['status'] ?>
+                                        </p>
+                                        <p>
+                                            <a class="btn btn-primary" href="designer_view_pending_request.php?request_id=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Design
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <?php
                             $i++ ;
+                            }
                             }
                         }
                     }
                     ?>
+                     <!-- completed -->
+                     <?php
+                           $querysec = "SELECT * FROM `requests` WHERE designer_accept_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'Completed' order by id desc limit 10";
+                        if ($resultsec = mysqli_query($conn, $querysec)) {
+
+                        if( ! mysqli_num_rows($resultsec) ) {
+                            $variablless = 1;
+                            ?>
+                    <!-- <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                        <div class="container-fluid" style="margin-top:0px"> -->
+                            <!-- main -->
+                            <!-- <div class="emptycartdiv">
+
+                                <h1>No Request in the works</h1>
+                                <h2>Launch a request or hire your favorite designer to get your design needs done.</h2>
+                                <a class="btn btn-primary" href="design_request_sheet.php"
+                                    data-purpose="keep-shopping-action">Click here</a>
+                            </div> -->
+                            <!--  -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                    <?php
+                        }else{
+                            $i = 1;
+                            while( $rowsec = mysqli_fetch_array($resultsec)){
+
+                                if( $rowsec['status'] == "Completed")
+                            {
+                                ?>
+                                <div class="row request_show">
+                                    <div style="width:55%">
+                                        <p><span style="font-size: 16px;font-weight: 700;">Order Number:
+                                            </span><?= $rowsec['id'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                            </span><?= $rowsec['project_name'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                            </span><?= $rowsec['type_of_design'] ?></p>
+                                    </div>
+                                    <div style="width:45%">
+                                        <p>
+                                            <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Request
+                                            </a>
+                                        </p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                            </span><?= $rowsec['status'] ?>
+                                        </p>
+                                        <p>
+                                            <a class="btn btn-primary" href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Design
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <?php
+                            $i++ ;
+                            }
+                            }
+                            ?>
+                             <div class="row" style="padding: 10px;text-align: initial;">
+                                <div style="width: 100%;">
+                                    <a href="designer_all_completed_requests.php" class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                                            View all completed requests
+                                    </a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                            ?>
+                           
+                                <!--  -->
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -467,6 +635,26 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <!-- ============================================================== -->
                     <!-- End Right sidebar -->
                     <!-- ============================================================== -->
+                    <?php
+                                if( $variablle == 1 AND $variablless == 1 )
+                                {
+                            ?>
+                                <div class="container " style="margin-bottom:20px;text-align: center;">
+                                    <div class="container-fluid" style="margin-top:0px;padding:0px;">
+                                        <!-- main -->
+                                        <div style="width:100%;">
+
+                                            <h2>No Request in the works</h2>
+                                            <!-- <h4>Launch a request or hire your favorite designer to get your design needs done.</h4> -->
+                                            <!-- <a class="btn btn-primary" href="client_dashboard.php"
+                                                data-purpose="keep-shopping-action">Click here</a> -->
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
                 </div>
             </div>
             <!-- mobile end -->
@@ -521,67 +709,6 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
     <script type="text/javascript">
         $("#header-desktop").load('templates/designer_header.php');
-    </script>
-    <script>
-         $(document).ready(function () {
-            $('.addItemBtn').click(function (e) {
-                e.preventDefault();
-                var $form = $(this).closest(".form-submit");
-                var cid = $form.find(".cid").val();
-                var cname = $form.find(".cname").val();
-                var cemail = $form.find(".cemail").val();
-                var dname = $form.find(".dname").val();
-                var demail = $form.find(".demail").val();
-                var did = $form.find(".did").val();
-                var dtablename = $form.find(".dtablename").val();
-                // alert(cid);
-                // alert(dname);
-                // alert(demail);
-                // alert(dtablename);
-                // alert(did);
-                $.ajax({
-                    type: 'POST',
-                    url: './php/action.php',
-                    dataType: "json",
-                    data: {
-                        "cid": cid,
-                        "cname": cname,
-                        "cemail": cemail,
-                        "demail": demail,
-                        "did": did,
-                        "dtablename": dtablename,
-                        "dname": dname,
-
-                    },
-
-                    success: function (data) {
-
-                        if (data.status == 200) {
-                            // window.dataLayer = window.dataLayer || [];
-                            // window.dataLayer.push({ 'event': 'contact-form' });
-                            // window.location = 'designer_dashboard.php';
-                            alert("Request Accepted!");
-                            window.location = 'designer_all_requests.php';
-                            // $("#contact-success-desktop").css('display','block');
-                            // $("#contact-form-desktop").css('display','none');
-                            // $("#ticket-id-desktop").html('#'+data.id);
-                            // scrollTo(0,0);
-
-                        } else if (data.status == 201) {
-                            console.log(data.error);
-                            alert("Request already accepted by another designer!");
-                            window.location = 'designer_dashboard.php';
-                        } else if (data.status == 202) {
-                            alert("Request Accepted!");
-                            window.location = 'designer_accepted_request.php';
-                        }
-                        // alert("Your form has been successfully submitted.")
-                    }
-                });
-            });
-
-            
-        });
     </script>
     <!-- <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script> -->
     <!-- <script>

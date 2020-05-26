@@ -251,7 +251,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">View Design</h3>
+                    <h3 class="text-themecolor">View Request</h3>
                 </div>
                 <!-- <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -280,20 +280,19 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <!-- Validation wizard -->
                     <!-- name -->
                     <?php
-                        $request_id = $_GET['request_id'];
+                        $request_id = $_GET['requestid'];
                         // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Completed' order by id desc limit 1" ;
+                        $querysec = "SELECT * FROM `requests` WHERE id = $request_id" ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
                                 ?>
-                            <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
-                                <div class="container-fluid" style="margin-top:0px">
-                                    <div class="emptycartdiv">
-                                        <h1>Sorry! Please return back</h1>
-                                    </div>
-                                </div>
+                    <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                        <div class="container-fluid" style="margin-top:0px">
+                            <div class="emptycartdiv">
+                                <h1>Sorry! Please return back</h1>
                             </div>
+                        </div>
                         <?php
                             }
                             else{
@@ -305,47 +304,148 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                 <h3 style="margin-left: 40px;font-weight: 500;">Order Number : </h3>
                             </div>
                             <div style="width: 50%;">
-                                <h3><?= $rowsec['request_id'] ?></h3>
+                                <h3><?= $rowsec['id'] ?></h3>
                             </div>
                         </div>
                         <div class="row" style="display:flex;padding-bottom:20px;">
                             <div style="width:50%">
-                                <h3 style="margin-left: 40px;font-weight: 500;">Designer Name : </h3>
+                                <h3 style="margin-left: 40px;font-weight: 500;">Name : </h3>
                             </div>
                             <div style="width: 50%;">
-                                <h3><?= $rowsec['designer_name'] ?></h3>
+                                <h3><?= $rowsec['name'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- project name -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Name your project : </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['project_name'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- type of design need  :  -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">What type of design do you need? </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['type_of_design'] ?></h3>
+                            </div>
+                        </div>
+                        <!--How will your design be used?  -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">How will your design be used? </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['how_design_be_used'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- Main tagline -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Main tagline : </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['Main_tagline'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- Age Group -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Age Group : </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['Age_Group'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- Image Size -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Image Size : </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['Image_Size'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- Image Format -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Image Format : </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['Image_Format'] ?></h3>
                             </div>
                         </div>
                         <!-- Describe your project -->
-                        <div class="row" style="display:flex;padding-bottom:40px;">
+                        <div class="row" style="display:flex;padding-bottom:20px;">
                             <div style="width:50%">
-                                <h3 style="margin-left: 40px;font-weight: 500;">Designer Message: </h3>
+                                <h3 style="margin-left: 40px;font-weight: 500;">Describe your project : </h3>
                             </div>
                             <div style="width: 50%;">
-                                <h3><?= $rowsec['designer_message'] ?></h3>
+                                <h3><?= $rowsec['Describe_your_project'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- Due Date -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Due Date : </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['Due_Date'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- What's your budget?  -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">What's your budget? </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['credits_pay'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- Link to any inspiration on the Web -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Link to any inspiration on the Web :
+                                </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['link_to_any_inspiration'] ?></h3>
+                            </div>
+                        </div>
+                        <!-- Your Page Url  -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+                                <h3 style="margin-left: 40px;font-weight: 500;">Your Page Url : </h3>
+                            </div>
+                            <div style="width: 50%;">
+                                <h3><?= $rowsec['Your_Page_Url'] ?></h3>
                             </div>
                         </div>
                         <!-- Anything else you'd like to share with your designer? -->
-                        <!-- <div class="row" style="display:flex;padding-bottom:20px;">
+                        <div class="row" style="display:flex;padding-bottom:20px;">
                             <div style="width:50%">
                                 <h3 style="margin-left: 40px;font-weight: 500;">Anything else you'd like to share with
                                     your designer? </h3>
                             </div>
                             <div style="width: 50%;">
+                                <h3><?= $rowsec['message_convey'] ?></h3>
                             </div>
-                        </div> -->
+                        </div>
                         <!-- reference -->
                         <div class="row" style="display:flex;padding-bottom:20px;">
                             <div style="width:50%">
 
-                                <h3 style="margin-left: 40px;font-weight: 500;">Designed files </h3>
-                                <!-- <p style="margin-left: 40px;">Upload any files that your designer needs including your
-                                    logo, photos, brand guide, fonts, copy, and any other documents.</p> -->
+                                <h3 style="margin-left: 40px;font-weight: 500;">Add reference files </h3>
+                                <p style="margin-left: 40px;">Upload any files that your designer needs including your
+                                    logo, photos, brand guide, fonts, copy, and any other documents.</p>
                                 <h3 style="margin-left: 40px;font-weight: 500;">(Click image for download)</h3>
                             </div>
                             <div class="row" style="width: 50%;margin-left: 4px;">
                                 <?php
-                                                $no_of_ref_file = $rowsec['designed_files'] ;
+                                                $no_of_ref_file = $rowsec['reference_files'] ;
                                                 if($no_of_ref_file != ""){
                                                     $no_of_ref_files = explode("++--",$no_of_ref_file);
                                                     for ($i = 0;$i < sizeof($no_of_ref_files);$i++ )
@@ -354,9 +454,9 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                                         // echo $no_of_ref_files[$i];
                                                         ?>
                                 <a id="downloadimmg" style="display: flex;margin: 5px;width:150px;height:150px;"
-                                    id="downlloadimg" href="designed_files/<?=$no_of_ref_files[$i]?>"
+                                    id="downlloadimg" href="upload_files/<?=$no_of_ref_files[$i]?>"
                                     download="<?=$no_of_ref_files[$i]?>">
-                                    <img class="downloadimmg" src="designed_files/<?=$no_of_ref_files[$i]?>" width="150x"
+                                    <img class="downloadimmg" src="upload_files/<?=$no_of_ref_files[$i]?>" width="150x"
                                         height="150px">
                                 </a>
                                 <!-- <h1>heelo</h1> -->
@@ -368,6 +468,38 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             </div>
                         </div>
                         <!-- inspiration files -->
+                        <div class="row" style="display:flex;padding-bottom:20px;">
+                            <div style="width:50%">
+
+                                <h3 style="margin-left: 40px;font-weight: 500;">Add inspiration files </h3>
+                                <p style="margin-left: 40px;">Upload any designs or imagery you like so your designer
+                                    gets an idea of the style you're looking for.</p>
+                                <h3 style="margin-left: 40px;font-weight: 500;">(Click image for download)</h3>
+                            </div>
+                            <div class="row" style="width: 50%;margin-left: 4px;">
+                                <?php
+                                                $no_of_ref_file = $rowsec['inspiration_files'] ;
+                                                if($no_of_ref_file != ""){
+                                                    $no_of_ref_files = explode("++--",$no_of_ref_file);
+                                                    for ($i = 0;$i < sizeof($no_of_ref_files);$i++ )
+                                                    
+                                                    {
+                                                        // echo $no_of_ref_files[$i];
+                                                        ?>
+                                <a id="downloadimmginsp" style="display: flex;margin: 5px;width:150px;height:150px;"
+                                    id="downlloadimg" href="upload_files/<?=$no_of_ref_files[$i]?>"
+                                    download="<?=$no_of_ref_files[$i]?>">
+                                    <img class="downloadimmg" src="upload_files/<?=$no_of_ref_files[$i]?>" width="150x"
+                                        height="150px">
+                                </a>
+                                <!-- <h1>heelo</h1> -->
+                                <?php
+                                                    }
+                                                }
+                                            ?>
+                                <!--  -->
+                            </div>
+                        </div>
                         <?php
                                 }
                             }
@@ -391,18 +523,17 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         <!-- Validation wizard -->
                         <!-- name -->
                         <?php
-                        $request_id = $_GET['request_id'];
+                        $request_id = $_GET['requestid'];
                         // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Completed' order by id desc limit 1 " ;
+                        $querysec = "SELECT * FROM `requests` WHERE id = $request_id" ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
                                 ?>
-                            <div class="container " style="text-align: center;display: flex;padding: 10px;align-items: center;vertical-align: middle;  text-align: center;">
-                                <div class="container-fluid" style="margin-top:0px;width: 100%;padding: 0;">
-                                    <div class="emptycartdiv" style="width: 100%;">
-                                        <h1>Sorry! Please return back</h1>
-                                    </div>
+                        <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                            <div class="container-fluid" style="margin-top:0px">
+                                <div class="emptycartdiv">
+                                    <h1>Sorry! Please return back</h1>
                                 </div>
                             </div>
                             <?php
@@ -416,38 +547,149 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                     <h3 style="margin-left: 20px;font-weight: 500;">Order Number : </h3>
                                 </div>
                                 <div style="width: 100%;">
-                                    <h3 style="margin-left: 20px;"><?= $rowsec['request_id'] ?></h3>
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['id'] ?></h3>
                                 </div>
                             </div>
                             <div class="row" style="display:flex;padding-bottom:20px;">
                                 <div style="width:100%">
-                                    <h3 style="margin-left: 20px;font-weight: 500;">Designer Name : </h3>
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Name : </h3>
                                 </div>
                                 <div style="width: 100%;">
-                                    <h3 style="margin-left: 20px;"><?= $rowsec['designer_name'] ?></h3>
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['name'] ?></h3>
                                 </div>
                             </div>
-                            <!-- designer message -->
-                            <div class="row" style="display:flex;padding-bottom:30px;">
+                            <!-- project name -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
                                 <div style="width:100%">
-                                    <h3 style="margin-left: 20px;font-weight: 500;">Designer Message:</h3>
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Name your project : </h3>
                                 </div>
                                 <div style="width: 100%;">
-                                    <h3 style="margin-left: 20px;"><?= $rowsec['designer_message']?></h3>
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['project_name'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- type of design need  :  -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">What type of design do you need?
+                                    </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['type_of_design'] ?></h3>
+                                </div>
+                            </div>
+                            <!--How will your design be used?  -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">How will your design be used? </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['how_design_be_used'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Main tagline -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Main tagline : </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['Main_tagline'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Age Group -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Age Group : </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['Age_Group'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Image Size -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Image Size : </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['Image_Size'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Image Format -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Image Format : </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['Image_Format'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Describe your project -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Describe your project : </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['Describe_your_project'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Due Date -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Due Date : </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['Due_Date'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- What's your budget?  -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">What's your budget? </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['credits_pay'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Link to any inspiration on the Web -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Link to any inspiration on the Web :
+                                    </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['link_to_any_inspiration'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Your Page Url  -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Your Page Url : </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['Your_Page_Url'] ?></h3>
+                                </div>
+                            </div>
+                            <!-- Anything else you'd like to share with your designer? -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Anything else you'd like to share
+                                        with your designer? </h3>
+                                </div>
+                                <div style="width: 100%;">
+                                    <h3 style="margin-left: 20px;"><?= $rowsec['message_convey'] ?></h3>
                                 </div>
                             </div>
                             <!-- reference -->
                             <div class="row" style="display:flex;padding-bottom:20px;">
                                 <div style="width:100%">
 
-                                    <h3 style="margin-left: 20px;font-weight: 500;">Designed files </h3>
-                                    <!-- <p style="margin-left: 20px;">Upload any files that your designer needs including
-                                        your logo, photos, brand guide, fonts, copy, and any other documents.</p> -->
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Add reference files </h3>
+                                    <p style="margin-left: 20px;">Upload any files that your designer needs including
+                                        your logo, photos, brand guide, fonts, copy, and any other documents.</p>
                                     <h3 style="margin-left: 20px;font-weight: 500;">(Click image for download)</h3>
                                 </div>
                                 <div class="row" style="width: 100%;margin-left: 4px;">
                                     <?php
-                                                $no_of_ref_file = $rowsec['designed_files'] ;
+                                                $no_of_ref_file = $rowsec['reference_files'] ;
                                                 if($no_of_ref_file != ""){
                                                     $no_of_ref_files = explode("++--",$no_of_ref_file);
                                                     for ($i = 0;$i < sizeof($no_of_ref_files);$i++ )
@@ -456,9 +698,43 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                                         // echo $no_of_ref_files[$i];
                                                         ?>
                                     <a id="downloadimmgmob" style="display: flex;margin: 5px;width:150px;height:150px;"
-                                        id="downlloadimg" href="designed_files/<?=$no_of_ref_files[$i]?>"
+                                        id="downlloadimg" href="upload_files/<?=$no_of_ref_files[$i]?>"
                                         download="<?=$no_of_ref_files[$i]?>">
-                                        <img class="downloadimmg" src="designed_files/<?=$no_of_ref_files[$i]?>"
+                                        <img class="downloadimmg" src="upload_files/<?=$no_of_ref_files[$i]?>"
+                                            width="150x" height="150px">
+                                    </a>
+                                    <!-- <h1>heelo</h1> -->
+                                    <?php
+                                                    }
+                                                }
+                                            ?>
+                                    <!--  -->
+                                </div>
+                            </div>
+                            <!-- inspiration files -->
+                            <div class="row" style="display:flex;padding-bottom:20px;">
+                                <div style="width:100%">
+
+                                    <h3 style="margin-left: 20px;font-weight: 500;">Add inspiration files </h3>
+                                    <p style="margin-left: 20px;">Upload any designs or imagery you like so your
+                                        designer gets an idea of the style you're looking for.</p>
+                                    <h3 style="margin-left: 20px;font-weight: 500;">(Click image for download)</h3>
+                                </div>
+                                <div class="row" style="width: 100%;margin-left: 4px;">
+                                    <?php
+                                                $no_of_ref_file = $rowsec['inspiration_files'] ;
+                                                if($no_of_ref_file != ""){
+                                                    $no_of_ref_files = explode("++--",$no_of_ref_file);
+                                                    for ($i = 0;$i < sizeof($no_of_ref_files);$i++ )
+                                                    
+                                                    {
+                                                        // echo $no_of_ref_files[$i];
+                                                        ?>
+                                    <a id="downloadimmginspmob"
+                                        style="display: flex;margin: 5px;width:150px;height:150px;" id="downlloadimg"
+                                        href="upload_files/<?=$no_of_ref_files[$i]?>"
+                                        download="<?=$no_of_ref_files[$i]?>">
+                                        <img class="downloadimmg" src="upload_files/<?=$no_of_ref_files[$i]?>"
                                             width="150x" height="150px">
                                     </a>
                                     <!-- <h1>heelo</h1> -->

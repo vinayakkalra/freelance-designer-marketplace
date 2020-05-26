@@ -7,12 +7,13 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
 }
  else {
     // echo '<script type="text/javascript">alert("hello!");</script>';
-    header('location:pages-register - Copy.php');
+    header('location:index.php');
 }
 if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
     // getting id of customer
     $customerid =  $_COOKIE['iddashboard'];
     $tablename = $_COOKIE['signupas'];
+  
     $query = "SELECT * FROM `$tablename` WHERE id = $customerid";
 //getting email of customer
          if ($result = mysqli_query($conn, $query)) {
@@ -20,7 +21,7 @@ if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
                 $customeremail = $row['email'] ;
                 $customername = $row['name'] ;
                 $customerphone = $row['phone'] ;
-               
+                // echo $customeremail ;
                    }
                 }
                 else{
@@ -39,7 +40,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                  $customeremail = $row['email'] ;
                  $customername = $row['name'] ;
                  $customerphone = $row['phone'] ;
-                
+                 echo $customeremail ;
                     }
                  }
                  else{
@@ -95,11 +96,12 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
 
     .request_show:hover {
         background: linear-gradient(to right, #fff 0, #f6f6f6 35%, #f6f6f6 65%, #fff 100%);
-        /* cursor: pointer; */
+        cursor: pointer;
         box-shadow: 0 7px 21px 0 rgba(0, 0, 0, .1);
         -webkit-transform: scale(1.01, 1.01);
         transform: scale(1.01, 1.01);
     }
+    
 </style>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -154,32 +156,8 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         <li class="nav-item m-l-10"> <a
                                 class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Comment -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Comment -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
                     </ul>
-                    <!-- ============================================================== -->
-                    <!-- User profile and search -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
                         <li class="nav-item hidden-sm-down search-box">
                             <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark"
                                 href="designer_dashboard.php?logout=1">
@@ -195,103 +173,12 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                 href="designer_dashboard.php?logout=1">
                                 <p style="color: #fff;margin: 0;">Logout</p>
                             </a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Language -->
-                        <!-- ============================================================== -->
-                        <!-- <li class="nav-item dropdown">
-
-                            <div class="dropdown-menu dropdown-menu-right scale-up"> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item"
-                                    href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                        </li> -->
-                        <!-- ============================================================== -->
-                        <!-- Profile -->
-                        <!-- ============================================================== -->
-                        <!-- <li class="nav-item dropdown">
-
-                            <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
-                                    <li>
-                                        <div class="dw-user-box">
-                                            <div class="u-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
-                                            <div class="u-text">
-                                                <h4>Steave Jobs</h4>
-                                                <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html"
-                                                    class="btn btn-rounded btn-danger btn-sm">View Profile</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </li> -->
+                        </li> 
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <!-- <li class="nav-small-cap">PERSONAL</li> -->
-                        <li >
-                            <a href="designer_dashboard.php">
-                                <i class="mdi mdi-gauge ">
-                                </i><span class="hide-menu">Dashboard </span>
-                            </a>
-                        </li>
-                        <li >
-                            <a href="designer_accepted_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Accepted Requests </span>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="designer_completed_request .php">
-                                <i class="mdi mdi-file ">
-                                </i><span class="hide-menu">Completed Requests </span>
-                            </a>
-                        </li>
-                       
-                        <!-- <li>
-                            <a href="client_processing_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Accepted Requests </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="client_processing_request.php">
-                                <i class="mdi mdi-email ">
-                                </i><span class="hide-menu">Design Requests </span>
-                            </a>
-                        </li> -->
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+        <div id="header-desktop" ></div>
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
@@ -300,7 +187,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Completed Requests</h3>
+                    <h3 class="text-themecolor">All Completed Requests</h3>
                 </div>
                 <!-- <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -328,74 +215,79 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <!-- ============================================================== -->
                     <!-- Validation wizard -->
                     <div class="row" style="display:flex;padding-bottom:20px;">
+                        <div style="width:15%">
+                            <h3 style="margin-left: 10px;">Order No</h3>
+                        </div>
+                        <div style="width:25%">
+                            <h3>Request Information</h3>
+                        </div>
                         <div style="width:20%">
-                            <h2 style="margin-left: 40px;">S.No</h2>
+                            <h3>View Request</h3>
                         </div>
-                        <div style="width:40%">
-                            <h2>Request Information</h2>
+                            <div style="width:20%">
+                            <h3>Status</h3>
                         </div>
-                        <div style="width:20%">
-                            <h2>View Request</h2>
-                        </div>
-                        <div style="width:20%;text-align:center;">
-                            <h2>View Design</h2>
+                            <div style="width:20%">
+                            <h3>View Design</h3>
                         </div>
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE designer_completed_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'completed'";
-                        if ($resultsec = mysqli_query($conn, $querysec)) {
+                    // completed 
+                           $querysec = "SELECT * FROM `requests` WHERE designer_accept_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'Completed' order by id desc ";
+                    if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
+                            
                             ?>
-                    <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
-                        <div class="container-fluid" style="margin-top:0px">
-                            <!-- main -->
-                            <div class="emptycartdiv">
 
-                                <h1>No Request in the works</h1>
-                                <!-- <h2>Launch a request or hire your favorite designer to get your design needs done.</h2>
-                                <a class="btn btn-primary" href="design_request_sheet.php"
-                                    data-purpose="keep-shopping-action">Click here</a> -->
-                            </div>
-                            <!--  -->
-                        </div>
-                    </div>
-                    <?php
+                                <div class="container " style="margin-bottom:20px;text-align: center;">
+                                    <div class="container-fluid" style="margin-top:0px;padding:0px;">
+                                        <!-- main -->
+                                        <div style="width:100%;">
+
+                                            <h2>No Request in the works</h2>
+                                            <!-- <h4>Launch a request or hire your favorite designer to get your design needs done.</h4> -->
+                                            <!-- <a class="btn btn-primary" href="client_dashboard.php"
+                                                data-purpose="keep-shopping-action">Click here</a> -->
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            <?php
                         }else{
                             $i = 1;
                             while( $rowsec = mysqli_fetch_array($resultsec)){
 
-                                if( $rowsec['status'] == "completed")
-                            {  
+                                if( $rowsec['status'] == "Completed")
+                            {
                                 ?>
-                    <!--  -->
-                    <div class="row request_show">
-                        <div style="width:20%;">
-                            <h2 style="margin-left: 40px;"><?= $i ?></h2>
-                        </div>
-                        <div style="width:40%">
-                            <p><span style="font-size: 16px;font-weight: 700;">Order Number:
-                                </span><?= $rowsec['id'] ?></p>
-                            <p><span style="font-size: 16px;font-weight: 700;">Project Name:
-                                </span><?= $rowsec['project_name'] ?></p>
-                            <p><span style="font-size: 16px;font-weight: 700;">Design Type:
-                                </span><?= $rowsec['type_of_design'] ?></p>
-                            <p><span style="font-size: 16px;font-weight: 700;">How design be used:
-                                </span><?= $rowsec['how_design_be_used'] ?></p>
-                        </div>
-                        <div style="width:20%">
-                            <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
-                                data-purpose="keep-shopping-action">
-                                View Request
-                            </a>
-                        </div>
-                        <div style="width:20%;text-align: center;">
-                                <a class="btn btn-primary addItemBtn" href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
-                                View Design
-                                </a>
-                        </div>
-                    </div>
-                    <!--  -->
+                                <!--  -->
+                                <div class="row request_show">
+                                    <div style="width:15%">
+                                        <h3 style="margin-left: 10px;"><?= $rowsec['id'] ?></h3>
+                                    </div>
+                                    <div style="width:25%">
+                                        <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                                </span><?= $rowsec['project_name'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                                </span><?= $rowsec['type_of_design'] ?></p>
+                                    </div>
+                                    <div style="width:20%">
+                                        <a class="btn btn-primary" href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Request
+                                        </a>
+                                    </div>
+                                        <div style="width:20%">
+                                        <h3><?= $rowsec['status'] ?></h3>
+                                    </div>
+                                    <div style="width:20%">
+                                        <a class="btn btn-primary addItemBtn" href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
+                                            View Design
+                                            </a>
+                                    </div>
+                                </div>
+                                <!--  -->
 
                     <?php
                             }
@@ -404,17 +296,6 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         }
                     }
                     ?>
-                    <!-- ============================================================== -->
-                    <!-- End PAge Content -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Right sidebar -->
-                    <!-- ============================================================== -->
-                    <!-- .right-sidebar -->
-
-                    <!-- ============================================================== -->
-                    <!-- End Right sidebar -->
-                    <!-- ============================================================== -->
                 </div>
             </div>
             <!-- desk end -->
@@ -430,73 +311,74 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             <h4>Request Information</h4>
                         </div>
                         <div style="width:45%">
-                            <h4>View Request & Design</h4>
+                            <h4>View Request,Status & Design </h4>
                         </div>
-                        <!-- <div style="width:30%">
-                            <h3>Accept Request</h3>
-                        </div> -->
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE designer_completed_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'completed'";
+                    //   completed 
+                           $querysec = "SELECT * FROM `requests` WHERE designer_accept_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND status = 'Completed' order by id desc ";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
                             ?>
-                    <div class="container " style="margin-bottom:20px;text-align: center;">
-                        <div class="container-fluid" style="margin-top:0px;padding:0px;">
-                            <!-- main -->
-                            <div style="width:100%;">
+                                <div class="container " style="margin-bottom:20px;text-align: center;">
+                                    <div class="container-fluid" style="margin-top:0px;padding:0px;">
+                                        <!-- main -->
+                                        <div style="width:100%;">
 
-                                <h2>No Request in the works</h2>
-                                <!-- <h4>Launch a request or hire your favorite designer to get your design needs done.</h4>
-                                <a class="btn btn-primary" href="design_request_sheet.php"
-                                    data-purpose="keep-shopping-action">Click here</a> -->
-                            </div>
-                            <!--  -->
-                        </div>
-                    </div>
+                                            <h2>No Request in the works</h2>
+                                            <!-- <h4>Launch a request or hire your favorite designer to get your design needs done.</h4> -->
+                                            <!-- <a class="btn btn-primary" href="client_dashboard.php"
+                                                data-purpose="keep-shopping-action">Click here</a> -->
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
                     <?php
                         }else{
                             $i = 1;
                             while( $rowsec = mysqli_fetch_array($resultsec)){
 
-                                if( $rowsec['status'] == "completed")
-                            {  
+                                if( $rowsec['status'] == "Completed")
+                            {
                                 ?>
-                    <!--  -->
-                    <div class="row request_show">
-                        <div style="width:60%">
-                            <p><span style="font-size: 16px;font-weight: 700;">Order Number:
-                                </span><?= $rowsec['id'] ?></p>
-                            <p><span style="font-size: 16px;font-weight: 700;">Project Name:
-                                </span><?= $rowsec['project_name'] ?></p>
-                            <p><span style="font-size: 16px;font-weight: 700;">Design Type:
-                                </span><?= $rowsec['type_of_design'] ?></p>
-                            <p><span style="font-size: 16px;font-weight: 700;">How design be used:
-                                </span><?= $rowsec['how_design_be_used'] ?></p>
-                        </div>
-                        <div style="width:40%">
-                            <p>
-                                <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
-                                    data-purpose="keep-shopping-action">
-                                    View
-                                </a>
-                            </p>
-                                <a class="btn btn-primary addItemBtn"  href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>" style="color:#fff;" type="button">
-                                    View design
-                                </a>
-                            
-                        </div>
-                    </div>
-                    <!--  -->
-
-                    <?php
-                            }
+                                <div class="row request_show">
+                                    <div style="width:55%">
+                                        <p><span style="font-size: 16px;font-weight: 700;">Order Number:
+                                            </span><?= $rowsec['id'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                            </span><?= $rowsec['project_name'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                            </span><?= $rowsec['type_of_design'] ?></p>
+                                    </div>
+                                    <div style="width:45%">
+                                        <p>
+                                            <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Request
+                                            </a>
+                                        </p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                            </span><?= $rowsec['status'] ?>
+                                        </p>
+                                        <p>
+                                            <a class="btn btn-primary" href="designer_view_completed_request.php?request_id=<?= $rowsec['id'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View Design
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <?php
                             $i++ ;
                             }
+                            }
+                            
                         }
                     }
-                    ?>
+                            ?>
+                           
+                                <!--  -->
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -507,7 +389,6 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
 
                     <!-- ============================================================== -->
                     <!-- End Right sidebar -->
-                    <!-- ============================================================== -->
                 </div>
             </div>
             <!-- mobile end -->
@@ -560,6 +441,9 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
 
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script type="text/javascript">
+        $("#header-desktop").load('templates/designer_header.php');
+    </script>
     <!-- <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script> -->
     <!-- <script>
         $(document).ready(function () {

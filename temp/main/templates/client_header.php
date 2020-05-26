@@ -26,7 +26,7 @@
                         </i><span class="hide-menu">Design Request Sheet </span>
                     </a>
                 </li> -->
-                <li id="Processing_Requests">
+                <!-- <li id="Processing_Requests">
                     <a href="client_processing_request.php" class="Processing_Requests">
                         <i class="mdi mdi-email ">
                         </i><span class="hide-menu">Processing Requests </span>
@@ -44,7 +44,7 @@
                         <i class="mdi mdi-email ">
                         </i><span class="hide-menu">Completed Requests </span>
                     </a>
-                </li>
+                </li> -->
                 <!-- <li>
                     <a href="client_processing_request.php">
                         <i class="mdi mdi-email ">

@@ -282,18 +282,18 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <?php
                         $request_id = $_GET['request_id'];
                         // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Completed' order by id desc limit 1" ;
+                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Pending' order by id desc limit 1" ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
                                 ?>
-                            <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
-                                <div class="container-fluid" style="margin-top:0px">
-                                    <div class="emptycartdiv">
-                                        <h1>Sorry! Please return back</h1>
-                                    </div>
+                        <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                            <div class="container-fluid" style="margin-top:0px">
+                                <div class="emptycartdiv">
+                                    <h1>Sorry! Please return back</h1>
                                 </div>
                             </div>
+                        </div>
                         <?php
                             }
                             else{
@@ -367,7 +367,6 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                 <!--  -->
                             </div>
                         </div>
-                        <!-- inspiration files -->
                         <?php
                                 }
                             }
@@ -383,7 +382,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                 </div>
                 <!-- desk end -->
                 <!-- mobile -->
-                <div class="d-lg-none">
+            <div class="d-lg-none">
                     <div class="container-fluid" style="background-color:#fff;padding-top:20px;">
                         <!-- ============================================================== -->
                         <!-- Start Page Content -->
@@ -391,9 +390,9 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         <!-- Validation wizard -->
                         <!-- name -->
                         <?php
-                        $request_id = $_GET['request_id'];
-                        // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Completed' order by id desc limit 1 " ;
+                         $request_id = $_GET['request_id'];
+                         // if( ! mysqli_num_rows($resultsec) ) {
+                         $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Pending' order by id desc limit 1" ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
@@ -480,8 +479,8 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             <!-- ============================================================== -->
                             <!-- End Right sidebar -->
                             <!-- ============================================================== -->
-                        </div>
                     </div>
+                </div>
                     <!-- mobile end -->
                     <!-- ============================================================== -->
                     <!-- End Container fluid  -->

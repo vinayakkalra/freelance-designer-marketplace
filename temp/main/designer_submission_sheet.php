@@ -121,12 +121,14 @@ if ($error != "") {
 }
      else
 {
-$querysec = "SELECT * FROM `designer_completed_requests` WHERE 	request_id = $client_request_id";
+$querysec = "SELECT * FROM `designer_completed_requests` WHERE 	request_id = $client_request_id AND status = 'Pending' order by id desc ";
 $resultsec = mysqli_query($conn, $querysec);
     if(  mysqli_num_rows($resultsec) ) {
     
     ?>
-<script>alert('Already Submiited!')</script>
+<script>alert('Already Submiited!');
+window.location = 'designer_all_requests.php';</script>
+
 <?php
 // header('location:designer_accepted_request.php');
 }
@@ -168,7 +170,7 @@ $refimages = implode("++--", $items);
 $refimages = "";
 }
 // upload reference file end
-$query = "INSERT INTO `designer_completed_requests` ( `client_name`,`client_email`,`designer_email`,`designer_name`,`client_phone`,`designer_phone`,`designer_message`,`designed_files`,`status`,`from_ip`,`from_browser`,`time`,`request_id`) VALUES ('".mysqli_real_escape_string($conn, $client_name)."','".mysqli_real_escape_string($conn, $client_email)."','".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $client_phone)."','".mysqli_real_escape_string($conn, $phone)."','".mysqli_real_escape_string($conn, $messageconvey)."','".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."',$client_request_id)";
+$query = "INSERT INTO `designer_completed_requests` ( `client_name`,`client_email`,`designer_email`,`designer_name`,`client_phone`,`designer_phone`,`designer_message`,`designed_files`,`status`,`from_ip`,`from_browser`,`time`,`request_id`,`employer_tablename`) VALUES ('".mysqli_real_escape_string($conn, $client_name)."','".mysqli_real_escape_string($conn, $client_email)."','".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $client_phone)."','".mysqli_real_escape_string($conn, $phone)."','".mysqli_real_escape_string($conn, $messageconvey)."','".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."',$client_request_id,'".mysqli_real_escape_string($conn, $tablename)."')";
 
 // $query = "INSERT INTO `requests` (`name`, `email`,`phone`, `project_name`,`type_of_design`, `how_design_be_used`,`Main_tagline` , `Age_Group`, `Image_Size`,`Image_Format`,`Describe_your_project`,`Due_Date`,`credits_pay`,`link_to_any_inspiration`,`Your_Page_Url`,`message_convey`,`reference_files`,`inspiration_files`,`status` , `from_ip`,`from_browser`,`time`) VALUES ('".mysqli_real_escape_string($conn, $name)."', '".mysqli_real_escape_string($conn, $email)."','".mysqli_real_escape_string($conn, $phone)."','".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $maintagline)."','".mysqli_real_escape_string($conn, $agegroup)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."','".mysqli_real_escape_string($conn, $budget)."','".mysqli_real_escape_string($conn, $inspirationlink)."','".mysqli_real_escape_string($conn, $yourpageurl)."','".mysqli_real_escape_string($conn, $messageconvey)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $images)."','".mysqli_real_escape_string($conn, $refimages)."','$from_ip','$from_browser','$date_now')";
 
@@ -181,33 +183,16 @@ if (!mysqli_query($conn, $query)) {
 
 } else {
     $completed = "Pending";
-    $query = "UPDATE `requests` SET `status` =  '".mysqli_real_escape_string($conn, $completed)."' , `designer_completed_email` = '".mysqli_real_escape_string($conn, $customeremail)."' , `designer_completed_name` = '".mysqli_real_escape_string($conn, $customername)."' , `designer_completed_id` = '".mysqli_real_escape_string($conn, $customerid)."'  WHERE id = $client_request_id";
+    $query = "UPDATE `requests` SET `status` =  '".mysqli_real_escape_string($conn, $completed)."'   WHERE id = $client_request_id";
     if(!$result = mysqli_query($conn, $query)){
       
     }else{
-        $querysec = "SELECT * FROM `$tablename` WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' AND id = $customerid";
-        if ($resultsec = mysqli_query($conn, $querysec)) {
-          while( $rowsec = mysqli_fetch_array($resultsec)){
-            $no_of_requests_completed = $rowsec['no_request_completed'];
-            echo $no_of_requests_completed ;
-            $no_of_requests_completed = $no_of_requests_completed + 1 ;
-            $query = "UPDATE `$tablename` SET `no_request_completed` =  $no_of_requests_completed  WHERE id = $customerid";
-            if($result = mysqli_query($conn, $query)){
-                ?>
-                <script>
-                        alert('Design submitted successfully!');
-                        window.location = 'designer_accepted_request.php';
-                </script>
-                <?php
-                // header('location:designer_accepted_request.php');
-                
-            }else{
-                ?>
-                <script>alert('error in form')</script>
-                <?php
-            }
-          }
-        }
+        ?>
+        <script>
+                alert('Design submitted successfully!');
+                window.location = 'designer_all_requests.php';
+        </script>
+        <?php
 
     }
     

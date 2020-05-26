@@ -18,7 +18,7 @@
                     <a href="design_request_sheet.php">
                         <i class="mdi mdi-file ">
                         </i><span class="hide-menu">Design Request Sheet </span>
-                    </a>
+                    </a>designer_all_requests.php
                 </li> -->
                     <li id="dashboard" >
                             <a href="designer_dashboard.php"  class="dashboard">
@@ -26,7 +26,13 @@
                                 </i><span class="hide-menu">Dashboard </span>
                             </a>
                         </li>
-                        <li id="accepted_requests">
+                        <li id="all_requests" >
+                            <a href="designer_all_requests.php" class="all_requests">
+                                <i class="mdi mdi-gauge ">
+                                </i><span class="hide-menu">All Requests </span>
+                            </a>
+                        </li>
+                        <!-- <li id="accepted_requests">
                             <a href="designer_accepted_request.php" class="accepted_requests">
                                 <i class="mdi mdi-email ">
                                 </i><span class="hide-menu">Accepted Requests </span>
@@ -37,7 +43,7 @@
                                 <i class="mdi mdi-file ">
                                 </i><span class="hide-menu">Completed Requests </span>
                             </a>
-                        </li>
+                        </li> -->
                 <!-- <li>
                     <a href="client_processing_request.php">
                         <i class="mdi mdi-email ">

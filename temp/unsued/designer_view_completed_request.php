@@ -282,18 +282,17 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <?php
                         $request_id = $_GET['request_id'];
                         // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Completed' order by id desc limit 1" ;
+                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id " ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
                                 ?>
-                            <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
-                                <div class="container-fluid" style="margin-top:0px">
-                                    <div class="emptycartdiv">
-                                        <h1>Sorry! Please return back</h1>
-                                    </div>
-                                </div>
+                    <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                        <div class="container-fluid" style="margin-top:0px">
+                            <div class="emptycartdiv">
+                                <h1>Sorry! Please return back</h1>
                             </div>
+                        </div>
                         <?php
                             }
                             else{
@@ -393,16 +392,15 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         <?php
                         $request_id = $_GET['request_id'];
                         // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Completed' order by id desc limit 1 " ;
+                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE designer_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id " ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
                                 ?>
-                            <div class="container " style="text-align: center;display: flex;padding: 10px;align-items: center;vertical-align: middle;  text-align: center;">
-                                <div class="container-fluid" style="margin-top:0px;width: 100%;padding: 0;">
-                                    <div class="emptycartdiv" style="width: 100%;">
-                                        <h1>Sorry! Please return back</h1>
-                                    </div>
+                        <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                            <div class="container-fluid" style="margin-top:0px">
+                                <div class="emptycartdiv">
+                                    <h1>Sorry! Please return back</h1>
                                 </div>
                             </div>
                             <?php

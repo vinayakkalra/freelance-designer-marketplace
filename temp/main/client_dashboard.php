@@ -626,7 +626,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='clothing_design_request_sheet.php?form=T-shirt';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -657,7 +657,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='clothing_design_request_sheet.php?form=Clothing-or-apparel';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -733,7 +733,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='clothing_design_request_sheet.php?form=Jersey';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -764,7 +764,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='clothing_design_request_sheet.php?form=Sweatshirt-Hoodie';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -800,7 +800,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='clothing_design_request_sheet.php?form=Merchandise';" class="border_styling "
                                         style="width: 50%;border-left: 4px solid #e6e6e6;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -831,7 +831,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='clothing_design_request_sheet.php?form=Other-clothing-or-merchandise';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">

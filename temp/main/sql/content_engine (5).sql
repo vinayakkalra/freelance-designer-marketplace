@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2020 at 06:39 PM
+-- Generation Time: Jun 08, 2020 at 06:21 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -54,6 +54,62 @@ INSERT INTO `client` (`id`, `email`, `password`, `name`, `phone`, `from_ip`, `fr
 (8, 'testclient@gmail.vom', '60853a2f9713df3bef4e5fe31ff5d5987b6a6cedbb3355f2d0e5bf0666d17dca56536a9e2f55021bb6bc633e55b6d73c15d45e87b6594214b90557d28682c722', 'testclient', '9887878787', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Fri, 22 May 2020 22:09:01 +0530'),
 (9, 'testfinal@gmail.com', 'd731df070d3663ae0d65993eb0996a8c49c40fe2e6f83131fa6a21421ad5c73f7301f673cbafaf8c661780dd7e84218f828cf9e69726aed7a4741e2723cbf899', 'testfinal@gmail.com', '7676766676767', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36', 'Mon, 25 May 2020 16:42:46 +0530'),
 (10, 'testfinalmob@gmail.com', '0b1541ff1c1d9569c68eded453ef32a4946bd2b720f506bf2759bf61748acd6c4e15f8702a837f30ad1ccd4f1358affd0d84701e07f377b9671429591038538b', 'testfinalmob', '9898989898', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 19:56:19 +0530');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clothing_requests`
+--
+
+CREATE TABLE `clothing_requests` (
+  `id` int(111) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` int(200) NOT NULL,
+  `project_name` varchar(200) NOT NULL,
+  `type_of_design` varchar(200) NOT NULL,
+  `how_design_can_be_used` varchar(200) NOT NULL,
+  `design_package` varchar(200) NOT NULL,
+  `How_did_you_hear_about_us` varchar(200) NOT NULL,
+  `Image_Size` varchar(200) NOT NULL,
+  `Image_Format` varchar(200) NOT NULL,
+  `Describe_Visual_style_of_project` varchar(200) NOT NULL,
+  `Due_Date` varchar(200) NOT NULL,
+  `Is_your_company_a_digital_marketing_or_design_agency` varchar(200) NOT NULL,
+  `how_often_you_need_design` varchar(200) NOT NULL,
+  `How_many_employees_you_company_have` varchar(200) NOT NULL,
+  `reference_files` varchar(200) NOT NULL,
+  `inspiration_files` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `from_ip` varchar(200) NOT NULL,
+  `from_browser` varchar(200) NOT NULL,
+  `time` varchar(200) NOT NULL,
+  `designer_accept_email` varchar(200) NOT NULL,
+  `designer_accept_name` varchar(200) NOT NULL,
+  `designer_accept_id` varchar(200) NOT NULL,
+  `designer_completed_email` varchar(200) NOT NULL,
+  `no_of_redo` int(200) NOT NULL,
+  `redo_status` varchar(200) NOT NULL,
+  `credits_pay` int(200) NOT NULL,
+  `orderid` varchar(200) NOT NULL,
+  `no_of_designs` int(22) NOT NULL,
+  `Who_is_the_product_for` varchar(200) NOT NULL,
+  `Do_you_have_any_specific_colors_in_mind` varchar(200) NOT NULL,
+  `What_kind_of_product_do_you_want_designed` varchar(200) NOT NULL,
+  `What_is_required_on_the_product` varchar(200) NOT NULL,
+  `Is_there_anything_that_should_be_avoided` varchar(200) NOT NULL,
+  `Describe_your_product_and_its_purpose` varchar(200) NOT NULL,
+  `What_is_your_organization_name` varchar(200) NOT NULL,
+  `select_industry` varchar(200) NOT NULL,
+  `communicate` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `clothing_requests`
+--
+
+INSERT INTO `clothing_requests` (`id`, `name`, `email`, `phone`, `project_name`, `type_of_design`, `how_design_can_be_used`, `design_package`, `How_did_you_hear_about_us`, `Image_Size`, `Image_Format`, `Describe_Visual_style_of_project`, `Due_Date`, `Is_your_company_a_digital_marketing_or_design_agency`, `how_often_you_need_design`, `How_many_employees_you_company_have`, `reference_files`, `inspiration_files`, `status`, `from_ip`, `from_browser`, `time`, `designer_accept_email`, `designer_accept_name`, `designer_accept_id`, `designer_completed_email`, `no_of_redo`, `redo_status`, `credits_pay`, `orderid`, `no_of_designs`, `Who_is_the_product_for`, `Do_you_have_any_specific_colors_in_mind`, `What_kind_of_product_do_you_want_designed`, `What_is_required_on_the_product`, `Is_there_anything_that_should_be_avoided`, `Describe_your_product_and_its_purpose`, `What_is_your_organization_name`, `select_industry`, `communicate`) VALUES
+(90, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'mmmm', 'Merchandise', 'm', 'Bronze', 'Search engine (e.g. Google, Bing)', 'mm', 'JPEG', 'mk', '2020-06-18', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Mon, 08 Jun 2020 09:51:11 +0530', '', '', '', '', 0, '', 20, 'CLOTH90', 3, '', '', '', '', '', ' l', 'm', 'Accounting & Financial', 'm');
 
 -- --------------------------------------------------------
 
@@ -210,18 +266,21 @@ CREATE TABLE `requests` (
   `designer_completed_email` varchar(200) NOT NULL,
   `no_of_redo` int(200) NOT NULL,
   `redo_status` varchar(200) NOT NULL,
-  `credits_pay` int(200) NOT NULL
+  `credits_pay` int(200) NOT NULL,
+  `orderid` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`id`, `name`, `email`, `phone`, `project_name`, `type_of_design`, `how_design_be_used`, `Main_tagline`, `Age_Group`, `Image_Size`, `Image_Format`, `Describe_your_project`, `Due_Date`, `link_to_any_inspiration`, `Your_Page_Url`, `message_convey`, `reference_files`, `inspiration_files`, `status`, `from_ip`, `from_browser`, `time`, `designer_accept_email`, `designer_accept_name`, `designer_accept_id`, `designer_completed_email`, `no_of_redo`, `redo_status`, `credits_pay`) VALUES
-(58, 'testfinal@gmail.com', 'testfinal@gmail.com', 2147483647, 'perrcy', 'Logo design', 'perrcy', 'perrcy', 'perrcy', 'perrcy', 'JPEG', 'perrcy', '2020-05-14', '', '', 'perrcy', '821d250a-4b21-4fed-ba2e-6e6fdbea752b.jpg++--3783a81f-745b-43c1-a639-94a3ad03af40.jpg++--5516ddbf-f2cd-40a6-aced-d0410f1f7680.jpg++--16395e83-9fab-4a5f-8824-180898ac9cc4.jpg', '', 'Completed', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 19:45:48 +0530', 'testfinal@gmail.com', 'testfinal@gmail.com', '6', 'testfinal@gmail.com', 2, 'Redo', 10),
-(59, 'testfinal@gmail.com', 'testfinal@gmail.com', 2147483647, 'shas', 'T-shirt', 'shas', 'shas', 'shas', 'shas', 'JPEG', 'shas', '2020-05-01', '', '', 'shas', '', 'Crypto Infographic-Different.jpg', 'Completed', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 19:50:18 +0530', 'testfinal@gmail.com', 'testfinal@gmail.com', '6', 'testfinal@gmail.com', 1, 'Redo', 10),
-(60, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'h', 'T-shirt', 'h', 'h', 'h', 'h', 'JPEG', 'h', '0199-05-09', '', '', 'u', 'Untitled-4.jpg', '', 'Completed', '::1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/12.0 Mobile/15A372 Safari/604.1', 'Tue, 26 May 2020 19:57:49 +0530', 'testfinalmob@gmail.com', 'testfinalmob', '7', 'testfinalmob@gmail.com', 1, 'Redo', 10),
-(61, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, ' vm', 'Brochure', ' vm', ' vm', ' vm', ' vm', 'JPEG', ' vm', '2020-05-15', '', '', ' vm', '', '', 'Redo', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 21:13:44 +0530', 'testfinalmob@gmail.com', 'testfinalmob', '7', '', 1, 'Redo', 10);
+INSERT INTO `requests` (`id`, `name`, `email`, `phone`, `project_name`, `type_of_design`, `how_design_be_used`, `Main_tagline`, `Age_Group`, `Image_Size`, `Image_Format`, `Describe_your_project`, `Due_Date`, `link_to_any_inspiration`, `Your_Page_Url`, `message_convey`, `reference_files`, `inspiration_files`, `status`, `from_ip`, `from_browser`, `time`, `designer_accept_email`, `designer_accept_name`, `designer_accept_id`, `designer_completed_email`, `no_of_redo`, `redo_status`, `credits_pay`, `orderid`) VALUES
+(0, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, ' vm', 'Brochure', ' vm', ' vm', ' vm', ' vm', 'JPEG', ' vm', '2020-05-15', '', '', ' vm', '', '', 'Redo', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 21:13:44 +0530', 'testfinalmob@gmail.com', 'testfinalmob', '7', '', 1, 'Redo', 10, ''),
+(58, 'testfinal@gmail.com', 'testfinal@gmail.com', 2147483647, 'perrcy', 'Logo design', 'perrcy', 'perrcy', 'perrcy', 'perrcy', 'JPEG', 'perrcy', '2020-05-14', '', '', 'perrcy', '821d250a-4b21-4fed-ba2e-6e6fdbea752b.jpg++--3783a81f-745b-43c1-a639-94a3ad03af40.jpg++--5516ddbf-f2cd-40a6-aced-d0410f1f7680.jpg++--16395e83-9fab-4a5f-8824-180898ac9cc4.jpg', '', 'Completed', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 19:45:48 +0530', 'testfinal@gmail.com', 'testfinal@gmail.com', '6', 'testfinal@gmail.com', 2, 'Redo', 10, ''),
+(59, 'testfinal@gmail.com', 'testfinal@gmail.com', 2147483647, 'shas', 'T-shirt', 'shas', 'shas', 'shas', 'shas', 'JPEG', 'shas', '2020-05-01', '', '', 'shas', '', 'Crypto Infographic-Different.jpg', 'Completed', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 19:50:18 +0530', 'testfinal@gmail.com', 'testfinal@gmail.com', '6', 'testfinal@gmail.com', 1, 'Redo', 10, ''),
+(60, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'h', 'T-shirt', 'h', 'h', 'h', 'h', 'JPEG', 'h', '0199-05-09', '', '', 'u', 'Untitled-4.jpg', '', 'Completed', '::1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/12.0 Mobile/15A372 Safari/604.1', 'Tue, 26 May 2020 19:57:49 +0530', 'testfinalmob@gmail.com', 'testfinalmob', '7', 'testfinalmob@gmail.com', 1, 'Redo', 10, ''),
+(62, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'hb', 'T-shirt', 'h', 'j', 'j', 'j', 'JPEG', 'j', '2020-06-23', '', 'j', 'j', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36', 'Wed, 03 Jun 2020 04:50:19 +0530', '', '', '', '', 0, '', 10, 'OPC61'),
+(63, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'j', 'T-shirt', 'j', 'j', 'j', 'j', 'JPEG', 'j', '2020-06-18', 'j', 'j', 'j', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36', 'Wed, 03 Jun 2020 04:51:38 +0530', '', '', '', '', 0, '', 10, 'OPC63');
 
 --
 -- Indexes for dumped tables
@@ -231,6 +290,12 @@ INSERT INTO `requests` (`id`, `name`, `email`, `phone`, `project_name`, `type_of
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `clothing_requests`
+--
+ALTER TABLE `clothing_requests`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -268,6 +333,12 @@ ALTER TABLE `client`
   MODIFY `id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `clothing_requests`
+--
+ALTER TABLE `clothing_requests`
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
+--
 -- AUTO_INCREMENT for table `designer`
 --
 ALTER TABLE `designer`
@@ -289,7 +360,7 @@ ALTER TABLE `redo`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

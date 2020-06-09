@@ -505,7 +505,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     data-category-menu="website-app-design" style="width: 100%;">
                                                     <div class="category-menu__item__text"
                                                         style="padding: 22px 30px;text-align: center;">
-                                                        <span class="heading heading--h5">
+                                                        <span class="heading heading--h5" style="letter-spacing: 1px;">
                                                             Logo & identity
                                                         </span>
                                                     </div>
@@ -1344,7 +1344,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     style="width: 96%;margin: 0 auto;height: 100%;">
                                                     <div class="category-menu__item__text"
                                                         style="padding: 10px 10px;text-align: center;">
-                                                        <span class="heading heading--h5">
+                                                        <span class="heading heading--h5" style="letter-spacing: 1px;">
                                                         Logo & identity
                                                         </span>
                                                     </div>

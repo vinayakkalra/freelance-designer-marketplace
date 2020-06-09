@@ -467,7 +467,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                     <li data-target="#multi-item-example" data-slide-to="0" class=""></li>
                                     <li data-target="#multi-item-example" data-slide-to="1" class=""></li>
                                     <li data-target="#multi-item-example" data-slide-to="2" class="active"></li>
-                                </ol> -->
+                                    </ol> -->
                                     <!--/.Indicators-->
 
                                     <!--Slides-->
@@ -500,17 +500,17 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                 </button>
                                             </div>
 
-                                            <!-- <div class="col-md-4">
-                                            <button class="category-menu__item designed_buttom"
-                                                data-category-menu="website-app-design" style="width: 100%;">
-                                                <div class="category-menu__item__text"
-                                                    style="padding: 22px 30px;text-align: center;">
-                                                    <span class="heading heading--h5">
-                                                        Web &amp; app design
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div> -->
+                                            <div class="col-md-4">
+                                                <button class="category-menu__item designed_buttom"
+                                                    data-category-menu="website-app-design" style="width: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 22px 30px;text-align: center;">
+                                                        <span class="heading heading--h5">
+                                                            Logo & identity
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
 
                                         </div>
                                         <!--/.First slide-->
@@ -1116,6 +1116,156 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         </div>
                     </div>
                 </div>
+                <!-- 3 part of carusel -->
+                <div class="container forms_option" style="display: none;">
+                        <div class="container-fluid" style="padding: 0px;display: flex;">
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='log_identity_design_request_sheet.php?form=Logo-design';" class="border_styling "
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Logo design
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from US$299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                An unforgettable logo crafted for your brand
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onClick="window.location='log_identity_design_request_sheet.php?form=Business-card';" class="border_styling_sec"
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Business card
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from US$299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A unique card designed to build connections
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width:50%;height: 332px !important;">
+                                <div id="carouselExampleIndicators23" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators23" data-slide-to="0" class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators23" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators23" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img3.jpg" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img4.jpg" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img5.jpg" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators23" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators23" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- ground part -->
+                    <div class="container forms_ground_option" style="margin-bottom: 30px;display: none;">
+                        <div class="container-fluid" style="padding: 0px;display: flex;">
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='log_identity_design_request_sheet.php?form=Stationery';" class="border_styling "
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Stationery
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from US$299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Letterhead and envelopes that send your brand's message
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
                 <!--mobile  phone  -->
                 <div class="d-lg-none">
                     <div class="container-fluid">
@@ -1145,7 +1295,6 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
 
                                         <!--First slide-->
                                         <div class="carousel-item active" style="height: 100%;">
-
                                             <div class="" style="width: 50%;">
                                                 <button class="category-menu__item designed_buttom button_selected"
                                                     data-category-menu="website-app-design"
@@ -1178,98 +1327,43 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                 <div class="category-menu__item__text"
                                                     style="padding: 22px 30px;text-align: center;">
                                                     <span class="heading heading--h5">
-                                                        Web &amp; app design
+                                                    Logo & identity
                                                     </span>
                                                 </div>
                                             </button>
-                                        </div> -->
+                                            </div> -->
 
                                         </div>
                                         <!--/.First slide-->
 
                                         <!--Second slide-->
-                                        <!-- <div class="carousel-item">
-
-                                        <div class="col-md-4">
-                                            <button class="category-menu__item designed_buttom"
-                                                data-category-menu="website-app-design" style="width: 100%;">
-                                                <div class="category-menu__item__text"
-                                                    style="padding: 22px 30px;text-align: center;">
-                                                    <span class="heading heading--h5">
-                                                        Web &amp; app design
-                                                    </span>
-                                                </div>
-                                            </button>
+                                        <div class="carousel-item " style="height: 100%;">
+                                            <div class="" style="width: 50%;">
+                                                <button class="category-menu__item designed_buttom"
+                                                    data-category-menu="website-app-design"
+                                                    style="width: 96%;margin: 0 auto;height: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 10px 10px;text-align: center;">
+                                                        <span class="heading heading--h5">
+                                                        Logo & identity
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <!-- <div class="" style="width: 50%;">
+                                                <button class="category-menu__item designed_buttom"
+                                                    data-category-menu="website-app-design"
+                                                    style="width: 96%;margin: 0 auto;height: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 10px 10px;text-align: center;">
+                                                        <span class="heading heading--h5">
+                                                            Design logo &amp; etc
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div> -->
                                         </div>
-
-                                        <div class="col-md-4">
-                                            <button class="category-menu__item designed_buttom"
-                                                data-category-menu="website-app-design" style="width: 100%;">
-                                                <div class="category-menu__item__text"
-                                                    style="padding: 22px 30px;text-align: center;">
-                                                    <span class="heading heading--h5">
-                                                        Web &amp; app design
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <button class="category-menu__item designed_buttom"
-                                                data-category-menu="website-app-design" style="width: 100%;">
-                                                <div class="category-menu__item__text"
-                                                    style="padding: 22px 30px;text-align: center;">
-                                                    <span class="heading heading--h5">
-                                                        Web &amp; app design
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-
-                                    </div> -->
                                         <!--/.Second slide-->
-
-                                        <!--Third slide-->
-                                        <!-- <div class="carousel-item ">
-
-                                        <div class="col-md-4">
-                                            <button class="category-menu__item" data-category-menu="website-app-design"
-                                                style="width: 100%;">
-                                                <div class="category-menu__item__text"
-                                                    style="padding: 22px 30px;text-align: center;">
-                                                    <span class="heading heading--h5">
-                                                        Web &amp; app design
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button class="category-menu__item" data-category-menu="website-app-design"
-                                                style="width: 100%;">
-                                                <div class="category-menu__item__text"
-                                                    style="padding: 22px 30px;text-align: center;">
-                                                    <span class="heading heading--h5">
-                                                        Web &amp; app design
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <button class="category-menu__item" data-category-menu="website-app-design"
-                                                style="width: 100%;">
-                                                <div class="category-menu__item__text"
-                                                    style="padding: 22px 30px;text-align: center;">
-                                                    <span class="heading heading--h5">
-                                                        Web &amp; app design
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-
-                                    </div> -->
-                                        <!--/.Third slide-->
-
                                     </div>
                                     <!--/.Slides-->
                                     <!-- controlls -->
@@ -1298,7 +1392,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='clothing_design_request_sheet.php?form=T-shirt';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1330,7 +1424,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='clothing_design_request_sheet.php?form=Clothing-or-apparel';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1411,7 +1505,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='clothing_design_request_sheet.php?form=Jersey';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1443,7 +1537,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='clothing_design_request_sheet.php?form=Sweatshirt-Hoodie';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1480,7 +1574,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='clothing_design_request_sheet.php?form=Merchandise';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1512,7 +1606,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='clothing_design_request_sheet.php?form=Other-clothing-or-merchandise';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1556,7 +1650,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='log_identity_design_request_sheet.php?form=Logo-design';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1805,6 +1899,161 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                 </div>
                             </div>
                             <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!-- 3 part -->
+                        <!-- carousel java html -->
+                        <div class="container forms_option" style="display: none ;">
+                        <div class="container-fluid" style="padding: 0px;/* display: flex; */">
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='log_identity_design_request_sheet.php?form=Logo-design';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                            Logo design
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from US$299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                    An unforgettable logo crafted for your brand
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onclick="window.location='log_identity_design_request_sheet.php?form=Business-card';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Business card
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from US$299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A unique card designed to build connections
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width: 100%;margin: 10px 0;height: 300px !important;">
+                                <div id="carouselExampleIndicators2mob23" class="carousel slide pointer-event"
+                                    data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators2mob23" data-slide-to="0" class="">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators2mob23" data-slide-to="1"
+                                            class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators2mob23" data-slide-to="2" class="">
+                                        </li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img3.jpg" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item active">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img4.jpg" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img5.jpg" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators2mob23"
+                                        role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators2mob23"
+                                        role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- ground part -->
+                    <div class="container forms_ground_option" style="display: none;margin-bottom: 30px;">
+                        <div class="container-fluid" style="padding: 0px;/* display: flex; */">
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='log_identity_design_request_sheet.php?form=Stationery';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Stationery
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from US$299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Letterhead and envelopes that send your brand's message
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!--  -->

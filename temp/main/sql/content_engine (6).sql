@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2020 at 06:21 AM
+-- Generation Time: Jun 09, 2020 at 10:08 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -109,7 +109,8 @@ CREATE TABLE `clothing_requests` (
 --
 
 INSERT INTO `clothing_requests` (`id`, `name`, `email`, `phone`, `project_name`, `type_of_design`, `how_design_can_be_used`, `design_package`, `How_did_you_hear_about_us`, `Image_Size`, `Image_Format`, `Describe_Visual_style_of_project`, `Due_Date`, `Is_your_company_a_digital_marketing_or_design_agency`, `how_often_you_need_design`, `How_many_employees_you_company_have`, `reference_files`, `inspiration_files`, `status`, `from_ip`, `from_browser`, `time`, `designer_accept_email`, `designer_accept_name`, `designer_accept_id`, `designer_completed_email`, `no_of_redo`, `redo_status`, `credits_pay`, `orderid`, `no_of_designs`, `Who_is_the_product_for`, `Do_you_have_any_specific_colors_in_mind`, `What_kind_of_product_do_you_want_designed`, `What_is_required_on_the_product`, `Is_there_anything_that_should_be_avoided`, `Describe_your_product_and_its_purpose`, `What_is_your_organization_name`, `select_industry`, `communicate`) VALUES
-(90, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'mmmm', 'Merchandise', 'm', 'Bronze', 'Search engine (e.g. Google, Bing)', 'mm', 'JPEG', 'mk', '2020-06-18', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Mon, 08 Jun 2020 09:51:11 +0530', '', '', '', '', 0, '', 20, 'CLOTH90', 3, '', '', '', '', '', ' l', 'm', 'Accounting & Financial', 'm');
+(90, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'mmmm', 'Merchandise', 'm', 'Bronze', 'Search engine (e.g. Google, Bing)', 'mm', 'JPEG', 'mk', '2020-06-18', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Mon, 08 Jun 2020 09:51:11 +0530', '', '', '', '', 0, '', 20, 'CLOTH90', 3, '', '', '', '', '', ' l', 'm', 'Accounting & Financial', 'm'),
+(91, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'bj', 'T-shirt', 'hbbh', 'Platinum', 'Search engine (e.g. Google, Bing)', 'bj', 'JPEG', 'bhbh', '2020-06-10', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Mobile Safari/537.36', 'Tue, 09 Jun 2020 13:38:35 +0530', '', '', '', '', 0, '', 50, 'CLOTH91', 9, 'Men', 'bhhb', 'Tank top', 'hb', 'hb', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -179,6 +180,66 @@ INSERT INTO `designer_completed_requests` (`id`, `client_name`, `client_email`, 
 (29, 'testfinalmob', 'testfinalmob@gmail.com', 'testfinalmob', 2147483647, 2147483647, 'xc ', 'e77e893b-6650-4986-b57a-16e51a750c11.jpg', 'Tue, 26 May 2020 20:00:48 +0530', 'Redo', '::1', 'Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Mobile Safari/537.36', 'testfinalmob@gmail.com', 60, 'designer', 0),
 (30, 'testfinalmob', 'testfinalmob@gmail.com', 'testfinalmob', 2147483647, 2147483647, 'j', 'Capture.PNG', 'Tue, 26 May 2020 20:02:28 +0530', 'Completed', '::1', 'Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Mobile Safari/537.36', 'testfinalmob@gmail.com', 60, 'designer', 0),
 (31, 'testfinalmob', 'testfinalmob@gmail.com', 'testfinalmob', 2147483647, 2147483647, '', 'bhafinali 1.jpg', 'Tue, 26 May 2020 21:13:59 +0530', 'Redo', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36', 'testfinalmob@gmail.com', 61, 'designer', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logo_identity_requests`
+--
+
+CREATE TABLE `logo_identity_requests` (
+  `id` int(111) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` int(200) NOT NULL,
+  `project_name` varchar(200) NOT NULL,
+  `type_of_design` varchar(200) NOT NULL,
+  `how_design_can_be_used` varchar(200) NOT NULL,
+  `design_package` varchar(200) NOT NULL,
+  `How_did_you_hear_about_us` varchar(200) NOT NULL,
+  `Image_Size` varchar(200) NOT NULL,
+  `Image_Format` varchar(200) NOT NULL,
+  `Describe_Visual_style_of_project` varchar(200) NOT NULL,
+  `Due_Date` varchar(200) NOT NULL,
+  `Is_your_company_a_digital_marketing_or_design_agency` varchar(200) NOT NULL,
+  `how_often_you_need_design` varchar(200) NOT NULL,
+  `How_many_employees_you_company_have` varchar(200) NOT NULL,
+  `reference_files` varchar(200) NOT NULL,
+  `inspiration_files` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `from_ip` varchar(200) NOT NULL,
+  `from_browser` varchar(200) NOT NULL,
+  `time` varchar(200) NOT NULL,
+  `designer_accept_email` varchar(200) NOT NULL,
+  `designer_accept_name` varchar(200) NOT NULL,
+  `designer_accept_id` varchar(200) NOT NULL,
+  `designer_completed_email` varchar(200) NOT NULL,
+  `no_of_redo` int(200) NOT NULL,
+  `redo_status` varchar(200) NOT NULL,
+  `credits_pay` int(200) NOT NULL,
+  `orderid` varchar(200) NOT NULL,
+  `no_of_designs` int(22) NOT NULL,
+  `What_name_do_you_want_in_your_product` varchar(200) NOT NULL,
+  `Do_you_have_a_slogan_you_want_incorporated_in_your_product` varchar(200) NOT NULL,
+  `Describe_what_your_organization_or_product_does_and_its_target` varchar(200) NOT NULL,
+  `What_details_do_you_want_on_your_product` varchar(200) NOT NULL,
+  `Is_there_anything_that_should_be_avoided` varchar(200) NOT NULL,
+  `select_industry` varchar(200) NOT NULL,
+  `communicate` varchar(200) NOT NULL,
+  `If_you_have_an_existing_website_please_list_it_here` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `logo_identity_requests`
+--
+
+INSERT INTO `logo_identity_requests` (`id`, `name`, `email`, `phone`, `project_name`, `type_of_design`, `how_design_can_be_used`, `design_package`, `How_did_you_hear_about_us`, `Image_Size`, `Image_Format`, `Describe_Visual_style_of_project`, `Due_Date`, `Is_your_company_a_digital_marketing_or_design_agency`, `how_often_you_need_design`, `How_many_employees_you_company_have`, `reference_files`, `inspiration_files`, `status`, `from_ip`, `from_browser`, `time`, `designer_accept_email`, `designer_accept_name`, `designer_accept_id`, `designer_completed_email`, `no_of_redo`, `redo_status`, `credits_pay`, `orderid`, `no_of_designs`, `What_name_do_you_want_in_your_product`, `Do_you_have_a_slogan_you_want_incorporated_in_your_product`, `Describe_what_your_organization_or_product_does_and_its_target`, `What_details_do_you_want_on_your_product`, `Is_there_anything_that_should_be_avoided`, `select_industry`, `communicate`, `If_you_have_an_existing_website_please_list_it_here`) VALUES
+(90, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'mmmm', 'Merchandise', 'm', 'Bronze', 'Search engine (e.g. Google, Bing)', 'mm', 'JPEG', 'mk', '2020-06-18', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Mon, 08 Jun 2020 09:51:11 +0530', '', '', '', '', 0, '', 20, 'CLOTH90', 3, '', '', '', '', '', 'Accounting & Financial', 'm', ''),
+(91, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'nn', 'Logo design', 'nn', 'Bronze', 'Search engine (e.g. Google, Bing)', 'nn', 'JPEG', '', '2020-06-25', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Tue, 09 Jun 2020 12:43:04 +0530', '', '', '', '', 0, '', 20, 'CLOTH91', 3, 'nn', 'nn', 'nn', '', '', 'Construction', 'n', ''),
+(92, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'k', 'Stationery', 'n  n', 'Bronze', 'Search engine (e.g. Google, Bing)', 'j', 'JPEG', 'jj', '2020-06-17', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Tue, 09 Jun 2020 13:08:40 +0530', '', '', '', '', 0, '', 20, 'CLOTH92', 3, 'jj', '', 'jj', 'jj', 'jj', 'Accounting & Financial', '', 'jj'),
+(93, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, ',l', 'Business card', 'nj', 'Bronze', 'Search engine (e.g. Google, Bing)', ',l', 'JPEG', 'jn', '2020-06-04', 'Yes', 'Rarely', '1', '92240805_220402115847612_1649414767134444675_n_49b84606c02ce876f069793f54331ffa.jpg++--92457029_869086613613653_5073888457209025592_n_31c85a146d61103edd412b362c752c06.jpg++--92457029_869086613613653_5', '88202210_644086999685741_160523837767310271_n_5752e3919b89a6b05c7507e4f488b8cc.jpg++--89084026_200217464417838_1877585520417749538_n_6ef1e03afad28937414926ed23462a34.jpg++--90180717_283740269275714_90', 'Submitted', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Tue, 09 Jun 2020 13:09:20 +0530', '', '', '', '', 0, '', 20, 'CLOTH93', 3, 'jnjn', '', 'nj', 'jnnj', 'jnnj', 'Accounting & Financial', '', 'jn'),
+(94, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'jn', 'Logo design', 'njnj', 'Platinum', 'Search engine (e.g. Google, Bing)', 'jnnj', 'JPEG', '', '2020-06-17', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Mobile Safari/537.36', 'Tue, 09 Jun 2020 13:34:17 +0530', '', '', '', '', 0, '', 50, 'CLOTH94', 9, 'jnjnj', 'njnj', 'nj', '', '', 'Accounting & Financial', 'jnnj', ''),
+(95, 'testfinalmob', 'testfinalmob@gmail.com', 2147483647, 'nj', 'Business card', 'nj', 'Bronze', 'Search engine (e.g. Google, Bing)', 'njjn', 'PNG', 'jn', '2020-06-20', 'Yes', 'Rarely', '1', '', '', 'Submitted', '::1', 'Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Mobile Safari/537.36', 'Tue, 09 Jun 2020 13:34:57 +0530', '', '', '', '', 0, '', 20, 'CLOTH95', 3, 'jn', '', 'nj', 'jn', 'nj', 'Accounting & Financial', '', 'jn');
 
 -- --------------------------------------------------------
 
@@ -311,6 +372,12 @@ ALTER TABLE `designer_completed_requests`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `logo_identity_requests`
+--
+ALTER TABLE `logo_identity_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `redo`
 --
 ALTER TABLE `redo`
@@ -336,7 +403,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `clothing_requests`
 --
 ALTER TABLE `clothing_requests`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `designer`
@@ -349,6 +416,12 @@ ALTER TABLE `designer`
 --
 ALTER TABLE `designer_completed_requests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `logo_identity_requests`
+--
+ALTER TABLE `logo_identity_requests`
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `redo`

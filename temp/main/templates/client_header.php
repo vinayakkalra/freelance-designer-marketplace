@@ -20,6 +20,12 @@
                         </i><span class="hide-menu">All Requests </span>
                     </a>
                 </li>
+                <li id="credits" >
+                    <a href="credits.php" class="credits">
+                        <i class="mdi mdi-gauge ">
+                        </i><span class="hide-menu">Credits </span>
+                    </a>
+                </li>
                 <!-- <li id="">
                     <a href="design_request_sheet.php">
                         <i class="mdi mdi-file ">

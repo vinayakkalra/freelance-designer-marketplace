@@ -12,7 +12,8 @@ if(isset($_POST['cid'])){
     $dname =$_POST['dname'];
     $did =$_POST['did'];
     $dtablename =$_POST['dtablename'];
-    $querysec = "SELECT * FROM `requests` WHERE email = '".mysqli_real_escape_string($conn, $cemail)."' AND id = $cid";
+    $customertablename =$_POST['customertablename'];
+    $querysec = "SELECT * FROM `$customertablename` WHERE email = '".mysqli_real_escape_string($conn, $cemail)."' AND orderid = '".mysqli_real_escape_string($conn, $cid)."'";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
                           while( $rowsec = mysqli_fetch_array($resultsec)){
 
@@ -29,7 +30,7 @@ if(isset($_POST['cid'])){
                                 $designer_accept_name = "designer_accept_name";
                                 $designer_accept_id = "designer_accept_id";
                                 $no_request_accepted = "no_request_accepted";
-                                $query = "UPDATE `requests` SET `$status` =  '".mysqli_real_escape_string($conn, $accepted)."' , `$designer_accept_email` = '".mysqli_real_escape_string($conn, $demail)."' , `$designer_accept_name` = '".mysqli_real_escape_string($conn, $dname)."' , `$designer_accept_id` = '".mysqli_real_escape_string($conn, $did)."'  WHERE id = $cid";
+                                $query = "UPDATE `$customertablename` SET `$status` =  '".mysqli_real_escape_string($conn, $accepted)."' , `$designer_accept_email` = '".mysqli_real_escape_string($conn, $demail)."' , `$designer_accept_name` = '".mysqli_real_escape_string($conn, $dname)."' , `$designer_accept_id` = '".mysqli_real_escape_string($conn, $did)."'  WHERE orderid = '".mysqli_real_escape_string($conn, $cid)."'";
                                 if(!$result = mysqli_query($conn, $query)){
                                   
                                 }else{

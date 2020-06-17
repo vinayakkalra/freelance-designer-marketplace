@@ -1,7 +1,15 @@
 <?php
 
     session_start();
-
+    include("./php/config.php");
+    // $_SESSION['iddashboard'] $_SESSION['signupas']
+    if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "client") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "client" )) {
+        header('location:client_dashboard.php');
+    }
+     elseif ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "designer") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "designer" )) {
+        header('location:designer_dashboard.php');
+    } 
+    // 
 
     $error = "";  
 
@@ -75,10 +83,17 @@
                     $from_browser = $_SERVER['HTTP_USER_AGENT'];
                     date_default_timezone_set("Asia/Calcutta");
                     $date_now = date("r");
+                    if($tablename == "client"){
+                        $credit = 200;
+                        $query = "INSERT INTO `$tablename` (`email`, `password`,`name`, `phone`,`from_ip`, `from_browser`,`time`,`Credits`) VALUES ('".mysqli_real_escape_string($conn, $_POST['email'])."', '".mysqli_real_escape_string($conn, $_POST['password'])."','".mysqli_real_escape_string($conn, $_POST['name'])."','".mysqli_real_escape_string($conn, $_POST['phone'])."','$from_ip', '$from_browser','$date_now',$credit)";
+                    }else{
+                        $query = "INSERT INTO `$tablename` (`email`, `password`,`name`, `phone`,`from_ip`, `from_browser`,`time`) VALUES ('".mysqli_real_escape_string($conn, $_POST['email'])."', '".mysqli_real_escape_string($conn, $_POST['password'])."','".mysqli_real_escape_string($conn, $_POST['name'])."','".mysqli_real_escape_string($conn, $_POST['phone'])."','$from_ip', '$from_browser','$date_now')";
+                    }
+                    
 
 
                     // inserting email and password
-                    $query = "INSERT INTO `$tablename` (`email`, `password`,`name`, `phone`,`from_ip`, `from_browser`,`time`) VALUES ('".mysqli_real_escape_string($conn, $_POST['email'])."', '".mysqli_real_escape_string($conn, $_POST['password'])."','".mysqli_real_escape_string($conn, $_POST['name'])."','".mysqli_real_escape_string($conn, $_POST['phone'])."','$from_ip', '$from_browser','$date_now')";
+                    // $query = "INSERT INTO `$tablename` (`email`, `password`,`name`, `phone`,`from_ip`, `from_browser`,`time`) VALUES ('".mysqli_real_escape_string($conn, $_POST['email'])."', '".mysqli_real_escape_string($conn, $_POST['password'])."','".mysqli_real_escape_string($conn, $_POST['name'])."','".mysqli_real_escape_string($conn, $_POST['phone'])."','$from_ip', '$from_browser','$date_now')";
 
                     if (!mysqli_query($conn, $query)) {
 

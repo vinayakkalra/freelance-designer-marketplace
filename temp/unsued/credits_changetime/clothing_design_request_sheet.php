@@ -20,9 +20,6 @@ if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
                 $customeremail = $row['email'] ;
                 $customername = $row['name'] ;
                 $customerphone = $row['phone'] ;
-                $customercredits = $row['Credits'] ;
-                $customerrequests = $row['no_requests'] ;
-                $customercompletedrequests = $row['no_completed_requests'] ;
                
                    }
                 }
@@ -42,9 +39,6 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                  $customeremail = $row['email'] ;
                  $customername = $row['name'] ;
                  $customerphone = $row['phone'] ;
-                 $customercredits = $row['Credits'] ;
-                 $customerrequests = $row['no_requests'] ;
-                 $customercompletedrequests = $row['no_completed_requests'] ;
                 
                     }
                  }
@@ -80,15 +74,23 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     $duedate = $_POST['duedate'];
     $projectname = $_POST['projectname'];
     $designpackage = $_POST['designpackage'];
-if($customercredits >=  $designpackage ){
-    
-    // 
-    $no_of_designs = 3 ;
+    if($designpackage == "Bronze"){
+        $budget = 20 ;
+        $no_of_designs = 3 ;
+    }elseif($designpackage == "Silver"){
+        $budget = 30 ;
+        $no_of_designs = 5 ;
+    }elseif($designpackage == "Gold"){
+        $budget = 40 ;
+        $no_of_designs = 7 ;
+    }elseif($designpackage == "Platinum"){
+        $budget = 50 ;
+        $no_of_designs = 9 ;
+    }
     $hearaboutus = $_POST['hearaboutus'];
     $companydigital = $_POST['companydigital'];
     $oftendesignneed = $_POST['oftendesignneed'];
     $employesno = $_POST['employesno'];
-    $table_name ="clothing_requests";
 if($form_type == "T-shirt"){
 
     $designtype = $_POST['designtype'];
@@ -227,7 +229,7 @@ $result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
     $id = $id + 1 ;
     $orderid = "CLOTH".$id ;
 
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Who_is_the_product_for`,`Do_you_have_any_specific_colors_in_mind`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $productfor)."','".mysqli_real_escape_string($conn, $productcolor)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
+$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`design_package`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Who_is_the_product_for`,`Do_you_have_any_specific_colors_in_mind`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $designpackage)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$budget,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $productfor)."','".mysqli_real_escape_string($conn, $productcolor)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs)";
 
  if (!mysqli_query($conn, $query)) {
 
@@ -236,26 +238,11 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
  <?php
 
    } else {
-     
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    } 
-               
+     ?>
+ <script>
+ alert('form submitted successfully!');
+  </script>
+ <?php
  // header('location:client_processing_request.php');
 
  }
@@ -399,7 +386,7 @@ $result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
     $id = $id + 1 ;
     $orderid = "CLOTH".$id ;
 
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
+$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`design_package`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $designpackage)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$budget,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs)";
 
  if (!mysqli_query($conn, $query)) {
 
@@ -408,25 +395,12 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
  <?php
 
    } else {
-       
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    }  
+     ?>
+ <script>
+ alert('form submitted successfully!');
+  </script>
+ <?php
+ // header('location:client_processing_request.php');
 
  }
 
@@ -569,7 +543,7 @@ $result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
     $id = $id + 1 ;
     $orderid = "CLOTH".$id ;
 
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_is_your_organization_name`,`select_industry`,`communicate`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $organisation)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $communicate)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
+$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`design_package`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_is_your_organization_name`,`select_industry`,`communicate`,`no_of_designs`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $designpackage)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$budget,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $organisation)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $communicate)."',$no_of_designs)";
 
  if (!mysqli_query($conn, $query)) {
 
@@ -578,40 +552,18 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
  <?php
 
    } else {
-       
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    } 
+     ?>
+ <script>
+ alert('form submitted successfully!');
+  </script>
+ <?php
+ // header('location:client_processing_request.php');
 
  }
 
 }
     // 
  }
-    // 
-}else{
-    ?>
-    <script>
-    alert("You don't have enough Credits!");
-     window.location = 'credits.php';</script>
-     <?php
-}
-
 }
 ?>
 <!DOCTYPE html>
@@ -1031,7 +983,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="productkind"> What Product do you want designed? : <span
+                                                    <label for="productkind"> What apparel do you want designed? : <span
                                                             class="danger">*</span> </label>
                                                     <select class="custom-select form-control required"
                                                             name="productkind" id="productkind">
@@ -1047,7 +999,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Do you have a logo you want on the Product?</label>
+                                                    <label >Do you have a logo you want on the apparel?</label>
                                                     <!-- <input type="file" id="input-file-max-fs" class="dropify"
                                                         data-max-file-size="2M" /> -->
                                                     <input type="file" name="images[]" multiple>
@@ -1058,7 +1010,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="productrequired">What is required on the Product? : <span
+                                                    <label for="productrequired">What is required on the t-shirt? : <span
                                                             class="danger">*</span></label>
                                                     <textarea name="productrequired" id="productrequired" rows="3"
                                                         class="form-control required"></textarea>
@@ -1076,7 +1028,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectdescriptionmain">Describe your Product and its purpose : <span
+                                                    <label for="projectdescriptionmain">Describe your apparel and its purpose : <span
                                                             class="danger">*</span></label>
                                                     <textarea name="projectdescriptionmain" id="projectdescriptionmain" rows="3"
                                                         class="form-control required"></textarea>
@@ -1247,7 +1199,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Do you have a logo you want on the Product?</label>
+                                                    <label >Do you have a logo you want on the apparel?</label>
                                                     <!-- <input type="file" id="input-file-max-fs" class="dropify"
                                                         data-max-file-size="2M" /> -->
                                                     <input type="file" name="images[]" multiple>
@@ -1284,35 +1236,158 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                     <!-- Step 2 -->
                                     <section class="form_option" style="display:none">
                                     <!--  -->
-                                    <h1 style="margin-bottom:10px;" >Name your price:</h1>
-                                        <!-- <h6 style="margin-bottom:15px;" >All t-shirt packages come with a 100% money-back guarantee and full copyright ownership of the final design.</h6> -->
+                                        <h1 style="margin-bottom:10px;" >Which design package do you want?</h1>
+                                        <h6 style="margin-bottom:15px;" >All t-shirt packages come with a 100% money-back guarantee and full copyright ownership of the final design.</h6>
                                         <div class="row" style="padding:5px;">
-                                            <div class="col-md-6" style="margin: 5px 0px;">
+                                            <div class="col-md-3" style="margin: 5px 0px;">
                                                 <div>
                                                 <!-- start -->
-                                    <?php 
-                                    if(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie") or ($form_type == "T-shirt") or ($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise") ){
-                                    ?>
-                                                <label for="designpackage">(199 minimum)  : <span
-                                                            class="danger">*</span></label>
-                                                    <!-- <input type="hidden" name="gg" value="10"> -->
-                                                    <input type="number" class="form-control required" id="designpackage"
-                                                        name="designpackage" value="199" min="199"  >
-                                                <!--  -->
-                                                <?php
-                                        }
-                                        ?>
+                                                <label style="width: 100%;">
+                                                    <input type="radio" name="designpackage" value="Bronze" checked  >
+                                                    <div class="package package--desktop package_list_group_item selectedpackage" >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                        Bronze
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 3 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading " style="margin-bottom: 10px;">
+                                                                            <span><span>20 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Bronze</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="display:none;border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <!-- end -->
+                                                </div>
+                                            </div>
+                                            <!-- 2nd -->
+                                            <div class="col-md-3" style="margin: 5px 0px;">
+                                                <div>
+                                                <!-- start -->
+                                                <label style="width: 100%;">
+                                                    <input  type="radio" name="designpackage" value="Silver"  >
+                                                    <div class="package package--desktop package_list_group_item " >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                        Silver
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 5 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading "style="margin-bottom: 10px;">
+                                                                            <span><span>30 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="display:none;width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Silver</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <!-- end -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="margin: 5px 0px;">
+                                                <div>
+                                                <!-- start -->
+                                                <label style="width: 100%;">
+                                                    <input  type="radio" name="designpackage" value="Gold"  >
+                                                    <div class="package package--desktop package_list_group_item " >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                        Gold
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 7 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading " style="margin-bottom: 10px;">
+                                                                            <span><span>40 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="display:none;width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Gold</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <!-- end -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="margin: 5px 0px;">
+                                                <div>
+                                                <!-- start -->
+                                                <label style="width: 100%;">
+                                                    <input  type="radio" name="designpackage" value="Platinum"  >
+                                                    <div class="package package--desktop package_list_group_item " >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                    Platinum
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 9 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading " style="margin-bottom: 10px;">
+                                                                            <span><span>50 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="display:none;width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Platinum</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
                                                 <!-- end -->
                                                 </div>
                                             </div>
                                             <!--  -->
                                         </div>
-                                        <h2 style="margin-bottom:15px;margin-top:15px;" >Design options</h2>
-                                        <h6 style="margin-bottom:15px;" >Customize your Design to suit your need</h6>
+                                        <h2 style="margin-bottom:15px;margin-top:15px;" >Contest options</h2>
+                                        <h6 style="margin-bottom:15px;" >Customize your contest to suit your need</h6>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectname"> Design Title : <span class="danger">*</span>
+                                                    <label for="projectname"> Contest Title : <span class="danger">*</span>
                                                     </label>
                                                     <input type="text" class="form-control required" id="projectname"
                                                         name="projectname">

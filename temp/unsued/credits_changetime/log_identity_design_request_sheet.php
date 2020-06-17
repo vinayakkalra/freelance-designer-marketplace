@@ -20,9 +20,6 @@ if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
                 $customeremail = $row['email'] ;
                 $customername = $row['name'] ;
                 $customerphone = $row['phone'] ;
-                $customercredits = $row['Credits'] ;
-                $customerrequests = $row['no_requests'] ;
-                $customercompletedrequests = $row['no_completed_requests'] ;
                
                    }
                 }
@@ -42,9 +39,6 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                  $customeremail = $row['email'] ;
                  $customername = $row['name'] ;
                  $customerphone = $row['phone'] ;
-                 $customercredits = $row['Credits'] ;
-                 $customerrequests = $row['no_requests'] ;
-                 $customercompletedrequests = $row['no_completed_requests'] ;
                 
                     }
                  }
@@ -80,47 +74,34 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     $duedate = $_POST['duedate'];
     $projectname = $_POST['projectname'];
     $designpackage = $_POST['designpackage'];
-if($customercredits >=  $designpackage ){
-    
-    // 
-    $no_of_designs = 3 ;
+    if($designpackage == "Bronze"){
+        $budget = 20 ;
+        $no_of_designs = 3 ;
+    }elseif($designpackage == "Silver"){
+        $budget = 30 ;
+        $no_of_designs = 5 ;
+    }elseif($designpackage == "Gold"){
+        $budget = 40 ;
+        $no_of_designs = 7 ;
+    }elseif($designpackage == "Platinum"){
+        $budget = 50 ;
+        $no_of_designs = 9 ;
+    }
     $hearaboutus = $_POST['hearaboutus'];
     $companydigital = $_POST['companydigital'];
     $oftendesignneed = $_POST['oftendesignneed'];
     $employesno = $_POST['employesno'];
-    $table_name ="clothing_requests";
-if($form_type == "T-shirt"){
+if($form_type == "Logo-design"){
 
     $designtype = $_POST['designtype'];
     $designused = $_POST['designused'];
-    $productfor = $_POST['productfor'];
-    $productcolor = $_POST['productcolor'];
-    $projectdescription = $_POST['projectdescription'];
-    $productkind = $_POST['productkind'];
-    $avoidthing = $_POST['avoidthing'];
-    $productrequired = $_POST['productrequired'];
+    $nameonproduct = $_POST['nameonproduct'];
+    $selectindustry = $_POST['selectindustry'];
+    $organisatintargetdescription = $_POST['organisatintargetdescription'];
+    $sloganonproduct = $_POST['sloganonproduct'];
+    $communicate = $_POST['communicate'];
     $status = "Submitted";
     $error="";
-    // check file uploaded or not
-    $total = count($_FILES['images']['name']);
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-
-}
-}
 // check inspiration file uploaded or not
 $total = count($_FILES['refimages']['name']);
 
@@ -149,42 +130,6 @@ if ($error != "") {
      else
 {
         // upload
-$total = count($_FILES['images']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-
-
-}
-}
-if (!empty($items)){
-$refimages = implode("++--", $items);
-}else{
-$refimages = "";
-}
-// upload reference file end
 // upload inspirational file
 $total = count($_FILES['refimages']['name']);
 
@@ -219,7 +164,7 @@ $inspimages = implode("++--", $itemss);
 $inspimages = "";
 }
 // upload inspiration img end
-$result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
+$result = mysqli_query($conn, "SELECT max(id) FROM `logo_identity_requests`");
 
     while ($row = mysqli_fetch_array($result)) {
         $id = $row[0];  
@@ -227,7 +172,7 @@ $result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
     $id = $id + 1 ;
     $orderid = "CLOTH".$id ;
 
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Who_is_the_product_for`,`Do_you_have_any_specific_colors_in_mind`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $productfor)."','".mysqli_real_escape_string($conn, $productcolor)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
+$query = "INSERT INTO `logo_identity_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`design_package`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`communicate`,`Due_Date`,`credits_pay`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_what_your_organization_or_product_does_and_its_target`,`What_name_do_you_want_in_your_product`,`select_industry`,`Do_you_have_a_slogan_you_want_incorporated_in_your_product`,`no_of_designs`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $designpackage)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $communicate)."','".mysqli_real_escape_string($conn, $duedate)."',$budget,'".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $organisatintargetdescription)."','".mysqli_real_escape_string($conn, $nameonproduct)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $sloganonproduct)."',$no_of_designs)";
 
  if (!mysqli_query($conn, $query)) {
 
@@ -236,211 +181,28 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
  <?php
 
    } else {
-     
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    } 
-               
+     ?>
+ <script>
+ alert('form submitted successfully!');
+  </script>
+ <?php
  // header('location:client_processing_request.php');
 
  }
 
 }
 
- }elseif(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie")){
+ }elseif(($form_type == "Stationery") or ($form_type == "Business-card")){
     //  
     $designtype = $_POST['designtype'];
     $designused = $_POST['designused'];
-    $projectdescription = $_POST['projectdescription'];
-    $projectdescriptionmain = $_POST['projectdescriptionmain'];
-    $productkind = $_POST['productkind'];
-    $avoidthing = $_POST['avoidthing'];
-    $productrequired = $_POST['productrequired'];
-    $status = "Submitted";
-    $error="";
-    // check file uploaded or not
-    $total = count($_FILES['images']['name']);
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-
-}
-}
-// check inspiration file uploaded or not
-$total = count($_FILES['refimages']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-}
-}
-
-if ($error != "") {
-
-    $error = "<p>There were error(s) in your form:</p>".$error;
-    
-}
-     else
-{
-        // upload
-$total = count($_FILES['images']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-
-
-}
-}
-if (!empty($items)){
-$refimages = implode("++--", $items);
-}else{
-$refimages = "";
-}
-// upload reference file end
-// upload inspirational file
-$total = count($_FILES['refimages']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$itemss[] = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-}
-}
-if (!empty($itemss)){
-$inspimages = implode("++--", $itemss);
-}else{
-$inspimages = "";
-}
-// upload inspiration img end
-$result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
-
-    while ($row = mysqli_fetch_array($result)) {
-        $id = $row[0];  
-    }
-    $id = $id + 1 ;
-    $orderid = "CLOTH".$id ;
-
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
-
- if (!mysqli_query($conn, $query)) {
-
-     ?>
- <script>alert('error in form')</script>
- <?php
-
-   } else {
-       
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    }  
-
- }
-
-}
-    // 
- }elseif(($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise")){
-    //  
-    $designtype = $_POST['designtype'];
-    $designused = $_POST['designused'];
-    $projectdescription = $_POST['projectdescription'];
-    $projectdescriptionmain = $_POST['projectdescriptionmain'];
-    $organisation = $_POST['organisation'];
+    $nameonproduct = $_POST['nameonproduct'];
     $selectindustry = $_POST['selectindustry'];
-    $communicate = $_POST['communicate'];
+    $organisatintargetdescription = $_POST['organisatintargetdescription'];
+    $websitename = $_POST['websitename'];
+    $productdetailsdescriptionmain = $_POST['productdetailsdescriptionmain'];
+    $visualstyledescription = $_POST['visualstyledescription'];
+    $avoidthing = $_POST['avoidthing'];
     $status = "Submitted";
     $error="";
     // check file uploaded or not
@@ -561,7 +323,7 @@ $inspimages = implode("++--", $itemss);
 $inspimages = "";
 }
 // upload inspiration img end
-$result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
+$result = mysqli_query($conn, "SELECT max(id) FROM `logo_identity_requests`");
 
     while ($row = mysqli_fetch_array($result)) {
         $id = $row[0];  
@@ -569,7 +331,7 @@ $result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
     $id = $id + 1 ;
     $orderid = "CLOTH".$id ;
 
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_is_your_organization_name`,`select_industry`,`communicate`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $organisation)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $communicate)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
+$query = "INSERT INTO `logo_identity_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`design_package`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`If_you_have_an_existing_website_please_list_it_here`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_what_your_organization_or_product_does_and_its_target`,`What_name_do_you_want_in_your_product`,`select_industry`,`Describe_Visual_style_of_project`,`Is_there_anything_that_should_be_avoided`,`What_details_do_you_want_on_your_product`,`no_of_designs`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $designpackage)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $websitename)."','".mysqli_real_escape_string($conn, $duedate)."',$budget,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $organisatintargetdescription)."','".mysqli_real_escape_string($conn, $nameonproduct)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $visualstyledescription)."','".mysqli_real_escape_string($conn, $avoidthing)."','".mysqli_real_escape_string($conn, $productdetailsdescriptionmain)."',$no_of_designs)";
 
  if (!mysqli_query($conn, $query)) {
 
@@ -578,40 +340,18 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
  <?php
 
    } else {
-       
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    } 
+     ?>
+ <script>
+ alert('form submitted successfully!');
+  </script>
+ <?php
+ // header('location:client_processing_request.php');
 
  }
 
 }
     // 
  }
-    // 
-}else{
-    ?>
-    <script>
-    alert("You don't have enough Credits!");
-     window.location = 'credits.php';</script>
-     <?php
-}
-
 }
 ?>
 <!DOCTYPE html>
@@ -810,305 +550,12 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                 <!--  -->
                                 <form id="validations" method="post" enctype="multipart/form-data">
                                     <!-- Step 1 -->
-                                    <?php 
-                                    if($form_type == "T-shirt"){
-                                    ?>
-                                    <section class="form_option" >
-                                        <h1 style="margin-bottom:10px;" >T-shirt brief</h1>
-                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;margin-top:20px;" >Background information</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designtype"> What type of design do you need? : <span
-                                                            class="danger">*</span> </label>
-                                                    <input value="T-shirt" readonly
-                                                        type="text" class="form-control required" id="designtype"
-                                                        name="designtype">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productfor"> Who is the t-shirt for? : <span
-                                                            class="danger">*</span> </label>
-                                                    <select class="custom-select form-control required"
-                                                        name="productfor" id="productfor">
-                                                            <option value="Men">Men</option>
-                                                            <option value="Women">Women
-                                                            </option>
-                                                            <option value="Boys">Boys</option>
-                                                            <option value="Girls">Girls
-                                                            </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designused">How will your design be used? <span
-                                                            class="danger">*</span> </label>
-                                                    <input
-                                                        placeholder="E.g. Billboard, Facebook campaign, bookcover etc."
-                                                        type="text" class="form-control required" id="designused"
-                                                        name="designused">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productcolor">Do you have any specific colors in mind? </label>
-                                                    <input
-                                                        placeholder="E.g. red, yellow, mauve"
-                                                        type="text" class="form-control required" id="productcolor"
-                                                        name="productcolor">
-                                                        <h5 style="font-size: 14px;color: #999;margin-top: 15px;font-weight: 500;">Common associations in Western culture</h5>
-                                                        <ul>
-                                                        <li class="visuallisteditem">Red: Passion, Anger, Vigor, Love, Danger</li>
-                                                        <li class="visuallisteditem">Yellow: Knowledge, Energy, Joy, Intellect, Youth</li>
-                                                        <li class="visuallisteditem">Green: Fertility, Wealth, Healing, Success, Growth</li>
-                                                        <li class="visuallisteditem">White: Purity, Healing, Perfection, Clean, Virtue</li>
-                                                        <li class="visuallisteditem">Blue: Knowledge, Trust, Tranquility, Calm, Peace, Cool</li>
-                                                        </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectdescription">Do you have ideas about the visual style you want? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="projectdescription" id="projectdescription" rows="5"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Content details</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productkind"> What kind of t-shirt do you want designed? : <span
-                                                            class="danger">*</span> </label>
-                                                    <select class="custom-select form-control required"
-                                                            name="productkind" id="productkind">
-                                                            <option value="Standard short-sleeve Tshirt">Standard short-sleeve Tshirt</option>
-                                                            <option value="Tank top">Tank top
-                                                            </option>
-                                                            <option value="Polo shirt">Polo shirt</option>
-                                                            <option value="Short sleeved button up shirt">Short sleeved button up shirt
-                                                            </option>
-                                                            <option value="Polo shirt">Dress/business shirt</option>
-                                                            <option value="Other, please specify">Other, please specify</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have a logo you want on the t-shirt?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="images[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productrequired">What is required on the t-shirt? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="productrequired" id="productrequired" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Slogan, organisation or product name, website address, phone number.</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="avoidthing">Is there anything that should be avoided? :</label>
-                                                    <textarea name="avoidthing" id="avoidthing" rows="3"
-                                                        class="form-control required"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Other</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have any images, sketches or documents that might be helpful?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="refimages[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a class="btn btn-primary btn btn-info  waves-effect waves-light addItemBtn" style="color:#fff;padding: 7px 25px;" type="button">Next
-                                        </a>
-                                    </section>
-                                    <?php
-                                    }elseif(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie")){
-                                        ?>
                                     <!--  -->
                                     <section class="form_option" >
                                     <?php
-                                    if($form_type == "Clothing-or-apparel"){
+                                    if($form_type == "Stationery"){
                                         ?>
-                                        <h1 style="margin-bottom:10px;" >Clothing or apparel brief</h1>
-                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designtype"> What type of design do you need? : <span
-                                                            class="danger">*</span> </label>
-                                                    <input value="Clothing or apparel" readonly
-                                                        type="text" class="form-control required" id="designtype"
-                                                        name="designtype">
-                                                </div>
-                                            </div>
-                                        <?php
-                                    }elseif( $form_type == "Jersey")
-                                    {
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Jersey</h1>
-                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designtype"> What type of design do you need? : <span
-                                                            class="danger">*</span> </label>
-                                                    <input value="Jersey" readonly
-                                                        type="text" class="form-control required" id="designtype"
-                                                        name="designtype">
-                                                </div>
-                                            </div>
-                                        <?php
-                                    }elseif( $form_type == "Sweatshirt-Hoodie")
-                                    {
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Sweatshirt & Hoodie</h1>
-                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designtype"> What type of design do you need? : <span
-                                                            class="danger">*</span> </label>
-                                                    <input value="Sweatshirt & Hoodie" readonly
-                                                        type="text" class="form-control required" id="designtype"
-                                                        name="designtype">
-                                                </div>
-                                            </div>
-                                        <?php
-                                    }
-                                        ?>
-                                        
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designused">How will your design be used? <span
-                                                            class="danger">*</span> </label>
-                                                    <input
-                                                        placeholder="E.g. Billboard, Facebook campaign, bookcover etc."
-                                                        type="text" class="form-control required" id="designused"
-                                                        name="designused">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectdescription">Do you have ideas about the visual style you want? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="projectdescription" id="projectdescription" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Content details</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productkind"> What Product do you want designed? : <span
-                                                            class="danger">*</span> </label>
-                                                    <select class="custom-select form-control required"
-                                                            name="productkind" id="productkind">
-                                                            <option value="Jacket">Jacket</option>
-                                                            <option value="Cap">Cap
-                                                            </option>
-                                                            <option value="Bag">Bag</option>
-                                                            <option value="Shoe">Shoe
-                                                            </option>
-                                                            <option value="Other, please specify">Other, please specify</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have a logo you want on the Product?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="images[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productrequired">What is required on the Product? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="productrequired" id="productrequired" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Slogan, organisation or product name, website address, phone number.</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="avoidthing">Is there anything that should be avoided? :</label>
-                                                    <textarea name="avoidthing" id="avoidthing" rows="3"
-                                                        class="form-control required"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectdescriptionmain">Describe your Product and its purpose : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="projectdescriptionmain" id="projectdescriptionmain" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. A fitted men's cap for Acme employees.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Other</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have any images, sketches or documents that might be helpful?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="refimages[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a class="btn btn-primary btn btn-info  waves-effect waves-light addItemBtn" style="color:#fff;padding: 7px 25px;" type="button">Next
-                                        </a>
-                                    </section>
-                                    <!--  -->
-                                        <?php
-                                    }elseif(($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise")){
-                                        ?>
-                                    <!--  -->
-                                    <section class="form_option" >
-                                    <?php
-                                    if($form_type == "Merchandise"){
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Merchandise brief</h1>
+                                        <h1 style="margin-bottom:10px;" >Stationery brief</h1>
                                         <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you‘re looking for.</h6>
                                         <h2 style="margin-bottom:15px;" >Background information</h2>
                                         <div class="row">
@@ -1116,16 +563,16 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                                 <div class="form-group">
                                                     <label for="designtype"> What type of design do you need? : <span
                                                             class="danger">*</span> </label>
-                                                    <input value="Merchandise" readonly
+                                                    <input value="Stationery" readonly
                                                         type="text" class="form-control required" id="designtype"
                                                         name="designtype">
                                                 </div>
                                             </div>
                                         <?php
-                                    }elseif( $form_type == "Other-clothing-or-merchandise")
+                                    }elseif( $form_type == "Business-card")
                                     {
                                         ?>
-                                        <h1 style="margin-bottom:10px;" >Other clothing or merchandise brief</h1>
+                                        <h1 style="margin-bottom:10px;" >Business card brief</h1>
                                         <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you‘re looking for.</h6>
                                         <h2 style="margin-bottom:15px;" >Background information</h2>
                                         <div class="row">
@@ -1133,7 +580,24 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                                 <div class="form-group">
                                                     <label for="designtype"> What type of design do you need? : <span
                                                             class="danger">*</span> </label>
-                                                    <input value="Other clothing or merchandise" readonly
+                                                    <input value="Business card" readonly
+                                                        type="text" class="form-control required" id="designtype"
+                                                        name="designtype">
+                                                </div>
+                                            </div>
+                                        <?php
+                                    }elseif( $form_type == "Logo-design")
+                                    {
+                                        ?>
+                                        <h1 style="margin-bottom:10px;" >Logo design brief</h1>
+                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you‘re looking for.</h6>
+                                        <h2 style="margin-bottom:15px;" >Background information</h2>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="designtype"> What type of design do you need? : <span
+                                                            class="danger">*</span> </label>
+                                                    <input value="Logo design" readonly
                                                         type="text" class="form-control required" id="designtype"
                                                         name="designtype">
                                                 </div>
@@ -1155,16 +619,35 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                             </div>
                                         </div>
                                         <div class="row">
+                                        <?php
+                                        if(($form_type == "Stationery") or ( $form_type == "Business-card")){
+                                        ?>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="organisation">What is your organization name? <span
+                                                    <label for="websitename">If you have an existing website, please list it here. </label>
+                                                    <input
+                                                        placeholder="E.g. www.acme.com"
+                                                        type="text" class="form-control required" id="websitename"
+                                                        name="websitename">
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }elseif( $form_type == "Logo-design")
+                                        {
+                                            ?>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="nameonproduct">What name do you want in your logo? <span
                                                             class="danger">*</span> </label>
                                                     <input
                                                         placeholder="E.g. Acme"
-                                                        type="text" class="form-control required" id="organisation"
-                                                        name="organisation">
+                                                        type="text" class="form-control required" id="nameonproduct"
+                                                        name="nameonproduct">
                                                 </div>
                                             </div>
+                                        <?php
+                                        }
+                                        ?>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="selectindustry"> Select your industry : <span
@@ -1226,36 +709,53 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectdescription">Describe what your organization or product does and its target audience : <span
+                                                    <label for="organisatintargetdescription">Describe what your organization or product does and its target audience : <span
                                                             class="danger">*</span></label>
-                                                    <textarea name="projectdescription" id="projectdescription" rows="3"
+                                                    <textarea name="organisatintargetdescription" id="organisatintargetdescription" rows="3"
                                                         class="form-control required"></textarea>
                                                     <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.</h5>
                                                 </div>
                                             </div>
+                                            <?php 
+                                            if( $form_type == "Logo-design")
+                                            {
+                                            ?>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="sloganonproduct">Do you have a slogan you want incorporated in your logo? <span
+                                                            class="danger">*</span> </label>
+                                                    <input
+                                                        placeholder="E.g. Acme"
+                                                        type="text" class="form-control required" id="sloganonproduct"
+                                                        name="sloganonproduct">
+                                                </div>
+                                            </div>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
-                                        <h2 style="margin-bottom:15px;" >Content details</h2>
+                                        <?php
+                                        if(($form_type == "Stationery") or ( $form_type == "Business-card")){
+                                        ?>
+                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectdescriptionmain">Describe what you want designed : <span
+                                                    <label for="visualstyledescription">Do you have ideas about the visual style you want? : <span
                                                             class="danger">*</span></label>
-                                                    <textarea name="projectdescriptionmain" id="projectdescriptionmain" rows="3"
+                                                    <textarea name="visualstyledescription" id="visualstyledescription" rows="3"
                                                         class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Describe your aims and requirements in detail here — the more specific, the better. Tell the designers what is required, but also let them know where they’re free to be creative.</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have a logo you want on the Product?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="images[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
+                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
                                                 </div>
                                             </div>
                                         </div>
-                                        <h2 style="margin-bottom:15px;" >Other</h2>
+                                        <?php
+                                        }
+                                        ?>
+                                        <h2 style="margin-bottom:15px;" >Content details</h2>
+                                        <?php
+                                        if($form_type == "Logo-design"){
+                                        ?>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -1264,6 +764,82 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                                         class="form-control required"></textarea>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <?php
+                                        }elseif(($form_type == "Stationery") or ( $form_type == "Business-card")){
+                                            if($form_type == "Stationery"){
+                                        ?>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="productdetailsdescriptionmain">What details do you want on your stationery items? : <span
+                                                            class="danger">*</span></label>
+                                                    <textarea name="productdetailsdescriptionmain" id="productdetailsdescriptionmain" rows="3"
+                                                        class="form-control required"></textarea>
+                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Name, title, contact details and website URL (where applicable)</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="nameonproduct">What brand name do you want on your stationery? <span
+                                                            class="danger">*</span> </label>
+                                                    <input
+                                                        placeholder="E.g. Acme"
+                                                        type="text" class="form-control required" id="nameonproduct"
+                                                        name="nameonproduct">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                            }elseif(( $form_type == "Business-card")){
+                                                ?>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="productdetailsdescriptionmain">What details do you want on your business card? : <span
+                                                            class="danger">*</span></label>
+                                                    <textarea name="productdetailsdescriptionmain" id="productdetailsdescriptionmain" rows="3"
+                                                        class="form-control required"></textarea>
+                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Name, title, contact details and website URL (where applicable)</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="nameonproduct">What brand name do you want on your business card? <span
+                                                            class="danger">*</span> </label>
+                                                    <input
+                                                        placeholder="E.g. Acme"
+                                                        type="text" class="form-control required" id="nameonproduct"
+                                                        name="nameonproduct">
+                                                </div>
+                                            </div>
+                                        </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="avoidthing">Is there anything that should be avoided? :</label>
+                                                        <textarea name="avoidthing" id="avoidthing" rows="3"
+                                                            class="form-control required"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label >Do you have a logo you want on the Product?</label>
+                                                        <!-- <input type="file" id="input-file-max-fs" class="dropify"
+                                                            data-max-file-size="2M" /> -->
+                                                        <input type="file" name="images[]" multiple>
+                                                        <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+                                        <h2 style="margin-bottom:15px;" >Other</h2>
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Do you have any images, sketches or documents that might be helpful?</label>
@@ -1278,41 +854,161 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                         </a>
                                     </section>
                                     <!--  -->
-                                        <?php
-                                    }
-                                    ?>
                                     <!-- Step 2 -->
                                     <section class="form_option" style="display:none">
                                     <!--  -->
-                                    <h1 style="margin-bottom:10px;" >Name your price:</h1>
-                                        <!-- <h6 style="margin-bottom:15px;" >All t-shirt packages come with a 100% money-back guarantee and full copyright ownership of the final design.</h6> -->
+                                        <h1 style="margin-bottom:10px;" >Which design package do you want?</h1>
+                                        <h6 style="margin-bottom:15px;" >All t-shirt packages come with a 100% money-back guarantee and full copyright ownership of the final design.</h6>
                                         <div class="row" style="padding:5px;">
-                                            <div class="col-md-6" style="margin: 5px 0px;">
+                                            <div class="col-md-3" style="margin: 5px 0px;">
                                                 <div>
                                                 <!-- start -->
-                                    <?php 
-                                    if(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie") or ($form_type == "T-shirt") or ($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise") ){
-                                    ?>
-                                                <label for="designpackage">(199 minimum)  : <span
-                                                            class="danger">*</span></label>
-                                                    <!-- <input type="hidden" name="gg" value="10"> -->
-                                                    <input type="number" class="form-control required" id="designpackage"
-                                                        name="designpackage" value="199" min="199"  >
-                                                <!--  -->
-                                                <?php
-                                        }
-                                        ?>
+                                                <label style="width: 100%;">
+                                                    <input type="radio" name="designpackage" value="Bronze" checked  >
+                                                    <div class="package package--desktop package_list_group_item selectedpackage" >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                        Bronze
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 3 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading " style="margin-bottom: 10px;">
+                                                                            <span><span>20 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Bronze</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="display:none;border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <!-- end -->
+                                                </div>
+                                            </div>
+                                            <!-- 2nd -->
+                                            <div class="col-md-3" style="margin: 5px 0px;">
+                                                <div>
+                                                <!-- start -->
+                                                <label style="width: 100%;">
+                                                    <input  type="radio" name="designpackage" value="Silver"  >
+                                                    <div class="package package--desktop package_list_group_item " >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                        Silver
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 5 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading "style="margin-bottom: 10px;">
+                                                                            <span><span>30 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="display:none;width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Silver</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <!-- end -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="margin: 5px 0px;">
+                                                <div>
+                                                <!-- start -->
+                                                <label style="width: 100%;">
+                                                    <input  type="radio" name="designpackage" value="Gold"  >
+                                                    <div class="package package--desktop package_list_group_item " >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                        Gold
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 7 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading " style="margin-bottom: 10px;">
+                                                                            <span><span>40 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="display:none;width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Gold</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <!-- end -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="margin: 5px 0px;">
+                                                <div>
+                                                <!-- start -->
+                                                <label style="width: 100%;">
+                                                    <input  type="radio" name="designpackage" value="Platinum"  >
+                                                    <div class="package package--desktop package_list_group_item " >
+                                                        <div class="package__box" >
+                                                            <div class="package__box__inner">
+                                                                <div class="bordered-box bordered-box--reduced-padding">
+                                                                    <h4 class="headingtop">
+                                                                    Platinum
+                                                                    </h4>
+                                                                    <div>
+                                                                        <p class="paragraph" style="margin-bottom: 10px;">
+                                                                            Expect 9 designs</p>
+                                                                    </div>
+                                                                    <div class="bordered-box__bottom-right-element">
+                                                                        <h5 class="heading " style="margin-bottom: 10px;">
+                                                                            <span><span>50 Credits</span></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonselected" style="display:none;width:100%;color: #fff;background-color: #e0b48c;"><i class="fa fa-check" aria-hidden="true"></i>  Platinum</a>
+                                                                    </div>
+                                                                    <div >
+                                                                        <a class="btn buttonnotselected" style="border: 3px solid #b2b2b2;width:100%;color: #b2b2b2;background-color: #fff;">Select</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
                                                 <!-- end -->
                                                 </div>
                                             </div>
                                             <!--  -->
                                         </div>
-                                        <h2 style="margin-bottom:15px;margin-top:15px;" >Design options</h2>
-                                        <h6 style="margin-bottom:15px;" >Customize your Design to suit your need</h6>
+                                        <h2 style="margin-bottom:15px;margin-top:15px;" >Contest options</h2>
+                                        <h6 style="margin-bottom:15px;" >Customize your contest to suit your need</h6>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectname"> Design Title : <span class="danger">*</span>
+                                                    <label for="projectname"> Contest Title : <span class="danger">*</span>
                                                     </label>
                                                     <input type="text" class="form-control required" id="projectname"
                                                         name="projectname">
@@ -1533,7 +1229,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
         //script fot submit mob form
         $(document).ready(function () {
         <?php 
-        if($form_type == "T-shirt"){
+        if($form_type == "Logo-design"){
         ?>
             // $('.addItemBtn').click(function (e) {
             //     e.preventDefault();
@@ -1560,20 +1256,29 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#productrequired").val() == "") {
-                $("#productrequired").css('border-color', 'red');
-                $("#productrequired").css('border-width', '2px');
-                $("#productrequired").attr('placeholder', 'Required Field');
-                error = error + 'productrequired';
+            if ($("#sloganonproduct").val() == "") {
+                $("#sloganonproduct").css('border-color', 'red');
+                $("#sloganonproduct").css('border-width', '2px');
+                $("#sloganonproduct").attr('placeholder', 'Required Field');
+                error = error + 'sloganonproduct';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#projectdescription").val() == "") {
-                $("#projectdescription").css('border-color', 'red');
-                $("#projectdescription").css('border-width', '2px');
-                $("#projectdescription").attr('placeholder', 'Required Field');
-                error = error + 'projectdescription';
+            if ($("#nameonproduct").val() == "") {
+                $("#nameonproduct").css('border-color', 'red');
+                $("#nameonproduct").css('border-width', '2px');
+                $("#nameonproduct").attr('placeholder', 'Required Field');
+                error = error + 'nameonproduct';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#organisatintargetdescription").val() == "") {
+                $("#organisatintargetdescription").css('border-color', 'red');
+                $("#organisatintargetdescription").css('border-width', '2px');
+                $("#organisatintargetdescription").attr('placeholder', 'Required Field');
+                error = error + 'organisatintargetdescription';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
@@ -1603,7 +1308,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 // alert(did);
             });
         <?php
-        }elseif(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie")){
+        }elseif(($form_type == "Stationery") or ($form_type == "Business-card") ){
         ?>
         // 
         elements = document.getElementsByClassName('addItemBtn');
@@ -1620,29 +1325,38 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#productrequired").val() == "") {
-                $("#productrequired").css('border-color', 'red');
-                $("#productrequired").css('border-width', '2px');
-                $("#productrequired").attr('placeholder', 'Required Field');
-                error = error + 'productrequired';
+            if ($("#nameonproduct").val() == "") {
+                $("#nameonproduct").css('border-color', 'red');
+                $("#nameonproduct").css('border-width', '2px');
+                $("#nameonproduct").attr('placeholder', 'Required Field');
+                error = error + 'nameonproduct';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#projectdescription").val() == "") {
-                $("#projectdescription").css('border-color', 'red');
-                $("#projectdescription").css('border-width', '2px');
-                $("#projectdescription").attr('placeholder', 'Required Field');
-                error = error + 'projectdescription';
+            if ($("#organisatintargetdescription").val() == "") {
+                $("#organisatintargetdescription").css('border-color', 'red');
+                $("#organisatintargetdescription").css('border-width', '2px');
+                $("#organisatintargetdescription").attr('placeholder', 'Required Field');
+                error = error + 'organisatintargetdescription';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#projectdescriptionmain").val() == "") {
-                $("#projectdescriptionmain").css('border-color', 'red');
-                $("#projectdescriptionmain").css('border-width', '2px');
-                $("#projectdescriptionmain").attr('placeholder', 'Required Field');
-                error = error + 'projectdescriptionmain';
+            if ($("#visualstyledescription").val() == "") {
+                $("#visualstyledescription").css('border-color', 'red');
+                $("#visualstyledescription").css('border-width', '2px');
+                $("#visualstyledescription").attr('placeholder', 'Required Field');
+                error = error + 'visualstyledescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#productdetailsdescriptionmain").val() == "") {
+                $("#productdetailsdescriptionmain").css('border-color', 'red');
+                $("#productdetailsdescriptionmain").css('border-width', '2px');
+                $("#productdetailsdescriptionmain").attr('placeholder', 'Required Field');
+                error = error + 'productdetailsdescriptionmain';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
@@ -1673,77 +1387,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
             });
         // 
         <?php
-        }elseif(($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise")){
-            ?>
-            // 
-            elements = document.getElementsByClassName('addItemBtn');
-                // style.setProperty("display", "block", "important");
-                elements[0].addEventListener("click", function(event){
-                    event.preventDefault();
-                    var error = "";
-                if ($("#designtype").val() == "") {
-                    $("#designtype").css('border-color', 'red');
-                    $("#designtype").css('border-width', '2px');
-                    $("#designtype").attr('placeholder', 'Required Field');
-                    error = error + 'designtype';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#organisation").val() == "") {
-                    $("#organisation").css('border-color', 'red');
-                    $("#organisation").css('border-width', '2px');
-                    $("#organisation").attr('placeholder', 'Required Field');
-                    error = error + 'organisation';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#projectdescription").val() == "") {
-                    $("#projectdescription").css('border-color', 'red');
-                    $("#projectdescription").css('border-width', '2px');
-                    $("#projectdescription").attr('placeholder', 'Required Field');
-                    error = error + 'projectdescription';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#projectdescriptionmain").val() == "") {
-                    $("#projectdescriptionmain").css('border-color', 'red');
-                    $("#projectdescriptionmain").css('border-width', '2px');
-                    $("#projectdescriptionmain").attr('placeholder', 'Required Field');
-                    error = error + 'projectdescriptionmain';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#designused").val() == "") {
-                    $("#designused").css('border-color', 'red');
-                    $("#designused").css('border-width', '2px');
-                    $("#designused").attr('placeholder', 'Required Field');
-                    error = error + 'designused';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if (error !== "") {
-                    alert('There are error in the form. Please check your submissions');
-                    // return false;
-                } else {
-                    // return true;
-                    var index = $(".addItemBtn").index(this);
-                    var indexs = index + 1;
-                // alert(indexs);
-                $(".form_option").css('display', 'none');
-                element = document.getElementsByClassName('form_option');
-                element[indexs].style.setProperty("display", "block", "important");
-                }
-                    // alert(dtablename);
-                    // alert(did);
-                });
-            // 
-            <?php
-            }
+        }
         ?>
         });
         // 

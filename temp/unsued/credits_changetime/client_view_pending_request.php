@@ -20,9 +20,6 @@ if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
                 $customeremail = $row['email'] ;
                 $customername = $row['name'] ;
                 $customerphone = $row['phone'] ;
-                $customercredits = $row['Credits'] ;
-                $customerrequests = $row['no_requests'] ;
-                $customercompletedrequests = $row['no_completed_requests'] ;
                
                    }
                 }
@@ -42,9 +39,6 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                  $customeremail = $row['email'] ;
                  $customername = $row['name'] ;
                  $customerphone = $row['phone'] ;
-                 $customercredits = $row['Credits'] ;
-                 $customerrequests = $row['no_requests'] ;
-                 $customercompletedrequests = $row['no_completed_requests'] ;
                 
                     }
                  }
@@ -61,16 +55,13 @@ if (array_key_exists("submit", $_POST)) {
     $employe_table = $_POST['employe_table'];
     // $projectname = $_POST['projectname'];
     $designer_email = $_POST['designer_email'];
-    $client_table = $_POST['client_table'];
-    $request_credits = $_POST['request_credits'];
-    $request_credits = (($request_credits)*(.7));
     // echo $order_no ;
     // echo $client_email ;
     // echo $employe_table ;
     // echo $designer_email ;
     // 
     $completed = "Completed";
-    $query = "UPDATE `designer_completed_requests` SET `status` =  '".mysqli_real_escape_string($conn, $completed)."' , `designer_email` = '".mysqli_real_escape_string($conn, $designer_email)."'  WHERE request_id = '".mysqli_real_escape_string($conn, $order_no)."' AND status = 'Pending'  AND client_email = '".mysqli_real_escape_string($conn, $client_email)."'  order by id desc limit 1";
+    $query = "UPDATE `designer_completed_requests` SET `status` =  '".mysqli_real_escape_string($conn, $completed)."' , `designer_email` = '".mysqli_real_escape_string($conn, $designer_email)."'  WHERE request_id = $order_no AND status = 'Pending'  AND client_email = '".mysqli_real_escape_string($conn, $client_email)."'  order by id desc limit 1";
     if(!$result = mysqli_query($conn, $query)){
       
     }else{  
@@ -78,29 +69,20 @@ if (array_key_exists("submit", $_POST)) {
         $querysec = "SELECT * FROM `$employe_table` WHERE email = '".mysqli_real_escape_string($conn, $designer_email)."'";
         if ($resultsec = mysqli_query($conn, $querysec)) {
           while( $rowsec = mysqli_fetch_array($resultsec)){
-            $credits = $rowsec['credits'];
             $no_of_requests_completed = $rowsec['no_request_completed'];
             // echo $no_of_requests_completed ;
             $no_of_requests_completed = $no_of_requests_completed + 1 ;
-            $credits = $credits + $request_credits ;
-            $query = "UPDATE `$employe_table` SET `no_request_completed` =  $no_of_requests_completed , `credits` = $credits  WHERE email = '".mysqli_real_escape_string($conn, $designer_email)."'";
+            $query = "UPDATE `$employe_table` SET `no_request_completed` =  $no_of_requests_completed  WHERE email = '".mysqli_real_escape_string($conn, $designer_email)."'";
             if($result = mysqli_query($conn, $query)){
-                $query = "UPDATE $client_table SET `status` =  '".mysqli_real_escape_string($conn, $completed)."' , `designer_completed_email` = '".mysqli_real_escape_string($conn, $designer_email)."'  WHERE orderid = '".mysqli_real_escape_string($conn, $order_no)."' AND status = 'Pending'  AND email = '".mysqli_real_escape_string($conn, $client_email)."'  ";
+                $query = "UPDATE `requests` SET `status` =  '".mysqli_real_escape_string($conn, $completed)."' , `designer_completed_email` = '".mysqli_real_escape_string($conn, $designer_email)."'  WHERE id = $order_no AND status = 'Pending'  AND email = '".mysqli_real_escape_string($conn, $client_email)."'  ";
                 if(!$result = mysqli_query($conn, $query)){
                   
-                }else{
-                    $customercompletedrequests = $customercompletedrequests + 1  ;
-
-                    $query = "UPDATE `client` SET `no_completed_requests` =  $customercompletedrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                                if($result = mysqli_query($conn, $query))  
-                                    { 
-                                        ?>
-                                            <script>
-                                                    alert('Design accepted!');
-                                                    window.location = 'client_all_requests.php';
-                                            </script>
-                                        <?php
-                                    }
+                }else{ ?>
+                    <script>
+                            alert('Design accepted!');
+                            window.location = 'client_all_requests.php';
+                    </script>
+                    <?php
                      }
                 
                 // header('location:designer_accepted_request.php');
@@ -352,7 +334,7 @@ if (array_key_exists("submit", $_POST)) {
                     <?php
                         $request_id = $_GET['request_id'];
                         // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE client_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = '".mysqli_real_escape_string($conn, $request_id)."' AND status = 'Pending' order by id desc limit 1" ;
+                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE client_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Pending' order by id desc limit 1" ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
@@ -443,8 +425,6 @@ if (array_key_exists("submit", $_POST)) {
                             <input type="hidden" name="client_email" value="<?= $customeremail ?>">
                             <input type="hidden" name="employe_table" value="<?= $rowsec['employer_tablename'] ?>">
                             <input type="hidden" name="designer_email" value="<?= $rowsec['designer_email'] ?>">
-                            <input type="hidden" name="client_table" value="<?= $rowsec['client_table'] ?>">
-                            <input type="hidden" name="request_credits" value="<?= $rowsec['credits'] ?>">
                             <button
                                 class="btn btn-primary btn btn-info  waves-effect waves-light"
                                 name="submit" type="submit" style="margin:5px;height: 40px;">Accept</button>
@@ -452,7 +432,7 @@ if (array_key_exists("submit", $_POST)) {
                             <button
                                 class="btn btn-primary btn btn-info  waves-effect waves-light"
                                  type="submit" style="margin:5px;letter-spacing: 2px;height: 40px;"
-                                 onclick="window.location.href='design_redo_request_sheet.php?request_id=<?=$request_id?>&request=<?=$rowsec['client_table']?>'">Redo</button>
+                                 onclick="window.location.href='design_redo_request_sheet.php?request_id=<?=$request_id?>'">Redo</button>
                         </div>
                         <!-- inspiration files -->
                         <?php
@@ -478,9 +458,9 @@ if (array_key_exists("submit", $_POST)) {
                         <!-- Validation wizard -->
                         <!-- name -->
                         <?php
-                        $request_id = $_GET['request_id'];
+                         $request_id = $_GET['request_id'];
                          // if( ! mysqli_num_rows($resultsec) ) {
-                        $querysec = "SELECT * FROM `designer_completed_requests` WHERE client_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = '".mysqli_real_escape_string($conn, $request_id)."' AND status = 'Pending' order by id desc limit 1" ;
+                         $querysec = "SELECT * FROM `designer_completed_requests` WHERE client_email = '".mysqli_real_escape_string($conn, $customeremail)."' AND request_id = $request_id AND status = 'Pending' order by id desc limit 1" ;
                         if ($resultsec = mysqli_query($conn, $querysec)) 
                         {
                             if( ! mysqli_num_rows($resultsec) ) {
@@ -562,7 +542,6 @@ if (array_key_exists("submit", $_POST)) {
                                 <input type="hidden" name="client_email" value="<?= $customeremail ?>">
                                 <input type="hidden" name="employe_table" value="<?= $rowsec['employer_tablename'] ?>">
                                 <input type="hidden" name="designer_email" value="<?= $rowsec['designer_email'] ?>">
-                                <input type="hidden" name="client_table" value="<?= $rowsec['client_table'] ?>">
                                 <button
                                     class="btn btn-primary btn btn-info  waves-effect waves-light"
                                     name="submit" type="submit" style="margin:5px;height: 40px;">Accept</button>

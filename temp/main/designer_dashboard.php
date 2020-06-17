@@ -34,6 +34,10 @@ if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
                 $customeremail = $row['email'] ;
                 $customername = $row['name'] ;
                 $customerphone = $row['phone'] ;
+                $customerrequest = $row['no_request_accepted'] ;
+                $customercompletedrequest = $row['no_request_completed'] ;
+                $customerredo = $row['no_of_redo'] ;
+                $customercredits = $row['credits'] ;
                
                    }
                 }
@@ -53,6 +57,10 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                  $customeremail = $row['email'] ;
                  $customername = $row['name'] ;
                  $customerphone = $row['phone'] ;
+                 $customerrequest = $row['no_request_accepted'] ;
+                 $customercompletedrequest = $row['no_request_completed'] ;
+                 $customerredo = $row['no_of_redo'] ;
+                 $customercredits = $row['credits'] ;
                 
                     }
                  }
@@ -226,6 +234,108 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             class="ti-settings text-white"></i></button>
                 </div>
             </div>
+            <!-- Row -->
+            <div class="container">
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="m-b-0"><i class="mdi mdi-briefcase-check text-info"></i></h2>
+                                        <h3 class=""><?=number_format("$customerrequest")?></h3>
+                                        <h6 class="card-subtitle">Requests</h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar"
+                                                style="width: 85%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="m-b-0"><i class="mdi mdi-alert-circle text-success"></i></h2>
+                                        <h3 class=""><?=number_format("$customercompletedrequest")?></h3>
+                                        <h6 class="card-subtitle">Completed Requests</h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                style="width: 40%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="m-b-0"><i class="mdi mdi-alert-circle text-success"></i></h2>
+                                        <h3 class=""><?=number_format("$customerredo")?></h3>
+                                        <h6 class="card-subtitle">Redos</h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                style="width: 40%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="m-b-0"><i class="mdi mdi-wallet text-purple"></i></h2>
+                                        <h3 class="">$24561</h3>
+                                        <h6 class="card-subtitle">Total Cost</h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                style="width: 56%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="m-b-0"><i class="mdi mdi-buffer text-warning"></i></h2>
+                                        <h3 class=""><?=number_format("$customercredits")?></h3>
+                                        <h6 class="card-subtitle">Total Credtis</h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                style="width: 26%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- carousel -->
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -261,25 +371,13 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <!--  -->
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE status = 'Submitted'";
+                     $variablle = 0;
+                     $variablless = 0;
+                        $querysec = "SELECT * FROM `clothing_requests` WHERE status = 'Submitted'";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
-                            ?>
-                    <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
-                        <div class="container-fluid" style="margin-top:0px">
-                            <!-- main -->
-                            <div class="emptycartdiv">
-
-                                <h1>No Request in the works</h1>
-                                <!-- <h2>Launch a request or hire your favorite designer to get your design needs done.</h2> -->
-                                <!-- <a class="btn btn-primary" href="form-wizard - Copy.php"
-                                    data-purpose="keep-shopping-action">Click here</a> -->
-                            </div>
-                            <!--  -->
-                        </div>
-                    </div>
-                    <?php
+                            $variablle =  $variablle + 1;
                         }else{
                             $i = 1;
                             while( $rowsec = mysqli_fetch_array($resultsec)){
@@ -290,7 +388,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <!--  -->
                     <div class="row request_show">
                         <div style="width:15%">
-                            <h3 style="margin-left: 10px;"><?= $rowsec['id'] ?></h3>
+                            <h3 style="margin-left: 10px;"><?= $rowsec['orderid'] ?></h3>
                         </div>
                         <!--  -->
                         <div style="width:25%">
@@ -301,7 +399,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         </div>
                         <!--  -->
                         <div style="width:20%">
-                            <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                            <a class="btn btn-primary" href="designer_clothing_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
                                 data-purpose="keep-shopping-action">
                                 View Request
                             </a>
@@ -311,7 +409,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         </div>
                         <div style="width:20%;text-align: center;">
                             <form action="" class="form-submit" style="margin-right: 5px;">
-                                <input type="hidden" class="cid" value="<?= $rowsec['id'] ?>">
+                                <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
                                 <input type="hidden" class="cname"
                                     value="<?= $rowsec['name'] ?>">
                                 <input type="hidden" class="cemail"
@@ -322,6 +420,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                     value="<?= $customername ?>">
                                 <input type="hidden" class="did" value="<?= $customerid ?>">
                                 <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
                                 <!-- <button style="width: 100%;"
                                     class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
                                     to cart</button> -->
@@ -340,7 +439,291 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             }
                         }
                     }
+                            $querysec = "SELECT * FROM `web_app_requests` WHERE status = 'Submitted'";
+                            if ($resultsec = mysqli_query($conn, $querysec)) {
+
+                            if( ! mysqli_num_rows($resultsec) ) {
+                                $variablle =  $variablle + 1;
+                            }else{
+                                $i = 1;
+                                while( $rowsec = mysqli_fetch_array($resultsec)){
+
+                                    if( $rowsec['status'] == "Submitted")
+                                {  
+                                    ?>
+                        <!--  -->
+                        <div class="row request_show">
+                            <div style="width:15%">
+                                <h3 style="margin-left: 10px;"><?= $rowsec['orderid'] ?></h3>
+                            </div>
+                            <!--  -->
+                            <div style="width:25%">
+                                <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                        </span><?= $rowsec['project_name'] ?></p>
+                                <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                        </span><?= $rowsec['type_of_design'] ?></p>
+                            </div>
+                            <!--  -->
+                            <div style="width:20%">
+                                <a class="btn btn-primary" href="designer_web_app_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                    data-purpose="keep-shopping-action">
+                                    View Request
+                                </a>
+                            </div>
+                            <div style="width:20%">
+                                <h3><?= $rowsec['status'] ?></h3>
+                            </div>
+                            <div style="width:20%;text-align: center;">
+                                <form action="" class="form-submit" style="margin-right: 5px;">
+                                    <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                    <input type="hidden" class="cname"
+                                        value="<?= $rowsec['name'] ?>">
+                                    <input type="hidden" class="cemail"
+                                        value="<?= $rowsec['email'] ?>">
+                                    <input type="hidden" class="demail"
+                                        value="<?= $customeremail?>">
+                                    <input type="hidden" class="dname"
+                                        value="<?= $customername ?>">
+                                    <input type="hidden" class="did" value="<?= $customerid ?>">
+                                    <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                    <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                    <!-- <button style="width: 100%;"
+                                        class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                        to cart</button> -->
+                                    <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                        Accept
+                                    </a>
+                                </form>
+                            
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <?php
+                                }
+                                $i++ ;
+                                }
+                            }
+                        }
+                                $querysec = "SELECT * FROM `logo_identity_requests` WHERE status = 'Submitted'";
+                                if ($resultsec = mysqli_query($conn, $querysec)) {
+            
+                                if( ! mysqli_num_rows($resultsec) ) {
+                                    $variablle =  $variablle + 1;
+                                }else{
+                                    $i = 1;
+                                    while( $rowsec = mysqli_fetch_array($resultsec)){
+            
+                                        if( $rowsec['status'] == "Submitted")
+                                    {  
+                                        ?>
+                            <!--  -->
+                            <div class="row request_show">
+                                <div style="width:15%">
+                                    <h3 style="margin-left: 10px;"><?= $rowsec['orderid'] ?></h3>
+                                </div>
+                                <!--  -->
+                                <div style="width:25%">
+                                    <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                            </span><?= $rowsec['project_name'] ?></p>
+                                    <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                            </span><?= $rowsec['type_of_design'] ?></p>
+                                </div>
+                                <!--  -->
+                                <div style="width:20%">
+                                    <a class="btn btn-primary" href="designer_logo_identity_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                        data-purpose="keep-shopping-action">
+                                        View Request
+                                    </a>
+                                </div>
+                                <div style="width:20%">
+                                    <h3><?= $rowsec['status'] ?></h3>
+                                </div>
+                                <div style="width:20%;text-align: center;">
+                                    <form action="" class="form-submit" style="margin-right: 5px;">
+                                        <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                        <input type="hidden" class="cname"
+                                            value="<?= $rowsec['name'] ?>">
+                                        <input type="hidden" class="cemail"
+                                            value="<?= $rowsec['email'] ?>">
+                                        <input type="hidden" class="demail"
+                                            value="<?= $customeremail?>">
+                                        <input type="hidden" class="dname"
+                                            value="<?= $customername ?>">
+                                        <input type="hidden" class="did" value="<?= $customerid ?>">
+                                        <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                        <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                        <!-- <button style="width: 100%;"
+                                            class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                            to cart</button> -->
+                                        <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                            Accept
+                                        </a>
+                                    </form>
+                                
+                                </div>
+                            </div>
+                            <!--  -->
+            
+                            <?php
+                                    }
+                                    $i++ ;
+                                    }
+                                }
+                            }
+                            $querysec = "SELECT * FROM `business_advert_requests` WHERE status = 'Submitted'";
+                            if ($resultsec = mysqli_query($conn, $querysec)) {
+        
+                            if( ! mysqli_num_rows($resultsec) ) {
+                                $variablle =  $variablle + 1;
+                            }else{
+                                $i = 1;
+                                while( $rowsec = mysqli_fetch_array($resultsec)){
+        
+                                    if( $rowsec['status'] == "Submitted")
+                                {  
+                                    ?>
+                        <!--  -->
+                        <div class="row request_show">
+                            <div style="width:15%">
+                                <h3 style="margin-left: 10px;"><?= $rowsec['orderid'] ?></h3>
+                            </div>
+                            <!--  -->
+                            <div style="width:25%">
+                                <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                        </span><?= $rowsec['project_name'] ?></p>
+                                <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                        </span><?= $rowsec['type_of_design'] ?></p>
+                            </div>
+                            <!--  -->
+                            <div style="width:20%">
+                                <a class="btn btn-primary" href="designer_business_advert_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                    data-purpose="keep-shopping-action">
+                                    View Request
+                                </a>
+                            </div>
+                            <div style="width:20%">
+                                <h3><?= $rowsec['status'] ?></h3>
+                            </div>
+                            <div style="width:20%;text-align: center;">
+                                <form action="" class="form-submit" style="margin-right: 5px;">
+                                    <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                    <input type="hidden" class="cname"
+                                        value="<?= $rowsec['name'] ?>">
+                                    <input type="hidden" class="cemail"
+                                        value="<?= $rowsec['email'] ?>">
+                                    <input type="hidden" class="demail"
+                                        value="<?= $customeremail?>">
+                                    <input type="hidden" class="dname"
+                                        value="<?= $customername ?>">
+                                    <input type="hidden" class="did" value="<?= $customerid ?>">
+                                    <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                    <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                    <!-- <button style="width: 100%;"
+                                        class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                        to cart</button> -->
+                                    <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                        Accept
+                                    </a>
+                                </form>
+                            
+                            </div>
+                        </div>
+                        <!--  -->
+        
+                        <?php
+                                }
+                                $i++ ;
+                                }
+                            }
+                        }
+                        $querysec = "SELECT * FROM `art_illusion_advert_requests` WHERE status = 'Submitted'";
+                        if ($resultsec = mysqli_query($conn, $querysec)) {
+    
+                        if( ! mysqli_num_rows($resultsec) ) {
+                            $variablle =  $variablle + 1;
+                        }else{
+                            $i = 1;
+                            while( $rowsec = mysqli_fetch_array($resultsec)){
+    
+                                if( $rowsec['status'] == "Submitted")
+                            {  
+                                ?>
+                    <!--  -->
+                    <div class="row request_show">
+                        <div style="width:15%">
+                            <h3 style="margin-left: 10px;"><?= $rowsec['orderid'] ?></h3>
+                        </div>
+                        <!--  -->
+                        <div style="width:25%">
+                            <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                    </span><?= $rowsec['project_name'] ?></p>
+                            <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                    </span><?= $rowsec['type_of_design'] ?></p>
+                        </div>
+                        <!--  -->
+                        <div style="width:20%">
+                            <a class="btn btn-primary" href="designer_art_illusion_advert_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                data-purpose="keep-shopping-action">
+                                View Request
+                            </a>
+                        </div>
+                        <div style="width:20%">
+                            <h3><?= $rowsec['status'] ?></h3>
+                        </div>
+                        <div style="width:20%;text-align: center;">
+                            <form action="" class="form-submit" style="margin-right: 5px;">
+                                <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                <input type="hidden" class="cname"
+                                    value="<?= $rowsec['name'] ?>">
+                                <input type="hidden" class="cemail"
+                                    value="<?= $rowsec['email'] ?>">
+                                <input type="hidden" class="demail"
+                                    value="<?= $customeremail?>">
+                                <input type="hidden" class="dname"
+                                    value="<?= $customername ?>">
+                                <input type="hidden" class="did" value="<?= $customerid ?>">
+                                <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                <!-- <button style="width: 100%;"
+                                    class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                    to cart</button> -->
+                                <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                    Accept
+                                </a>
+                            </form>
+                        
+                        </div>
+                    </div>
+                    <!--  -->
+    
+                    <?php
+                            }
+                            $i++ ;
+                            }
+                        }
+                    }
                     ?>
+                    <?php
+                                if( $variablle == 5  )
+                                {
+                            ?>
+                                <div class="container " style="margin-bottom:20px;text-align: center;padding: 100px;">
+                        <div class="container-fluid" style="margin-top:0px">
+                            <!-- main -->
+                            <div class="emptycartdiv">
+    
+                                <h1>No Request in the works</h1>
+                                <!-- <h2>Launch a request or hire your favorite designer to get your design needs done.</h2> -->
+                                <!-- <a class="btn btn-primary" href="form-wizard - Copy.php"
+                                    data-purpose="keep-shopping-action">Click here</a> -->
+                            </div>
+                            <!--  -->
+                        </div>
+                    </div>
+                            <?php
+                            }
+                            ?>
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -378,24 +761,15 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         </div> -->
                     </div>
                     <?php
-                        $querysec = "SELECT * FROM `requests` WHERE  status = 'Submitted'";
+                    $variablle = 0;
+                    $variablless = 0;
+                        $querysec = "SELECT * FROM `clothing_requests` WHERE  status = 'Submitted'";
                         if ($resultsec = mysqli_query($conn, $querysec)) {
 
                         if( ! mysqli_num_rows($resultsec) ) {
+                            $variablle =  $variablle + 1;
                             ?>
-                    <div class="container " style="margin-bottom:20px;text-align: center;">
-                        <div class="container-fluid" style="margin-top:0px;padding:0px;">
-                            <!-- main -->
-                            <div style="width:100%;">
-
-                                <h2>No Request in the works</h2>
-                                <!-- <h4>Launch a request or hire your favorite designer to get your design needs done.</h4> -->
-                                <!-- <a class="btn btn-primary" href="form-wizard - Copy.php"
-                                    data-purpose="keep-shopping-action">Click here</a> -->
-                            </div>
-                            <!--  -->
-                        </div>
-                    </div>
+                    
                     <?php
                         }else{
                             $i = 1;
@@ -408,7 +782,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                     <div class="row request_show">
                             <div style="width:55%">
                                     <p><span style="font-size: 16px;font-weight: 700;">Order Number:
-                                        </span><?= $rowsec['id'] ?></p>
+                                        </span><?= $rowsec['orderid'] ?></p>
                                     <p><span style="font-size: 16px;font-weight: 700;">Project Name:
                                         </span><?= $rowsec['project_name'] ?></p>
                                     <p><span style="font-size: 16px;font-weight: 700;">Design Type:
@@ -417,7 +791,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             <!--  -->
                         <div style="width:45%">
                             <p>
-                                <a class="btn btn-primary" href="designer_view_request.php?requestid=<?= $rowsec['id'] ?>"
+                                <a class="btn btn-primary" href="designer_clothing_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
                                     data-purpose="keep-shopping-action">
                                     View
                                 </a>
@@ -426,7 +800,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                         </span><?= $rowsec['status'] ?>
                                     </p>
                             <form action="" class="form-submit" style="margin-right: 5px;">
-                                <input type="hidden" class="cid" value="<?= $rowsec['id'] ?>">
+                                <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
                                 <input type="hidden" class="cname"
                                     value="<?= $rowsec['name'] ?>">
                                 <input type="hidden" class="cemail"
@@ -437,6 +811,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                                     value="<?= $customername ?>">
                                 <input type="hidden" class="did" value="<?= $customerid ?>">
                                 <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
                                 <!-- <button style="width: 100%;"
                                     class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
                                     to cart</button> -->
@@ -455,6 +830,292 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             }
                         }
                     }
+                                    $querysec = "SELECT * FROM `web_app_requests` WHERE  status = 'Submitted'";
+                                    if ($resultsec = mysqli_query($conn, $querysec)) {
+
+                                    if( ! mysqli_num_rows($resultsec) ) {
+                                        $variablle =  $variablle + 1;
+                                        ?>
+                                
+                                <?php
+                                    }else{
+                                        $i = 1;
+                                        while( $rowsec = mysqli_fetch_array($resultsec)){
+
+                                            if( $rowsec['status'] == "Submitted")
+                                        {  
+                                            ?>
+                                <!--  -->
+                                <div class="row request_show">
+                                        <div style="width:55%">
+                                                <p><span style="font-size: 16px;font-weight: 700;">Order Number:
+                                                    </span><?= $rowsec['orderid'] ?></p>
+                                                <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                                    </span><?= $rowsec['project_name'] ?></p>
+                                                <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                                    </span><?= $rowsec['type_of_design'] ?></p>
+                                        </div>
+                                        <!--  -->
+                                    <div style="width:45%">
+                                        <p>
+                                            <a class="btn btn-primary" href="designer_web_app_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                                data-purpose="keep-shopping-action">
+                                                View
+                                            </a>
+                                        </p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                                    </span><?= $rowsec['status'] ?>
+                                                </p>
+                                        <form action="" class="form-submit" style="margin-right: 5px;">
+                                            <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                            <input type="hidden" class="cname"
+                                                value="<?= $rowsec['name'] ?>">
+                                            <input type="hidden" class="cemail"
+                                                value="<?= $rowsec['email'] ?>">
+                                            <input type="hidden" class="demail"
+                                                value="<?= $customeremail?>">
+                                            <input type="hidden" class="dname"
+                                                value="<?= $customername ?>">
+                                            <input type="hidden" class="did" value="<?= $customerid ?>">
+                                            <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                            <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                            <!-- <button style="width: 100%;"
+                                                class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                                to cart</button> -->
+                                            <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                                Accept
+                                            </a>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <!--  -->
+
+                                <?php
+                                        }
+                                        $i++ ;
+                                        }
+                                    }
+                                }
+                                $querysec = "SELECT * FROM `logo_identity_requests` WHERE  status = 'Submitted'";
+                                if ($resultsec = mysqli_query($conn, $querysec)) {
+
+                                if( ! mysqli_num_rows($resultsec) ) {
+                                    $variablle =  $variablle + 1;
+                                    ?>
+                            
+                            <?php
+                                }else{
+                                    $i = 1;
+                                    while( $rowsec = mysqli_fetch_array($resultsec)){
+
+                                        if( $rowsec['status'] == "Submitted")
+                                    {  
+                                        ?>
+                            <!--  -->
+                            <div class="row request_show">
+                                    <div style="width:55%">
+                                            <p><span style="font-size: 16px;font-weight: 700;">Order Number:
+                                                </span><?= $rowsec['orderid'] ?></p>
+                                            <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                                </span><?= $rowsec['project_name'] ?></p>
+                                            <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                                </span><?= $rowsec['type_of_design'] ?></p>
+                                    </div>
+                                    <!--  -->
+                                <div style="width:45%">
+                                    <p>
+                                        <a class="btn btn-primary" href="designer_logo_identity_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                            data-purpose="keep-shopping-action">
+                                            View
+                                        </a>
+                                    </p>
+                                    <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                                </span><?= $rowsec['status'] ?>
+                                            </p>
+                                    <form action="" class="form-submit" style="margin-right: 5px;">
+                                        <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                        <input type="hidden" class="cname"
+                                            value="<?= $rowsec['name'] ?>">
+                                        <input type="hidden" class="cemail"
+                                            value="<?= $rowsec['email'] ?>">
+                                        <input type="hidden" class="demail"
+                                            value="<?= $customeremail?>">
+                                        <input type="hidden" class="dname"
+                                            value="<?= $customername ?>">
+                                        <input type="hidden" class="did" value="<?= $customerid ?>">
+                                        <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                        <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                        <!-- <button style="width: 100%;"
+                                            class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                            to cart</button> -->
+                                        <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                            Accept
+                                        </a>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <!--  -->
+
+                            <?php
+                                    }
+                                    $i++ ;
+                                    }
+                                }
+                            }
+                            $querysec = "SELECT * FROM `business_advert_requests` WHERE  status = 'Submitted'";
+                            if ($resultsec = mysqli_query($conn, $querysec)) {
+
+                            if( ! mysqli_num_rows($resultsec) ) {
+                                $variablle =  $variablle + 1;
+                                ?>
+                        
+                        <?php
+                            }else{
+                                $i = 1;
+                                while( $rowsec = mysqli_fetch_array($resultsec)){
+
+                                    if( $rowsec['status'] == "Submitted")
+                                {  
+                                    ?>
+                        <!--  -->
+                        <div class="row request_show">
+                                <div style="width:55%">
+                                        <p><span style="font-size: 16px;font-weight: 700;">Order Number:
+                                            </span><?= $rowsec['orderid'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                            </span><?= $rowsec['project_name'] ?></p>
+                                        <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                            </span><?= $rowsec['type_of_design'] ?></p>
+                                </div>
+                                <!--  -->
+                            <div style="width:45%">
+                                <p>
+                                    <a class="btn btn-primary" href="designer_business_advert_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                        data-purpose="keep-shopping-action">
+                                        View
+                                    </a>
+                                </p>
+                                <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                            </span><?= $rowsec['status'] ?>
+                                        </p>
+                                <form action="" class="form-submit" style="margin-right: 5px;">
+                                    <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                    <input type="hidden" class="cname"
+                                        value="<?= $rowsec['name'] ?>">
+                                    <input type="hidden" class="cemail"
+                                        value="<?= $rowsec['email'] ?>">
+                                    <input type="hidden" class="demail"
+                                        value="<?= $customeremail?>">
+                                    <input type="hidden" class="dname"
+                                        value="<?= $customername ?>">
+                                    <input type="hidden" class="did" value="<?= $customerid ?>">
+                                    <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                    <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                    <!-- <button style="width: 100%;"
+                                        class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                        to cart</button> -->
+                                    <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                        Accept
+                                    </a>
+                                </form>
+
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <?php
+                                }
+                                $i++ ;
+                                }
+                            }
+                        }
+                        $querysec = "SELECT * FROM `art_illusion_advert_requests` WHERE  status = 'Submitted'";
+                        if ($resultsec = mysqli_query($conn, $querysec)) {
+
+                        if( ! mysqli_num_rows($resultsec) ) {
+                            $variablle =  $variablle + 1;
+                            ?>
+                    
+                    <?php
+                        }else{
+                            $i = 1;
+                            while( $rowsec = mysqli_fetch_array($resultsec)){
+
+                                if( $rowsec['status'] == "Submitted")
+                            {  
+                                ?>
+                    <!--  -->
+                    <div class="row request_show">
+                            <div style="width:55%">
+                                    <p><span style="font-size: 16px;font-weight: 700;">Order Number:
+                                        </span><?= $rowsec['orderid'] ?></p>
+                                    <p><span style="font-size: 16px;font-weight: 700;">Project Name:
+                                        </span><?= $rowsec['project_name'] ?></p>
+                                    <p><span style="font-size: 16px;font-weight: 700;">Design Type:
+                                        </span><?= $rowsec['type_of_design'] ?></p>
+                            </div>
+                            <!--  -->
+                        <div style="width:45%">
+                            <p>
+                                <a class="btn btn-primary" href="designer_art_illusion_advert_view_request.php?requestid=<?= $rowsec['orderid'] ?>"
+                                    data-purpose="keep-shopping-action">
+                                    View
+                                </a>
+                            </p>
+                            <p><span style="font-size: 16px;font-weight: 700;">Status:
+                                        </span><?= $rowsec['status'] ?>
+                                    </p>
+                            <form action="" class="form-submit" style="margin-right: 5px;">
+                                <input type="hidden" class="cid" value="<?= $rowsec['orderid'] ?>">
+                                <input type="hidden" class="cname"
+                                    value="<?= $rowsec['name'] ?>">
+                                <input type="hidden" class="cemail"
+                                    value="<?= $rowsec['email'] ?>">
+                                <input type="hidden" class="demail"
+                                    value="<?= $customeremail?>">
+                                <input type="hidden" class="dname"
+                                    value="<?= $customername ?>">
+                                <input type="hidden" class="did" value="<?= $customerid ?>">
+                                <input type="hidden" class="dtablename" value="<?= $tablename ?>">
+                                <input type="hidden" class="customertablename" value="<?= $rowsec['table_name']  ?>">
+                                <!-- <button style="width: 100%;"
+                                    class=" cartpopovercolor popoverbtn popoverbtn-lg popoverbtn-primary addItemBtn">Add
+                                    to cart</button> -->
+                                <a class="btn btn-primary addItemBtn" style="color:#fff;" type="button">
+                                    Accept
+                                </a>
+                            </form>
+
+                        </div>
+                    </div>
+                    <!--  -->
+
+                    <?php
+                            }
+                            $i++ ;
+                            }
+                        }
+                    }
+                    if( $variablle == 5  )
+                    {
+                ?>
+                    <div class="container " style="margin-bottom:20px;text-align: center;">
+                        <div class="container-fluid" style="margin-top:0px;padding:0px;">
+                            <!-- main -->
+                            <div style="width:100%;">
+
+                                <h2>No Request in the works</h2>
+                                <!-- <h4>Launch a request or hire your favorite designer to get your design needs done.</h4> -->
+                                <!-- <a class="btn btn-primary" href="form-wizard - Copy.php"
+                                    data-purpose="keep-shopping-action">Click here</a> -->
+                            </div>
+                            <!--  -->
+                        </div>
+                    </div>
+                        <?php
+                        }
                     ?>
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
@@ -526,6 +1187,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
          $(document).ready(function () {
             $('.addItemBtn').click(function (e) {
                 e.preventDefault();
+                // alert("Request Accepted!");
                 var $form = $(this).closest(".form-submit");
                 var cid = $form.find(".cid").val();
                 var cname = $form.find(".cname").val();
@@ -534,6 +1196,8 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                 var demail = $form.find(".demail").val();
                 var did = $form.find(".did").val();
                 var dtablename = $form.find(".dtablename").val();
+                var customertablename = $form.find(".customertablename").val();
+                // alert("Request Accepted!");
                 // alert(cid);
                 // alert(dname);
                 // alert(demail);
@@ -550,6 +1214,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         "demail": demail,
                         "did": did,
                         "dtablename": dtablename,
+                        "customertablename": customertablename,
                         "dname": dname,
 
                     },

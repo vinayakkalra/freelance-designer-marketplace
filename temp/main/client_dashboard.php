@@ -23,6 +23,53 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
     // echo '<script type="text/javascript">alert("hello!");</script>';
     header('location:index.php');
 }
+if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
+    // getting id of customer
+    $customerid =  $_COOKIE['iddashboard'];
+    $tablename = $_COOKIE['signupas'];
+  
+    $query = "SELECT * FROM `$tablename` WHERE id = $customerid";
+//getting email of customer
+         if ($result = mysqli_query($conn, $query)) {
+                 while( $row = mysqli_fetch_array($result)){
+                $customeremail = $row['email'] ;
+                $customername = $row['name'] ;
+                $customerphone = $row['phone'] ;
+                $customercredits = $row['Credits'] ;
+                $customerrequests = $row['no_requests'] ;
+                $customercompletedrequests = $row['no_completed_requests'] ;
+                
+
+                // echo $customeremail ;
+                   }
+                }
+                else{
+                    echo "hello";
+                }
+}
+elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard']) 
+{
+     // getting id of customer
+     $customerid =  $_SESSION['iddashboard'];
+     $tablename = $_SESSION['signupas'];
+     $query = "SELECT * FROM `$tablename` WHERE id = $customerid";
+ //getting email of customer
+          if ($result = mysqli_query($conn, $query)) {
+                  while( $row = mysqli_fetch_array($result)){
+                 $customeremail = $row['email'] ;
+                 $customername = $row['name'] ;
+                 $customerphone = $row['phone'] ;
+                 $customercredits = $row['Credits'] ;
+                $customerrequests = $row['no_requests'] ;
+                $customercompletedrequests = $row['no_completed_requests'] ;
+                //  echo $customeremail ;
+                    }
+                 }
+                 else{
+                     echo "hello";
+                 }
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -360,8 +407,8 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                 <div class="row">
                                     <div class="col-12">
                                         <h2 class="m-b-0"><i class="mdi mdi-briefcase-check text-info"></i></h2>
-                                        <h3 class="">2456</h3>
-                                        <h6 class="card-subtitle">New Projects</h6>
+                                        <h3 class=""><?=number_format("$customerrequests")?></h3>
+                                        <h6 class="card-subtitle">Requests</h6>
                                     </div>
                                     <div class="col-12">
                                         <div class="progress">
@@ -380,8 +427,8 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                 <div class="row">
                                     <div class="col-12">
                                         <h2 class="m-b-0"><i class="mdi mdi-alert-circle text-success"></i></h2>
-                                        <h3 class="">546</h3>
-                                        <h6 class="card-subtitle">Pending Project</h6>
+                                        <h3 class=""><?=number_format("$customercompletedrequests")?></h3>
+                                        <h6 class="card-subtitle">Completed Requests</h6>
                                     </div>
                                     <div class="col-12">
                                         <div class="progress">
@@ -395,7 +442,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         </div>
                         <!-- Column -->
                         <!-- Column -->
-                        <div class="card">
+                        <!-- <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
@@ -412,7 +459,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- Column -->
                         <!-- Column -->
                         <div class="card">
@@ -420,8 +467,8 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                 <div class="row">
                                     <div class="col-12">
                                         <h2 class="m-b-0"><i class="mdi mdi-buffer text-warning"></i></h2>
-                                        <h3 class="">$30010</h3>
-                                        <h6 class="card-subtitle">Total Earnings</h6>
+                                        <h3 class=""><?=number_format("$customercredits")?></h3>
+                                        <h6 class="card-subtitle">Total Credtis</h6>
                                     </div>
                                     <div class="col-12">
                                         <div class="progress">
@@ -494,7 +541,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     <div class="category-menu__item__text"
                                                         style="padding: 22px 30px;text-align: center;">
                                                         <span class="heading heading--h5">
-                                                            Design logo & etc
+                                                        Web & app design
                                                         </span>
                                                     </div>
                                                 </button>
@@ -516,6 +563,55 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                         <!--/.First slide-->
 
                                         <!--Second slide-->
+                                        <div class="carousel-item ">
+
+                                            <div class="col-md-4">
+                                                <button class="category-menu__item designed_buttom "
+                                                    data-category-menu="website-app-design" style="width: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 22px 30px;text-align: center;">
+                                                        <span class="heading heading--h5">
+                                                        Business & advertising
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="category-menu__item designed_buttom "
+                                                    data-category-menu="website-app-design" style="width: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 22px 30px;text-align: center;">
+                                                        <span class="heading heading--h5">
+                                                        Art & illustration
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <!-- <div class="col-md-4">
+                                                <button class="category-menu__item designed_buttom"
+                                                    data-category-menu="website-app-design" style="width: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 22px 30px;text-align: center;">
+                                                        <span class="heading heading--h5">
+                                                        Web & app design
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <button class="category-menu__item designed_buttom"
+                                                    data-category-menu="website-app-design" style="width: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 22px 30px;text-align: center;">
+                                                        <span class="heading heading--h5" style="letter-spacing: 1px;">
+                                                            Logo & identity
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div> -->
+
+                                        </div>
                                         <!-- <div class="carousel-item">
 
                                         <div class="col-md-4">
@@ -643,7 +739,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                from CR 199
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -674,7 +770,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 199
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -750,7 +846,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 199
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -781,7 +877,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 199
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -817,7 +913,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 199
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -848,7 +944,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 199
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -874,7 +970,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='web_app_design_request_sheet.php?form=Web-page';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -886,26 +982,26 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Logo design
+                                                        Web page design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    An unforgettable logo crafted for your brand
+                                                Engaging web pages that connect with visitors
                                                 </div>
                                             </div>
                                         </div>
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='web_app_design_request_sheet.php?form=Website-Redesign';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -917,19 +1013,19 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Invitation
+                                                        Website Redesign
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    An invitation that gets RSVP's
+                                                A refreshed website to better showcase your business
                                                 </div>
                                             </div>
                                         </div>
@@ -981,7 +1077,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;display: flex;">
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='web_app_design_request_sheet.php?form=Blog';" class="border_styling "
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -993,26 +1089,26 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            3D
+                                                        Blog
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    3D digital design that takes it to the next dimension
+                                                Custom blog design to keep them reading
                                                 </div>
                                             </div>
                                         </div>
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='web_app_design_request_sheet.php?form=WordPress-theme';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1024,19 +1120,19 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Vector art
+                                                        WordPress theme design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    Art so creative you can't categorize it
+                                                A custom WordPress theme that does everything you need it to
                                                 </div>
                                             </div>
                                         </div>
@@ -1048,7 +1144,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 50%;height: 334px !important;">
                                 <div class="row" style="margin: 0px;">
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onClick="window.location='web_app_design_request_sheet.php?form=Landing-page';" class="border_styling "
                                         style="width: 50%;border-left: 4px solid #e6e6e6;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1060,26 +1156,26 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Brochure
+                                                        Landing page design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                from CR 349
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    The printable, foldable way to engage with clients
+                                                Landing page that gets clicks
                                                 </div>
                                             </div>
                                         </div>
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onClick="window.location='design_request_sheet.php';" class="border_styling_sec"
+                                    <div onClick="window.location='web_app_design_request_sheet.php?form=App-design';" class="border_styling_sec"
                                         style="width: 50%;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category">
@@ -1091,19 +1187,19 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Pamphlet
+                                                        App design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    A pamphlet that delivers all the info you need
+                                                A user-friendly app that gets downloads
                                                 </div>
                                             </div>
                                         </div>
@@ -1138,7 +1234,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1169,7 +1265,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 169
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1245,7 +1341,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 219
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1266,6 +1362,500 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- end 2nd part car -->
                         </div>
                     </div>
+                    <div class="container forms_option" style="display:none;">
+                        <div class="container-fluid" style="padding: 0px;display: flex;">
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='buisness_design_request_sheet.php?form=Brochure';" class="border_styling "
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                            Brochure
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                The printable, foldable way to engage with clients
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onClick="window.location='buisness_design_request_sheet.php?form=Booklet';" class="border_styling_sec"
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Booklet
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A booklet that tells your brand's story
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width:50%;height: 332px !important;">
+                                <div id="carouselExampleIndicators24" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators24" data-slide-to="0" class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators24" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators24" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img3.jpg" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img4.jpg" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img5.jpg" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators24" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators24" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- ground part -->
+                    <div class="container forms_ground_option" style="margin-bottom: 30px;display:none;">
+                        <div class="container-fluid" style="padding: 0px;display: flex;">
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='buisness_design_request_sheet.php?form=Pamphlet';" class="border_styling "
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Pamphlet
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A pamphlet that delivers all the info you need
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onClick="window.location='buisness_design_request_sheet.php?form=Banner';" class="border_styling_sec"
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Banner
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 149
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Banners to fly your brand high
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='buisness_design_request_sheet.php?form=Podcast';" class="border_styling "
+                                        style="width: 50%;border-left: 4px solid #e6e6e6;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Podcast
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Custom podcast art that gets the word out
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onClick="window.location='buisness_design_request_sheet.php?form=Signage';" class="border_styling_sec"
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Signage
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A sign or banner to get your brand noticed
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- carousel java end -->
+                    <!-- 5 part -->
+                    <div class="container forms_option" style="display:none;">
+                        <div class="container-fluid" style="padding: 0px;display: flex;">
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='Art_illusion_design_request_sheet.php?form=Card-invitation';" class="border_styling "
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Card or invitation
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Card or invitation design that sends a message
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onClick="window.location='Art_illusion_design_request_sheet.php?form=Greeting';" class="border_styling_sec"
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Greeting Card
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A greeting card that brightens the receiver's day
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width:50%;height: 332px !important;">
+                                <div id="carouselExampleIndicators25" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators25" data-slide-to="0" class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators25" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators25" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img3.jpg" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img4.jpg" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 332px !important;" class="img-responsive"
+                                                src="../assets/images/big/img5.jpg" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators25" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators25" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- ground part -->
+                    <div class="container forms_ground_option" style="margin-bottom: 30px;display:none;">
+                        <div class="container-fluid" style="padding: 0px;display: flex;">
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='Art_illusion_design_request_sheet.php?form=Illustration-graphics';" class="border_styling "
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Illustration or graphics
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Stunning illustrations and graphics that will draw attention
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onClick="window.location='Art_illusion_design_request_sheet.php?form=3D';" class="border_styling_sec"
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        3D
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 449
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                3D digital design that takes it to the next dimension
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width: 50%;height: 334px !important;">
+                                <div class="row" style="margin: 0px;">
+                                    <div onClick="window.location='Art_illusion_design_request_sheet.php?form=3D-Architectural';" class="border_styling "
+                                        style="width: 50%;border-left: 4px solid #e6e6e6;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        3D Architectural Rendering
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 449
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                3D architectural rendering to bring your project to life
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onClick="window.location='Art_illusion_design_request_sheet.php?form=Other-art';" class="border_styling_sec"
+                                        style="width: 50%;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Other art or illustration
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 349
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Art and illustration so creative you can't categorize it
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- end 5 part -->
+                    <!-- 2nd form option -->
                 <!--mobile  phone  -->
                 <div class="d-lg-none">
                     <div class="container-fluid">
@@ -1350,20 +1940,48 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                 </button>
                                             </div>
+                                            <div class="" style="width: 50%;">
+                                                <button class="category-menu__item designed_buttom"
+                                                    data-category-menu="website-app-design"
+                                                    style="width: 96%;margin: 0 auto;height: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 10px 10px;text-align: center;">
+                                                        <span class="heading heading--h5" style="letter-spacing: 1px;">
+                                                        Business & advertising
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--/.Second slide-->
+                                         <!--third slide-->
+                                         <div class="carousel-item " style="height: 100%;">
+                                            <div class="" style="width: 50%;">
+                                                <button class="category-menu__item designed_buttom"
+                                                    data-category-menu="website-app-design"
+                                                    style="width: 96%;margin: 0 auto;height: 100%;">
+                                                    <div class="category-menu__item__text"
+                                                        style="padding: 10px 10px;text-align: center;">
+                                                        <span class="heading heading--h5" style="letter-spacing: 1px;">
+                                                        Art & illustration
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
                                             <!-- <div class="" style="width: 50%;">
                                                 <button class="category-menu__item designed_buttom"
                                                     data-category-menu="website-app-design"
                                                     style="width: 96%;margin: 0 auto;height: 100%;">
                                                     <div class="category-menu__item__text"
                                                         style="padding: 10px 10px;text-align: center;">
-                                                        <span class="heading heading--h5">
-                                                            Design logo &amp; etc
+                                                        <span class="heading heading--h5" style="letter-spacing: 1px;">
+                                                        Business & advertising
                                                         </span>
                                                     </div>
                                                 </button>
                                             </div> -->
                                         </div>
-                                        <!--/.Second slide-->
+                                        <!--/.third slide-->
                                     </div>
                                     <!--/.Slides-->
                                     <!-- controlls -->
@@ -1410,7 +2028,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1442,7 +2060,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1523,7 +2141,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1555,7 +2173,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1592,7 +2210,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1624,7 +2242,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1650,7 +2268,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='log_identity_design_request_sheet.php?form=Logo-design';" class="border_styling "
+                                    <div onclick="window.location='web_app_design_request_sheet.php?form=Web-page';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1663,26 +2281,26 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Logo design
+                                                        Web page design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    An unforgettable logo crafted for your brand
+                                                Engaging web pages that connect with visitors
                                                 </div>
                                             </div>
                                         </div>
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='web_app_design_request_sheet.php?form=Website-Redesign';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1695,19 +2313,19 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Invitation
+                                                        Website Redesign
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    An invitation that gets RSVP's
+                                                A refreshed website to better showcase your business
                                                 </div>
                                             </div>
                                         </div>
@@ -1763,7 +2381,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         <div class="container-fluid" style="padding: 0px;/* display: flex; */">
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='web_app_design_request_sheet.php?form=Blog';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1776,26 +2394,26 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            3D
+                                                        Blog
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    3D digital design that takes it to the next dimension
+                                                Custom blog design to keep them reading
                                                 </div>
                                             </div>
                                         </div>
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='web_app_design_request_sheet.php?form=WordPress-theme';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1808,19 +2426,19 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Vector art
+                                                        WordPress theme design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    Art so creative you can't categorize it
+                                                A custom WordPress theme that does everything you need it to
                                                 </div>
                                             </div>
                                         </div>
@@ -1832,7 +2450,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                             <!-- 2nd part caro -->
                             <div style="width: 100%;/* height: 334px !important; */">
                                 <div class="row" style="margin: 0px;">
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='web_app_design_request_sheet.php?form=Landing-page';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1845,26 +2463,26 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Brochure
+                                                        Landing page design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 349
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    The printable, foldable way to engage with clients
+                                                Landing page that gets clicks
                                                 </div>
                                             </div>
                                         </div>
                                         <!--  -->
                                     </div>
                                     <!-- 2ndhalf -->
-                                    <div onclick="window.location='design_request_sheet.php';" class="border_styling "
+                                    <div onclick="window.location='web_app_design_request_sheet.php?form=App-design';" class="border_styling "
                                         style="width: 100%;padding: 0;margin: 10px 0px;">
                                         <!--  -->
                                         <div class="first_div_form_type vertically_center category"
@@ -1877,19 +2495,19 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                     </div>
                                                     <div class="category__details__text">
                                                         <h5 class="category__details__text__name">
-                                                            Pamphlet
+                                                        App design
                                                         </h5>
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 599
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="category__description">
-                                                    A pamphlet that delivers all the info you need
+                                                A user-friendly app that gets downloads
                                                 </div>
                                             </div>
                                         </div>
@@ -1926,7 +2544,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 299
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -1958,7 +2576,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                from CR 169
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -2039,7 +2657,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                                                         <div class="category__details__text__price">
                                                             <span class="price">
                                                                 <span class="price__amount">
-                                                                    from US$299
+                                                                    from CR 219
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -2057,6 +2675,526 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
                         </div>
                     </div>
                     <!--  -->
+                    <!-- 4part -->
+                      <!-- 2nd form option -->
+                    <!-- carousel java html -->
+                    <div class="container forms_option" style="display: none ;">
+                        <div class="container-fluid" style="padding: 0px;/* display: flex; */">
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='buisness_design_request_sheet.php?form=Brochure';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Brochure
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                The printable, foldable way to engage with clients
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onclick="window.location='buisness_design_request_sheet.php?form=Booklet';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Booklet
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A booklet that tells your brand's story
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width: 100%;margin: 10px 0;height: 300px !important;">
+                                <div id="carouselExampleIndicators2mob4" class="carousel slide pointer-event"
+                                    data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators2mob4" data-slide-to="0" class="">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators2mob4" data-slide-to="1"
+                                            class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators2mob4" data-slide-to="2" class="">
+                                        </li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img3.jpg" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item active">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img4.jpg" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img5.jpg" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators2mob4"
+                                        role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators2mob4"
+                                        role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- ground part -->
+                    <div class="container forms_ground_option" style="display: none;margin-bottom: 30px;">
+                        <div class="container-fluid" style="padding: 0px;/* display: flex; */">
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='buisness_design_request_sheet.php?form=Pamphlet';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Pamphlet
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A pamphlet that delivers all the info you need
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onclick="window.location='buisness_design_request_sheet.php?form=Banner';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Banner
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 149
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Banners to fly your brand high
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='buisness_design_request_sheet.php?form=Podcast';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Podcast
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Custom podcast art that gets the word out
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onclick="window.location='buisness_design_request_sheet.php?form=Signage';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Signage
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A sign or banner to get your brand noticed
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!-- end 4th part -->
+                      <!-- 5nd form option -->
+                      <!-- 5thd form option -->
+                    <!-- carousel java html -->
+                    <div class="container forms_option" style="display: none ;">
+                        <div class="container-fluid" style="padding: 0px;/* display: flex; */">
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='Art_illusion_design_request_sheet.php?form=Card-invitation';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Card or invitation
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Card or invitation design that sends a message
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onclick="window.location='Art_illusion_design_request_sheet.php?form=Greeting';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Greeting Card
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 199
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                A greeting card that brightens the receiver's day
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width: 100%;margin: 10px 0;height: 300px !important;">
+                                <div id="carouselExampleIndicators2mob5" class="carousel slide pointer-event"
+                                    data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators2mob5" data-slide-to="0" class="">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators2mob5" data-slide-to="1"
+                                            class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators2mob5" data-slide-to="2" class="">
+                                        </li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img3.jpg" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item active">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img4.jpg" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img style="height: 300px !important;" class="img-responsive"
+                                                src="../assets/images/big/img5.jpg" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators2mob5"
+                                        role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators2mob5"
+                                        role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!-- ground part -->
+                    <div class="container forms_ground_option" style="display: none;margin-bottom: 30px;">
+                        <div class="container-fluid" style="padding: 0px;/* display: flex; */">
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='Art_illusion_design_request_sheet.php?form=Illustration-graphics';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Illustration or graphics
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 299
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Stunning illustrations and graphics that will draw attention
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onclick="window.location='Art_illusion_design_request_sheet.php?form=3D';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        3D
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 449
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                3D digital design that takes it to the next dimension
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- 2nd part caro -->
+                            <div style="width: 100%;/* height: 334px !important; */">
+                                <div class="row" style="margin: 0px;">
+                                    <div onclick="window.location='Art_illusion_design_request_sheet.php?form=3D-Architectural';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        3D Architectural Rendering
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                    from CR 449
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                3D architectural rendering to bring your project to life
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- 2ndhalf -->
+                                    <div onclick="window.location='Art_illusion_design_request_sheet.php?form=Other-art';" class="border_styling "
+                                        style="width: 100%;padding: 0;margin: 10px 0px;">
+                                        <!--  -->
+                                        <div class="first_div_form_type vertically_center category"
+                                            style="height: 220px;padding: 15px;">
+                                            <div>
+                                                <div class="category__details" style="color: #555;">
+                                                    <div class="category__details__icon">
+                                                        <span class="fa fa-television form_icons">
+                                                        </span>
+                                                    </div>
+                                                    <div class="category__details__text">
+                                                        <h5 class="category__details__text__name">
+                                                        Other art or illustration
+                                                        </h5>
+                                                        <div class="category__details__text__price">
+                                                            <span class="price">
+                                                                <span class="price__amount">
+                                                                from CR 349
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="category__description">
+                                                Art and illustration so creative you can't categorize it
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!-- end 2nd half -->
+                                </div>
+                            </div>
+                            <!-- end 2nd part car -->
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!-- end 5th part -->
                 </div>
                 <!-- carousel java end -->
                 <!-- Row -->

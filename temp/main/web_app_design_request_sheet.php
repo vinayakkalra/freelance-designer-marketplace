@@ -80,389 +80,31 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     $duedate = $_POST['duedate'];
     $projectname = $_POST['projectname'];
     $designpackage = $_POST['designpackage'];
-if($customercredits >=  $designpackage ){
-    
-    // 
     $no_of_designs = 3 ;
     $hearaboutus = $_POST['hearaboutus'];
     $companydigital = $_POST['companydigital'];
     $oftendesignneed = $_POST['oftendesignneed'];
     $employesno = $_POST['employesno'];
-    $table_name ="clothing_requests";
-if($form_type == "T-shirt"){
+    $table_name ="web_app_requests";
+    if($customercredits >=  $designpackage ){
+// 
+if(($form_type == "Web-page") or ($form_type == "WordPress-theme") or ($form_type == "Blog") or ( $form_type == "Website-Redesign")){
 
     $designtype = $_POST['designtype'];
     $designused = $_POST['designused'];
-    $productfor = $_POST['productfor'];
-    $productcolor = $_POST['productcolor'];
-    $projectdescription = $_POST['projectdescription'];
-    $productkind = $_POST['productkind'];
-    $avoidthing = $_POST['avoidthing'];
-    $productrequired = $_POST['productrequired'];
-    $status = "Submitted";
-    $error="";
-    // check file uploaded or not
-    $total = count($_FILES['images']['name']);
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-
-}
-}
-// check inspiration file uploaded or not
-$total = count($_FILES['refimages']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-}
-}
-
-if ($error != "") {
-
-    $error = "<p>There were error(s) in your form:</p>".$error;
-    
-}
-     else
-{
-        // upload
-$total = count($_FILES['images']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-
-
-}
-}
-if (!empty($items)){
-$refimages = implode("++--", $items);
-}else{
-$refimages = "";
-}
-// upload reference file end
-// upload inspirational file
-$total = count($_FILES['refimages']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$itemss[] = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-}
-}
-if (!empty($itemss)){
-$inspimages = implode("++--", $itemss);
-}else{
-$inspimages = "";
-}
-// upload inspiration img end
-$result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
-
-    while ($row = mysqli_fetch_array($result)) {
-        $id = $row[0];  
-    }
-    $id = $id + 1 ;
-    $orderid = "CLOTH".$id ;
-
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Who_is_the_product_for`,`Do_you_have_any_specific_colors_in_mind`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $productfor)."','".mysqli_real_escape_string($conn, $productcolor)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
-
- if (!mysqli_query($conn, $query)) {
-
-     ?>
- <script>alert('error in form')</script>
- <?php
-
-   } else {
-     
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    } 
-               
- // header('location:client_processing_request.php');
-
- }
-
-}
-
- }elseif(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie")){
-    //  
-    $designtype = $_POST['designtype'];
-    $designused = $_POST['designused'];
-    $projectdescription = $_POST['projectdescription'];
-    $projectdescriptionmain = $_POST['projectdescriptionmain'];
-    $productkind = $_POST['productkind'];
-    $avoidthing = $_POST['avoidthing'];
-    $productrequired = $_POST['productrequired'];
-    $status = "Submitted";
-    $error="";
-    // check file uploaded or not
-    $total = count($_FILES['images']['name']);
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-
-}
-}
-// check inspiration file uploaded or not
-$total = count($_FILES['refimages']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-}
-}
-
-if ($error != "") {
-
-    $error = "<p>There were error(s) in your form:</p>".$error;
-    
-}
-     else
-{
-        // upload
-$total = count($_FILES['images']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-
-
-}
-}
-if (!empty($items)){
-$refimages = implode("++--", $items);
-}else{
-$refimages = "";
-}
-// upload reference file end
-// upload inspirational file
-$total = count($_FILES['refimages']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$itemss[] = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-}
-}
-if (!empty($itemss)){
-$inspimages = implode("++--", $itemss);
-}else{
-$inspimages = "";
-}
-// upload inspiration img end
-$result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
-
-    while ($row = mysqli_fetch_array($result)) {
-        $id = $row[0];  
-    }
-    $id = $id + 1 ;
-    $orderid = "CLOTH".$id ;
-
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_kind_of_product_do_you_want_designed`,`What_is_required_on_the_product`,`Is_there_anything_that_should_be_avoided`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $productkind)."','".mysqli_real_escape_string($conn, $productrequired)."','".mysqli_real_escape_string($conn, $avoidthing)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
-
- if (!mysqli_query($conn, $query)) {
-
-     ?>
- <script>alert('error in form')</script>
- <?php
-
-   } else {
-       
-    $customerrequests = $customerrequests + 1  ;
-
-    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                if($result = mysqli_query($conn, $query))  
-                    {  
-                        $customercredits = $customercredits - $designpackage;
-                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
-                        if($result = mysqli_query($conn, $query))  
-                        {
-                            ?>
-                            <script>
-             
-                            alert('form submitted successfully!');
-                             window.location = 'client_all_requests.php';</script>
-                             <?php
-                        }
-                       
-                    }  
-
- }
-
-}
-    // 
- }elseif(($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise")){
-    //  
-    $designtype = $_POST['designtype'];
-    $designused = $_POST['designused'];
-    $projectdescription = $_POST['projectdescription'];
-    $projectdescriptionmain = $_POST['projectdescriptionmain'];
     $organisation = $_POST['organisation'];
+    $organisatintargetdescription = $_POST['organisatintargetdescription'];
+    $websitename = $_POST['websitename'];
     $selectindustry = $_POST['selectindustry'];
+    $visualstyledescription = $_POST['visualstyledescription'];
+    $inspwebsitename = $_POST['inspwebsitename'];
+    $sitedescription = $_POST['sitedescription'];
+    $totalpages = $_POST['totalpages'];
+    $eachpagedescription = $_POST['eachpagedescription'];
+    $themecoloradd = $_POST['themecoloradd'];
     $communicate = $_POST['communicate'];
     $status = "Submitted";
     $error="";
-    // check file uploaded or not
-    $total = count($_FILES['images']['name']);
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-
-}
-}
 // check inspiration file uploaded or not
 $total = count($_FILES['refimages']['name']);
 
@@ -490,43 +132,6 @@ if ($error != "") {
 }
      else
 {
-        // upload
-$total = count($_FILES['images']['name']);
-
-// Loop through each file
-for( $i=0 ; $i < $total ; $i++ ) {
-
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-
-
-}
-}
-if (!empty($items)){
-$refimages = implode("++--", $items);
-}else{
-$refimages = "";
-}
-// upload reference file end
 // upload inspirational file
 $total = count($_FILES['refimages']['name']);
 
@@ -561,15 +166,15 @@ $inspimages = implode("++--", $itemss);
 $inspimages = "";
 }
 // upload inspiration img end
-$result = mysqli_query($conn, "SELECT max(id) FROM `clothing_requests`");
+$result = mysqli_query($conn, "SELECT max(id) FROM `web_app_requests`");
 
     while ($row = mysqli_fetch_array($result)) {
         $id = $row[0];  
     }
     $id = $id + 1 ;
-    $orderid = "CLOTH".$id ;
+    $orderid = "WEB".$id ;
 
-$query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`Describe_Visual_style_of_project`,`Due_Date`,`credits_pay`,`reference_files`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Describe_your_product_and_its_purpose`,`What_is_your_organization_name`,`select_industry`,`communicate`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $projectdescription)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $refimages)."','".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $projectdescriptionmain)."','".mysqli_real_escape_string($conn, $organisation)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $communicate)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
+$query = "INSERT INTO `web_app_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`communicate`,`Due_Date`,`credits_pay`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Briefly_describe_what_you_do_and_your_target_audience`,`What_is_your_organization_or_website_name`,`select_industry`,`If_you_have_an_existing_website_please_list_it_here`,`What_ideas_do_you_have_for_the_style/theme_of_your_product`,`Website_address`,`What_do_you_like_about_this_site`,`How_many_pages_do_you_need_designed_for_your_product`,`What_would_you_like_on_each_page`,`List_any_colors_themes_or_other_elements_include`,`no_of_designs`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $communicate)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $organisatintargetdescription)."','".mysqli_real_escape_string($conn, $organisation)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $websitename)."','".mysqli_real_escape_string($conn, $visualstyledescription)."','".mysqli_real_escape_string($conn, $inspwebsitename)."','".mysqli_real_escape_string($conn, $sitedescription)."','".mysqli_real_escape_string($conn, $totalpages)."','".mysqli_real_escape_string($conn, $eachpagedescription)."','".mysqli_real_escape_string($conn, $themecoloradd)."',$no_of_designs)";
 
  if (!mysqli_query($conn, $query)) {
 
@@ -578,7 +183,244 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
  <?php
 
    } else {
-       
+
+    $customerrequests = $customerrequests + 1  ;
+
+    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
+                if($result = mysqli_query($conn, $query))  
+                    {  
+                        $customercredits = $customercredits - $designpackage;
+                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
+                        if($result = mysqli_query($conn, $query))  
+                        {
+                            ?>
+                            <script>
+             
+                            alert('form submitted successfully!');
+                             window.location = 'client_all_requests.php';</script>
+                             <?php
+                        }
+                       
+                    } 
+
+ }
+
+}
+
+ }elseif(( $form_type == "Landing-page")){
+    //  
+    $designtype = $_POST['designtype'];
+    $designused = $_POST['designused'];
+    $organisation = $_POST['organisation'];
+    $organisatintargetdescription = $_POST['organisatintargetdescription'];
+    $websitename = $_POST['websitename'];
+    $selectindustry = $_POST['selectindustry'];
+    $visualstyledescription = $_POST['visualstyledescription'];
+    $inspwebsitename = $_POST['inspwebsitename'];
+    $sitedescription = $_POST['sitedescription'];
+    $eachpagedescription = $_POST['eachpagedescription'];
+    $communicate = $_POST['communicate'];
+    $status = "Submitted";
+    $error="";
+// check inspiration file uploaded or not
+$total = count($_FILES['refimages']['name']);
+
+// Loop through each file
+for( $i=0 ; $i < $total ; $i++ ) {
+
+$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+//Make sure we have a file path
+if ($tmpFilePath != ""){
+$img_folder = "upload_files/";
+$img = $_FILES['refimages']['name'][$i];
+$img_loc = $_FILES['refimages']['tmp_name'][$i];
+// $img = $_FILES['images']['name'][$i];
+if(file_exists("upload_files/" . $img)){
+    $error = $img . " is already exists.<br>".$error;
+    // echo $upload . " is already exists.";
+}
+}
+}
+
+if ($error != "") {
+
+    $error = "<p>There were error(s) in your form:</p>".$error;
+    
+}
+     else
+{
+// upload inspirational file
+$total = count($_FILES['refimages']['name']);
+
+// Loop through each file
+for( $i=0 ; $i < $total ; $i++ ) {
+
+$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+//Make sure we have a file path
+if ($tmpFilePath != ""){
+$img_folder = "upload_files/";
+$img = $_FILES['refimages']['name'][$i];
+$itemss[] = $_FILES['refimages']['name'][$i];
+$img_loc = $_FILES['refimages']['tmp_name'][$i];
+// $img = $_FILES['images']['name'][$i];
+if(move_uploaded_file($img_loc,$img_folder.$img))
+{
+    ?>
+<script>alert('file uploaded')</script>
+<?php
+}
+else 
+{
+    ?>
+<script>alert('file not uploaded')</script>
+<?php
+}
+}
+}
+if (!empty($itemss)){
+$inspimages = implode("++--", $itemss);
+}else{
+$inspimages = "";
+}
+// upload inspiration img end
+$result = mysqli_query($conn, "SELECT max(id) FROM `web_app_requests`");
+
+    while ($row = mysqli_fetch_array($result)) {
+        $id = $row[0];  
+    }
+    $id = $id + 1 ;
+    $orderid = "WEB".$id ;
+
+$query = "INSERT INTO `web_app_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`communicate`,`Due_Date`,`credits_pay`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Briefly_describe_what_you_do_and_your_target_audience`,`What_is_your_organization_or_website_name`,`select_industry`,`If_you_have_an_existing_website_please_list_it_here`,`What_ideas_do_you_have_for_the_style/theme_of_your_product`,`Website_address`,`What_do_you_like_about_this_site`,`What_would_you_like_on_each_page`,`no_of_designs`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $communicate)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $organisatintargetdescription)."','".mysqli_real_escape_string($conn, $organisation)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $websitename)."','".mysqli_real_escape_string($conn, $visualstyledescription)."','".mysqli_real_escape_string($conn, $inspwebsitename)."','".mysqli_real_escape_string($conn, $sitedescription)."','".mysqli_real_escape_string($conn, $eachpagedescription)."',$no_of_designs)";
+
+ if (!mysqli_query($conn, $query)) {
+
+     ?>
+ <script>alert('error in form')</script>
+ <?php
+
+   } else {
+
+    $customerrequests = $customerrequests + 1  ;
+
+    $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
+                if($result = mysqli_query($conn, $query))  
+                    {  
+                        $customercredits = $customercredits - $designpackage;
+                        $query = "UPDATE `client` SET `Credits` =  $customercredits  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
+                        if($result = mysqli_query($conn, $query))  
+                        {
+                            ?>
+                            <script>
+             
+                            alert('form submitted successfully!');
+                             window.location = 'client_all_requests.php';</script>
+                             <?php
+                        }
+                       
+                    }
+
+ }
+
+}
+    // 
+ }elseif(( $form_type == "App-design")){
+    //  
+    $designtype = $_POST['designtype'];
+    $designused = $_POST['designused'];
+    $organisatintargetdescription = $_POST['organisatintargetdescription'];
+    $websitename = $_POST['websitename'];
+    $selectindustry = $_POST['selectindustry'];
+    $visualstyledescription = $_POST['visualstyledescription'];
+    $inspwebsitename = $_POST['inspwebsitename'];
+    $sitedescription = $_POST['sitedescription'];
+    $eachpagedescription = $_POST['eachpagedescription'];
+    $communicate = $_POST['communicate'];
+    $devicetype = $_POST['devicetype'];
+    $avoidthing = $_POST['avoidthing'];
+    $app_name = $_POST['app_name'];
+    $totalpages = $_POST['totalpages'];
+    $status = "Submitted";
+    $error="";
+// check inspiration file uploaded or not
+$total = count($_FILES['refimages']['name']);
+
+// Loop through each file
+for( $i=0 ; $i < $total ; $i++ ) {
+
+$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+//Make sure we have a file path
+if ($tmpFilePath != ""){
+$img_folder = "upload_files/";
+$img = $_FILES['refimages']['name'][$i];
+$img_loc = $_FILES['refimages']['tmp_name'][$i];
+// $img = $_FILES['images']['name'][$i];
+if(file_exists("upload_files/" . $img)){
+    $error = $img . " is already exists.<br>".$error;
+    // echo $upload . " is already exists.";
+}
+}
+}
+
+if ($error != "") {
+
+    $error = "<p>There were error(s) in your form:</p>".$error;
+    
+}
+     else
+{
+// upload inspirational file
+$total = count($_FILES['refimages']['name']);
+
+// Loop through each file
+for( $i=0 ; $i < $total ; $i++ ) {
+
+$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+//Make sure we have a file path
+if ($tmpFilePath != ""){
+$img_folder = "upload_files/";
+$img = $_FILES['refimages']['name'][$i];
+$itemss[] = $_FILES['refimages']['name'][$i];
+$img_loc = $_FILES['refimages']['tmp_name'][$i];
+// $img = $_FILES['images']['name'][$i];
+if(move_uploaded_file($img_loc,$img_folder.$img))
+{
+    ?>
+<script>alert('file uploaded')</script>
+<?php
+}
+else 
+{
+    ?>
+<script>alert('file not uploaded')</script>
+<?php
+}
+}
+}
+if (!empty($itemss)){
+$inspimages = implode("++--", $itemss);
+}else{
+$inspimages = "";
+}
+// upload inspiration img end
+$result = mysqli_query($conn, "SELECT max(id) FROM `web_app_requests`");
+
+    while ($row = mysqli_fetch_array($result)) {
+        $id = $row[0];  
+    }
+    $id = $id + 1 ;
+    $orderid = "WEB".$id ;
+
+$query = "INSERT INTO `web_app_requests` (`email`,`name`,`phone`,`project_name`,`type_of_design`,`how_design_can_be_used`,`How_did_you_hear_about_us`,`Image_Size`,`Image_Format`,`communicate`,`Due_Date`,`credits_pay`,`inspiration_files`,`status`,`from_ip`,`from_browser`,`time`,`orderid`,`Is_your_company_a_digital_marketing_or_design_agency`,`how_often_you_need_design`,`How_many_employees_you_company_have`,`Briefly_describe_what_you_do_and_your_target_audience`,`device_type`,`select_industry`,`If_you_have_an_existing_website_please_list_it_here`,`What_ideas_do_you_have_for_the_style/theme_of_your_product`,`Website_address`,`What_do_you_like_about_this_site`,`What_would_you_like_on_each_page`,`app_name`,`Is_there_anything_that_should_be_avoided`,`How_many_pages_do_you_need_designed_for_your_product`,`no_of_designs`,`table_name`) VALUES ('".mysqli_real_escape_string($conn, $email)."', '".mysqli_real_escape_string($conn, $name)."','".mysqli_real_escape_string($conn, $phone)."', '".mysqli_real_escape_string($conn, $projectname)."','".mysqli_real_escape_string($conn, $designtype)."','".mysqli_real_escape_string($conn, $designused)."','".mysqli_real_escape_string($conn, $hearaboutus)."','".mysqli_real_escape_string($conn, $imagesize)."','".mysqli_real_escape_string($conn, $imageformat)."','".mysqli_real_escape_string($conn, $communicate)."','".mysqli_real_escape_string($conn, $duedate)."',$designpackage,'".mysqli_real_escape_string($conn, $inspimages)."','".mysqli_real_escape_string($conn, $status)."','".mysqli_real_escape_string($conn, $from_ip)."','".mysqli_real_escape_string($conn, $from_browser)."','".mysqli_real_escape_string($conn, $date_now)."','".mysqli_real_escape_string($conn, $orderid)."','".mysqli_real_escape_string($conn, $companydigital)."','".mysqli_real_escape_string($conn, $oftendesignneed)."','".mysqli_real_escape_string($conn, $employesno)."','".mysqli_real_escape_string($conn, $organisatintargetdescription)."','".mysqli_real_escape_string($conn, $devicetype)."','".mysqli_real_escape_string($conn, $selectindustry)."','".mysqli_real_escape_string($conn, $websitename)."','".mysqli_real_escape_string($conn, $visualstyledescription)."','".mysqli_real_escape_string($conn, $inspwebsitename)."','".mysqli_real_escape_string($conn, $sitedescription)."','".mysqli_real_escape_string($conn, $eachpagedescription)."','".mysqli_real_escape_string($conn, $app_name)."','".mysqli_real_escape_string($conn, $avoidthing)."','".mysqli_real_escape_string($conn, $totalpages)."',$no_of_designs,'".mysqli_real_escape_string($conn, $table_name)."')";
+
+ if (!mysqli_query($conn, $query)) {
+
+     ?>
+ <script>alert('error in form')</script>
+ <?php
+
+   } else {
+
     $customerrequests = $customerrequests + 1  ;
 
     $query = "UPDATE `client` SET `no_requests` =  $customerrequests  WHERE email = '".mysqli_real_escape_string($conn, $customeremail)."' ";
@@ -603,14 +445,14 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
 }
     // 
  }
-    // 
-}else{
-    ?>
-    <script>
-    alert("You don't have enough Credits!");
-     window.location = 'credits.php';</script>
-     <?php
-}
+// 
+    }else{
+        ?>
+        <script>
+        alert("You don't have enough Credits!");
+        window.location = 'credits.php';</script>
+         <?php
+    }
 
 }
 ?>
@@ -811,10 +653,11 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                 <form id="validations" method="post" enctype="multipart/form-data">
                                     <!-- Step 1 -->
                                     <?php 
-                                    if($form_type == "T-shirt"){
+                                    if(($form_type == "Web-page") or ($form_type == "WordPress-theme") or ($form_type == "Blog") or ( $form_type == "Website-Redesign") OR ( $form_type == "Landing-page")){
+                                        if($form_type == "Web-page"){
                                     ?>
                                     <section class="form_option" >
-                                        <h1 style="margin-bottom:10px;" >T-shirt brief</h1>
+                                        <h1 style="margin-bottom:10px;" >Web page design brief</h1>
                                         <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
                                         <h2 style="margin-bottom:15px;margin-top:20px;" >Background information</h2>
                                         <div class="row">
@@ -822,189 +665,82 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                                 <div class="form-group">
                                                     <label for="designtype"> What type of design do you need? : <span
                                                             class="danger">*</span> </label>
-                                                    <input value="T-shirt" readonly
+                                                    <input value="Web page design" readonly
                                                         type="text" class="form-control required" id="designtype"
                                                         name="designtype">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productfor"> Who is the t-shirt for? : <span
-                                                            class="danger">*</span> </label>
-                                                    <select class="custom-select form-control required"
-                                                        name="productfor" id="productfor">
-                                                            <option value="Men">Men</option>
-                                                            <option value="Women">Women
-                                                            </option>
-                                                            <option value="Boys">Boys</option>
-                                                            <option value="Girls">Girls
-                                                            </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designused">How will your design be used? <span
-                                                            class="danger">*</span> </label>
-                                                    <input
-                                                        placeholder="E.g. Billboard, Facebook campaign, bookcover etc."
-                                                        type="text" class="form-control required" id="designused"
-                                                        name="designused">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productcolor">Do you have any specific colors in mind? </label>
-                                                    <input
-                                                        placeholder="E.g. red, yellow, mauve"
-                                                        type="text" class="form-control required" id="productcolor"
-                                                        name="productcolor">
-                                                        <h5 style="font-size: 14px;color: #999;margin-top: 15px;font-weight: 500;">Common associations in Western culture</h5>
-                                                        <ul>
-                                                        <li class="visuallisteditem">Red: Passion, Anger, Vigor, Love, Danger</li>
-                                                        <li class="visuallisteditem">Yellow: Knowledge, Energy, Joy, Intellect, Youth</li>
-                                                        <li class="visuallisteditem">Green: Fertility, Wealth, Healing, Success, Growth</li>
-                                                        <li class="visuallisteditem">White: Purity, Healing, Perfection, Clean, Virtue</li>
-                                                        <li class="visuallisteditem">Blue: Knowledge, Trust, Tranquility, Calm, Peace, Cool</li>
-                                                        </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectdescription">Do you have ideas about the visual style you want? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="projectdescription" id="projectdescription" rows="5"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Content details</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productkind"> What kind of t-shirt do you want designed? : <span
-                                                            class="danger">*</span> </label>
-                                                    <select class="custom-select form-control required"
-                                                            name="productkind" id="productkind">
-                                                            <option value="Standard short-sleeve Tshirt">Standard short-sleeve Tshirt</option>
-                                                            <option value="Tank top">Tank top
-                                                            </option>
-                                                            <option value="Polo shirt">Polo shirt</option>
-                                                            <option value="Short sleeved button up shirt">Short sleeved button up shirt
-                                                            </option>
-                                                            <option value="Polo shirt">Dress/business shirt</option>
-                                                            <option value="Other, please specify">Other, please specify</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have a logo you want on the t-shirt?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="images[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productrequired">What is required on the t-shirt? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="productrequired" id="productrequired" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Slogan, organisation or product name, website address, phone number.</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="avoidthing">Is there anything that should be avoided? :</label>
-                                                    <textarea name="avoidthing" id="avoidthing" rows="3"
-                                                        class="form-control required"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Other</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have any images, sketches or documents that might be helpful?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="refimages[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a class="btn btn-primary btn btn-info  waves-effect waves-light addItemBtn" style="color:#fff;padding: 7px 25px;" type="button">Next
-                                        </a>
-                                    </section>
-                                    <?php
-                                    }elseif(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie")){
-                                        ?>
-                                    <!--  -->
-                                    <section class="form_option" >
-                                    <?php
-                                    if($form_type == "Clothing-or-apparel"){
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Clothing or apparel brief</h1>
+                                            <?php
+                                            }elseif(( $form_type == "WordPress-theme")){
+                                            ?>
+                                        <section class="form_option" >
+                                        <h1 style="margin-bottom:10px;" >WordPress theme design brief</h1>
                                         <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
+                                        <h2 style="margin-bottom:15px;margin-top:20px;" >Background information</h2>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="designtype"> What type of design do you need? : <span
                                                             class="danger">*</span> </label>
-                                                    <input value="Clothing or apparel" readonly
+                                                    <input value="WordPress theme design" readonly
                                                         type="text" class="form-control required" id="designtype"
                                                         name="designtype">
                                                 </div>
                                             </div>
-                                        <?php
-                                    }elseif( $form_type == "Jersey")
-                                    {
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Jersey</h1>
+                                            <?php
+                                            }elseif(( $form_type == "Blog")){
+                                            ?>
+                                        <section class="form_option" >
+                                        <h1 style="margin-bottom:10px;" >Blog brief</h1>
                                         <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
+                                        <h2 style="margin-bottom:15px;margin-top:20px;" >Background information</h2>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="designtype"> What type of design do you need? : <span
                                                             class="danger">*</span> </label>
-                                                    <input value="Jersey" readonly
+                                                    <input value="Blog" readonly
                                                         type="text" class="form-control required" id="designtype"
                                                         name="designtype">
                                                 </div>
                                             </div>
-                                        <?php
-                                    }elseif( $form_type == "Sweatshirt-Hoodie")
-                                    {
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Sweatshirt & Hoodie</h1>
-                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designtype"> What type of design do you need? : <span
-                                                            class="danger">*</span> </label>
-                                                    <input value="Sweatshirt & Hoodie" readonly
-                                                        type="text" class="form-control required" id="designtype"
-                                                        name="designtype">
+                                            <?php
+                                            }elseif(( $form_type == "Website-Redesign")){
+                                                ?>
+                                            <section class="form_option" >
+                                            <h1 style="margin-bottom:10px;" >Website Redesign brief</h1>
+                                            <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
+                                            <h2 style="margin-bottom:15px;margin-top:20px;" >Background information</h2>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="designtype"> What type of design do you need? : <span
+                                                                class="danger">*</span> </label>
+                                                        <input value="Website Redesign" readonly
+                                                            type="text" class="form-control required" id="designtype"
+                                                            name="designtype">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        <?php
-                                    }
-                                        ?>
-                                        
+                                            <?php
+                                            }elseif(( $form_type == "Landing-page")){
+                                                ?>
+                                            <section class="form_option" >
+                                            <h1 style="margin-bottom:10px;" >Landing page design brief</h1>
+                                            <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
+                                            <h2 style="margin-bottom:15px;margin-top:20px;" >Background information</h2>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="designtype"> What type of design do you need? : <span
+                                                                class="danger">*</span> </label>
+                                                        <input value="Landing page design" readonly
+                                                            type="text" class="form-control required" id="designtype"
+                                                            name="designtype">
+                                                    </div>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="designused">How will your design be used? <span
@@ -1019,150 +755,32 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectdescription">Do you have ideas about the visual style you want? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="projectdescription" id="projectdescription" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Content details</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productkind"> What Product do you want designed? : <span
-                                                            class="danger">*</span> </label>
-                                                    <select class="custom-select form-control required"
-                                                            name="productkind" id="productkind">
-                                                            <option value="Jacket">Jacket</option>
-                                                            <option value="Cap">Cap
-                                                            </option>
-                                                            <option value="Bag">Bag</option>
-                                                            <option value="Shoe">Shoe
-                                                            </option>
-                                                            <option value="Other, please specify">Other, please specify</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have a logo you want on the Product?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="images[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="productrequired">What is required on the Product? : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="productrequired" id="productrequired" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Slogan, organisation or product name, website address, phone number.</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="avoidthing">Is there anything that should be avoided? :</label>
-                                                    <textarea name="avoidthing" id="avoidthing" rows="3"
-                                                        class="form-control required"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectdescriptionmain">Describe your Product and its purpose : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="projectdescriptionmain" id="projectdescriptionmain" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. A fitted men's cap for Acme employees.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 style="margin-bottom:15px;" >Other</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Do you have any images, sketches or documents that might be helpful?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="refimages[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a class="btn btn-primary btn btn-info  waves-effect waves-light addItemBtn" style="color:#fff;padding: 7px 25px;" type="button">Next
-                                        </a>
-                                    </section>
-                                    <!--  -->
-                                        <?php
-                                    }elseif(($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise")){
-                                        ?>
-                                    <!--  -->
-                                    <section class="form_option" >
-                                    <?php
-                                    if($form_type == "Merchandise"){
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Merchandise brief</h1>
-                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you‘re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Background information</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designtype"> What type of design do you need? : <span
-                                                            class="danger">*</span> </label>
-                                                    <input value="Merchandise" readonly
-                                                        type="text" class="form-control required" id="designtype"
-                                                        name="designtype">
-                                                </div>
-                                            </div>
-                                        <?php
-                                    }elseif( $form_type == "Other-clothing-or-merchandise")
-                                    {
-                                        ?>
-                                        <h1 style="margin-bottom:10px;" >Other clothing or merchandise brief</h1>
-                                        <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you‘re looking for.</h6>
-                                        <h2 style="margin-bottom:15px;" >Background information</h2>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designtype"> What type of design do you need? : <span
-                                                            class="danger">*</span> </label>
-                                                    <input value="Other clothing or merchandise" readonly
-                                                        type="text" class="form-control required" id="designtype"
-                                                        name="designtype">
-                                                </div>
-                                            </div>
-                                        <?php
-                                    }
-                                        ?>
-                                        
-                                        
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="designused">How will your design be used? <span
-                                                            class="danger">*</span> </label>
-                                                    <input
-                                                        placeholder="E.g. Billboard, Facebook campaign, bookcover etc."
-                                                        type="text" class="form-control required" id="designused"
-                                                        name="designused">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="organisation">What is your organization name? <span
+                                                    <label for="organisation">What is your organization or website name? <span
                                                             class="danger">*</span> </label>
                                                     <input
                                                         placeholder="E.g. Acme"
                                                         type="text" class="form-control required" id="organisation"
                                                         name="organisation">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="organisatintargetdescription">Briefly describe what you do and your target audience. : <span
+                                                            class="danger">*</span></label>
+                                                    <textarea name="organisatintargetdescription" id="organisatintargetdescription" rows="3"
+                                                        class="form-control required"></textarea>
+                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="websitename">If you have an existing website, please list it here. </label>
+                                                    <input
+                                                        placeholder="E.g. www.acme.com"
+                                                        type="text" class="form-control required" id="websitename"
+                                                        name="websitename">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -1223,38 +841,127 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                                 </div>
                                             </div>
                                         </div>
+                                        <h2 style="margin-bottom:15px;" >Visual style</h2>
+                                        <div class="row">
+                                        <?php
+                                        if($form_type == "Landing-page"){
+                                                ?>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="visualstyledescription">What style or theme do you want to use? : <span
+                                                            class="danger">*</span></label>
+                                                    <textarea name="visualstyledescription" id="visualstyledescription" rows="3"
+                                                        class="form-control required"></textarea>
+                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }else{
+                                            ?>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="visualstyledescription">What ideas do you have for the style/theme of your website design? : <span
+                                                            class="danger">*</span></label>
+                                                    <textarea name="visualstyledescription" id="visualstyledescription" rows="3"
+                                                        class="form-control required"></textarea>
+                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
+                                                </div>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                        </div>
+                                        <h2 style="margin-bottom:15px;" >What websites can designers draw inspiration from?</h2>
+                                        <h6 style="margin-bottom:15px;" >List websites you like and describe what you like about them.</h6>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectdescription">Describe what your organization or product does and its target audience : <span
+                                                    <label for="inspwebsitename">Website address </label>
+                                                    <input
+                                                        placeholder="E.g. www.acme.com"
+                                                        type="text" class="form-control required" id="inspwebsitename"
+                                                        name="inspwebsitename">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="sitedescription">What do you like about this site? : <span
                                                             class="danger">*</span></label>
-                                                    <textarea name="projectdescription" id="projectdescription" rows="3"
+                                                    <textarea name="sitedescription" id="sitedescription" rows="3"
                                                         class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.</h5>
+                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. I like the homepage of the website, the colors and imagery used as well as the menu and buttons.</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <h2 style="margin-bottom:15px;" >Content details</h2>
+                                        <?php
+                                        if($form_type == "Landing-page"){
+                                                ?>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="eachpagedescription">What do you want to include on your landing page? : <span
+                                                                class="danger">*</span></label>
+                                                        <textarea name="eachpagedescription" id="eachpagedescription" rows="3"
+                                                            class="form-control required"></textarea>
+                                                        <ul>
+                                                            <li class="visuallisteditem">Specify any necessary features to include on the landing page.</li>
+                                                            <li class="visuallisteditem">E.g. Email capture form, sign up form, social sharing buttons, calls to action, etc...</li>
+                                                            </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <?php
+                                        }else{
+                                        ?>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectdescriptionmain">Describe what you want designed : <span
-                                                            class="danger">*</span></label>
-                                                    <textarea name="projectdescriptionmain" id="projectdescriptionmain" rows="3"
-                                                        class="form-control required"></textarea>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Describe your aims and requirements in detail here — the more specific, the better. Tell the designers what is required, but also let them know where they’re free to be creative.</h5>
+                                                    <label for="totalpages"> How many pages do you need designed for your website? : <span
+                                                            class="danger">*</span> </label>
+                                                    <select class="custom-select form-control required"
+                                                            name="totalpages" id="totalpages">
+                                                            <option value="onepage">1 page (from CR 599)</option>
+                                                            <option value="twopage">2 pages (from CR 749)
+                                                            </option>
+                                                            <option value="threepage">3 pages (from CR 899)</option>
+                                                            <option value="fourpage">4 pages (from CR 1,049)
+                                                            </option>
+                                                            <option value="fivepage">5 pages (from CR 1,199)</option>
+                                                    </select>
+                                                        <ul style="margin-top:5px;">
+                                                        <li class="visuallisteditem">E.g. Homepage, payment section, loading screen, browse section.</li>
+                                                        <li class="visuallisteditem">Tip: Need more than 5 pages? No problem. Once your contest is complete, work one-on-one with your winning designer to finish the remaining designs.</li>
+                                                        </ul>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Do you have a logo you want on the Product?</label>
-                                                    <!-- <input type="file" id="input-file-max-fs" class="dropify"
-                                                        data-max-file-size="2M" /> -->
-                                                    <input type="file" name="images[]" multiple>
-                                                    <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
+                                                    <label for="eachpagedescription">What would you like on each page? : <span
+                                                            class="danger">*</span></label>
+                                                    <textarea name="eachpagedescription" id="eachpagedescription" rows="3"
+                                                        class="form-control required"></textarea>
+                                                    <ul>
+                                                        <li class="visuallisteditem">Outline the content for each page layout and also what the main goal of each page is.</li>
+                                                        <li class="visuallisteditem">E.g. Homepage: We want a big featured image of our spices with an introduction of who we are. The page should direct customers to search or browse all our products.</li>
+                                                        </ul>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="themecoloradd">List any colors, themes or other elements that you don't want included. : <span
+                                                            class="danger">*</span></label>
+                                                    <textarea name="themecoloradd" id="themecoloradd" rows="3"
+                                                        class="form-control required"></textarea>
+                                                        <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Please do not use any drop down menus.</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
                                         <h2 style="margin-bottom:15px;" >Other</h2>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -1277,29 +984,269 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                         <a class="btn btn-primary btn btn-info  waves-effect waves-light addItemBtn" style="color:#fff;padding: 7px 25px;" type="button">Next
                                         </a>
                                     </section>
-                                    <!--  -->
-                                        <?php
+                                    <?php
+                                    }elseif(($form_type == "App-design")){
+                                        ?>
+                                        <section class="form_option" >
+                                                <h1 style="margin-bottom:10px;" >App design brief</h1>
+                                                <h6 style="margin-bottom:15px;" >Fill out the brief so the designers know what you’re looking for.</h6>
+                                                <h2 style="margin-bottom:15px;margin-top:20px;" >Background information</h2>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="designtype"> What type of design do you need? : <span
+                                                                    class="danger">*</span> </label>
+                                                            <input value="App design" readonly
+                                                                type="text" class="form-control required" id="designtype"
+                                                                name="designtype">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="designused">How will your design be used? <span
+                                                                    class="danger">*</span> </label>
+                                                            <input
+                                                                placeholder="E.g. Billboard, Facebook campaign, bookcover etc."
+                                                                type="text" class="form-control required" id="designused"
+                                                                name="designused">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="selectindustry"> Select your industry : <span
+                                                                    class="danger">*</span> </label>
+                                                            <select class="custom-select form-control required"
+                                                                    name="selectindustry" id="selectindustry">
+                                                                    <option value="Accounting & Financial">Accounting & Financial</option>
+                                                                    <option value="Agriculture">Agriculture
+                                                                    </option>
+                                                                    <option value="Animal & Pet">Animal & Pet</option>
+                                                                    <option value="Architectural">Architectural
+                                                                    </option>
+                                                                    <option value="Art & Design">Art & Design</option>
+                                                                    <option value="Attorney & Law">Attorney & Law</option>
+                                                                    <option value="Automotive">Automotive</option>
+                                                                    <option value="Bar & Nightclub">Bar & Nightclub</option>
+                                                                    <option value="Business & Consulting">Business & Consulting</option>
+                                                                    <option value="Childcare">Childcare</option>
+                                                                    <option value="Cleaning & Maintenance">Cleaning & Maintenance</option>
+                                                                    <option value="Communications">Communications</option>
+                                                                    <option value="Community & Non-Profit">Community & Non-Profit</option>
+                                                                    <option value="Computer">Computer</option>
+                                                                    <!--  -->
+                                                                    <option   value="Construction">Construction</option>
+                                                                    <option   value="Cosmetics">Cosmetics &amp; Beauty</option>
+                                                                    <option   value="Dating">Dating</option>
+                                                                    <option   value="Education">Education</option>
+                                                                    <option  value="Entertainment">Entertainment &amp; The Arts</option>
+                                                                    <option   value="Environment">Environmental</option>
+                                                                    <option  value="Fashion">Fashion</option>
+                                                                    <option   value="Floral">Floral</option>
+                                                                    <option   value="Food & Drink">Food &amp; Drink</option>
+                                                                    <option  value="Games & Recreational">Games &amp; Recreational</option>
+                                                                    <option   value="Home Furnishing">Home Furnishing</option>
+                                                                    <option   value="Internet">Internet</option>
+                                                                    <option   value="Landscaping">Landscaping</option>
+                                                                    <option   value="Marketing">Marketing</option>
+                                                                    <option   value="Medical & Pharmaceutical">Medical &amp; Pharmaceutical</option>
+                                                                    <option   value="Photography">Photography</option>
+                                                                    <option   value="Physical Fitness">Physical Fitness</option>
+                                                                    <option   value="Politics">Political</option>
+                                                                    <option   value="Realestate">Real Estate &amp; Mortgage</option>
+                                                                    <option   value="Religious">Religious</option>
+                                                                    <option   value="Restaurant">Restaurant</option>
+                                                                    <option   value="Retail">Retail</option>
+                                                                    <option   value="Security">Security</option>
+                                                                    <option   value="Spa">Spa &amp; Esthetics</option>
+                                                                    <option  value="Sales">Sales</option>
+                                                                    <option  value="Sports">Sport</option>
+                                                                    <option   value="Technology">Technology</option>
+                                                                    <option  value="Travel & Hole;">Travel &amp; Hotel</option>
+                                                                    <option   value="wedding">Wedding Service</option>
+                                                                    <option   value="Other">Other</option>
+                                                                    <!--  -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="websitename">If you have an existing website, please list it here. </label>
+                                                            <input
+                                                                placeholder="E.g. www.acme.com"
+                                                                type="text" class="form-control required" id="websitename"
+                                                                name="websitename">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="organisatintargetdescription">Briefly describe what your app does : <span
+                                                                    class="danger">*</span></label>
+                                                            <textarea name="organisatintargetdescription" id="organisatintargetdescription" rows="3"
+                                                                class="form-control required"></textarea>
+                                                            <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. The app allows our customers to browse and purchase anvils on their mobile phone.</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h2 style="margin-bottom:15px;" >Visual style</h2>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="visualstyledescription">What ideas do you have for the style/theme of your app? : <span
+                                                                    class="danger">*</span></label>
+                                                            <textarea name="visualstyledescription" id="visualstyledescription" rows="3"
+                                                                class="form-control required"></textarea>
+                                                            <h5 style="font-size: 14px;color: #999;margin-top: 7px;">Tip: Providing any thoughts on colors, illustration or photography will help guide designers.</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h2 style="margin-bottom:15px;" >What websites can designers draw inspiration from?</h2>
+                                                <h6 style="margin-bottom:15px;" >List websites you like and describe what you like about them.</h6>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="inspwebsitename">Website address </label>
+                                                            <input
+                                                                placeholder="E.g. www.acme.com"
+                                                                type="text" class="form-control required" id="inspwebsitename"
+                                                                name="inspwebsitename">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="sitedescription">What do you like about this site? : <span
+                                                                    class="danger">*</span></label>
+                                                            <textarea name="sitedescription" id="sitedescription" rows="3"
+                                                                class="form-control required"></textarea>
+                                                            <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. I like the homepage of the website, the colors and imagery used as well as the menu and buttons.</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h2 style="margin-bottom:15px;" >Content details</h2>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="app_name">What is the name of your app? <span
+                                                                    class="danger">*</span> </label>
+                                                            <input
+                                                                placeholder="E.g. AcmeApp"
+                                                                type="text" class="form-control required" id="app_name"
+                                                                name="app_name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="totalpages"> How many screens do you want designed? : <span
+                                                                    class="danger">*</span> </label>
+                                                            <select class="custom-select form-control required"
+                                                                    name="totalpages" id="totalpages">
+                                                                    <option value="onepage">1 screen (from CR 599)</option>
+                                                                    <option value="twopage">2 screens (from CR 699)
+                                                                    </option>
+                                                                    <option value="threepage">3 screens (from CR 799)</option>
+                                                                    <option value="fourpage">4 screens (from CR 899)
+                                                                    </option>
+                                                                    <option value="fivepage">5 screens (from CR 999)</option>
+                                                            </select>
+                                                                <ul style="margin-top:5px;">
+                                                                <li class="visuallisteditem">Tip: If you require more than 5 screens, we recommend you focus on identifying a design direction first and then working with the designer 1-to-1 after your contest, to complete the subsequent screens.</li>
+                                                                </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eachpagedescription">Describe the screens and the main work flows for your app : <span
+                                                                    class="danger">*</span></label>
+                                                            <textarea name="eachpagedescription" id="eachpagedescription" rows="3"
+                                                                class="form-control required"></textarea>
+                                                            <ul>
+                                                                <li class="visuallisteditem">Tip: How do people use your app? How do users move around from screen to screen?</li>
+                                                                <li class="visuallisteditem">E.g. From the home screen users can either search or browse our range of anvils. From a search results or category page they can go through to an anvil details page. Here they can enter a quantity to purchase and add them to a shopping cart and checkout.</li>
+                                                                </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="avoidthing">Is there anything that should be avoided? : <span
+                                                                    class="danger">*</span></label>
+                                                            <textarea name="avoidthing" id="avoidthing" rows="3"
+                                                                class="form-control required"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="devicetype">What device do you need designs for <span
+                                                                    class="danger">*</span> </label>
+                                                            <input
+                                                                placeholder="E.g. iPhone, Android, iPad, Windows, Apple Mac etc."
+                                                                type="text" class="form-control required" id="devicetype"
+                                                                name="devicetype">
+                                                            <ul>
+                                                                <li class="visuallisteditem" style="margin-top:5px;">If you require designs for more than 1 device we recommend identifying a design direction first and then working with the designer 1-to-1 after the contest has finished.</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h2 style="margin-bottom:15px;" >Other</h2>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="communicate">Is there anything else you would like to communicate to the designers? :</label>
+                                                            <textarea name="communicate" id="communicate" rows="3"
+                                                                class="form-control required"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label >Do you have any images, sketches or documents that might be helpful?</label>
+                                                            <!-- <input type="file" id="input-file-max-fs" class="dropify"
+                                                                data-max-file-size="2M" /> -->
+                                                            <input type="file" name="refimages[]" multiple>
+                                                            <h5 style="font-size: 14px;color: #999;margin-top: 7px;">E.g. Your current logo, fonts, photos, illustrations, content, layout ideas etc.</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-primary btn btn-info  waves-effect waves-light addItemBtn" style="color:#fff;padding: 7px 25px;" type="button">Next
+                                                </a>
+                                            </section>
+                                            <?php
                                     }
                                     ?>
                                     <!-- Step 2 -->
                                     <section class="form_option" style="display:none">
                                     <!--  -->
-                                    <h1 style="margin-bottom:10px;" >Name your price:</h1>
+                                        <h1 style="margin-bottom:10px;" >Name your price:</h1>
                                         <!-- <h6 style="margin-bottom:15px;" >All t-shirt packages come with a 100% money-back guarantee and full copyright ownership of the final design.</h6> -->
                                         <div class="row" style="padding:5px;">
                                             <div class="col-md-6" style="margin: 5px 0px;">
                                                 <div>
                                                 <!-- start -->
                                     <?php 
-                                    if(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie") or ($form_type == "T-shirt") or ($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise") ){
+                                    if(($form_type == "Web-page") or ($form_type == "WordPress-theme") or ($form_type == "Blog") or ( $form_type == "Website-Redesign") or ($form_type == "App-design")){
                                     ?>
-                                                <label for="designpackage">(199 minimum)  : <span
+                                                <label for="designpackage">(599 minimum)  : <span
                                                             class="danger">*</span></label>
                                                     <!-- <input type="hidden" name="gg" value="10"> -->
                                                     <input type="number" class="form-control required" id="designpackage"
-                                                        name="designpackage" value="199" min="199"  >
+                                                        name="designpackage" value="599" min="599"  >
                                                 <!--  -->
                                                 <?php
+                                        }elseif($form_type == "Landing-page"){
+                                            ?>
+                                             <label for="designpackage">(349 minimum)  : <span
+                                                            class="danger">*</span></label>
+                                                    <!-- <input type="hidden" name="gg" value="10"> -->
+                                                    <input type="number" class="form-control required" id="designpackage"
+                                                        name="designpackage" value="349" min="349"  >
+                                            <?php
                                         }
                                         ?>
                                                 <!-- end -->
@@ -1308,7 +1255,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                                             <!--  -->
                                         </div>
                                         <h2 style="margin-bottom:15px;margin-top:15px;" >Design options</h2>
-                                        <h6 style="margin-bottom:15px;" >Customize your Design to suit your need</h6>
+                                        <h6 style="margin-bottom:15px;" >Customize your design to suit your need</h6>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -1533,7 +1480,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
         //script fot submit mob form
         $(document).ready(function () {
         <?php 
-        if($form_type == "T-shirt"){
+        if(($form_type == "Web-page") or ($form_type == "WordPress-theme") or ($form_type == "Blog") or ( $form_type == "Website-Redesign")){
         ?>
             // $('.addItemBtn').click(function (e) {
             //     e.preventDefault();
@@ -1560,20 +1507,47 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#productrequired").val() == "") {
-                $("#productrequired").css('border-color', 'red');
-                $("#productrequired").css('border-width', '2px');
-                $("#productrequired").attr('placeholder', 'Required Field');
-                error = error + 'productrequired';
+            if ($("#organisation").val() == "") {
+                $("#organisation").css('border-color', 'red');
+                $("#organisation").css('border-width', '2px');
+                $("#organisation").attr('placeholder', 'Required Field');
+                error = error + 'organisation';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#projectdescription").val() == "") {
-                $("#projectdescription").css('border-color', 'red');
-                $("#projectdescription").css('border-width', '2px');
-                $("#projectdescription").attr('placeholder', 'Required Field');
-                error = error + 'projectdescription';
+            if ($("#visualstyledescription").val() == "") {
+                $("#visualstyledescription").css('border-color', 'red');
+                $("#visualstyledescription").css('border-width', '2px');
+                $("#visualstyledescription").attr('placeholder', 'Required Field');
+                error = error + 'visualstyledescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#inspwebsitename").val() == "") {
+                $("#inspwebsitename").css('border-color', 'red');
+                $("#inspwebsitename").css('border-width', '2px');
+                $("#inspwebsitename").attr('placeholder', 'Required Field');
+                error = error + 'inspwebsitename';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#sitedescription").val() == "") {
+                $("#sitedescription").css('border-color', 'red');
+                $("#sitedescription").css('border-width', '2px');
+                $("#sitedescription").attr('placeholder', 'Required Field');
+                error = error + 'sitedescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#organisatintargetdescription").val() == "") {
+                $("#organisatintargetdescription").css('border-color', 'red');
+                $("#organisatintargetdescription").css('border-width', '2px');
+                $("#organisatintargetdescription").attr('placeholder', 'Required Field');
+                error = error + 'organisatintargetdescription';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
@@ -1583,6 +1557,24 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 $("#designused").css('border-width', '2px');
                 $("#designused").attr('placeholder', 'Required Field');
                 error = error + 'designused';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#eachpagedescription").val() == "") {
+                $("#eachpagedescription").css('border-color', 'red');
+                $("#eachpagedescription").css('border-width', '2px');
+                $("#eachpagedescription").attr('placeholder', 'Required Field');
+                error = error + 'eachpagedescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#themecoloradd").val() == "") {
+                $("#themecoloradd").css('border-color', 'red');
+                $("#themecoloradd").css('border-width', '2px');
+                $("#themecoloradd").attr('placeholder', 'Required Field');
+                error = error + 'themecoloradd';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
@@ -1603,7 +1595,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 // alert(did);
             });
         <?php
-        }elseif(($form_type == "Clothing-or-apparel") or ($form_type == "Jersey") or ($form_type == "Sweatshirt-Hoodie")){
+        }elseif(($form_type == "Landing-page")){
         ?>
         // 
         elements = document.getElementsByClassName('addItemBtn');
@@ -1620,29 +1612,47 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#productrequired").val() == "") {
-                $("#productrequired").css('border-color', 'red');
-                $("#productrequired").css('border-width', '2px');
-                $("#productrequired").attr('placeholder', 'Required Field');
-                error = error + 'productrequired';
+            if ($("#organisation").val() == "") {
+                $("#organisation").css('border-color', 'red');
+                $("#organisation").css('border-width', '2px');
+                $("#organisation").attr('placeholder', 'Required Field');
+                error = error + 'organisation';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#projectdescription").val() == "") {
-                $("#projectdescription").css('border-color', 'red');
-                $("#projectdescription").css('border-width', '2px');
-                $("#projectdescription").attr('placeholder', 'Required Field');
-                error = error + 'projectdescription';
+            if ($("#visualstyledescription").val() == "") {
+                $("#visualstyledescription").css('border-color', 'red');
+                $("#visualstyledescription").css('border-width', '2px');
+                $("#visualstyledescription").attr('placeholder', 'Required Field');
+                error = error + 'visualstyledescription';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
             }
-            if ($("#projectdescriptionmain").val() == "") {
-                $("#projectdescriptionmain").css('border-color', 'red');
-                $("#projectdescriptionmain").css('border-width', '2px');
-                $("#projectdescriptionmain").attr('placeholder', 'Required Field');
-                error = error + 'projectdescriptionmain';
+            if ($("#inspwebsitename").val() == "") {
+                $("#inspwebsitename").css('border-color', 'red');
+                $("#inspwebsitename").css('border-width', '2px');
+                $("#inspwebsitename").attr('placeholder', 'Required Field');
+                error = error + 'inspwebsitename';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#sitedescription").val() == "") {
+                $("#sitedescription").css('border-color', 'red');
+                $("#sitedescription").css('border-width', '2px');
+                $("#sitedescription").attr('placeholder', 'Required Field');
+                error = error + 'sitedescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#organisatintargetdescription").val() == "") {
+                $("#organisatintargetdescription").css('border-color', 'red');
+                $("#organisatintargetdescription").css('border-width', '2px');
+                $("#organisatintargetdescription").attr('placeholder', 'Required Field');
+                error = error + 'organisatintargetdescription';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
@@ -1652,6 +1662,15 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 $("#designused").css('border-width', '2px');
                 $("#designused").attr('placeholder', 'Required Field');
                 error = error + 'designused';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#eachpagedescription").val() == "") {
+                $("#eachpagedescription").css('border-color', 'red');
+                $("#eachpagedescription").css('border-width', '2px');
+                $("#eachpagedescription").attr('placeholder', 'Required Field');
+                error = error + 'eachpagedescription';
             } else {
                 // $("#wfirstName2").css('border-color','white');
                 // $("#wfirstName2").css('border-width','1px');
@@ -1673,7 +1692,7 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
             });
         // 
         <?php
-        }elseif(($form_type == "Merchandise") or ($form_type == "Other-clothing-or-merchandise")){
+        }elseif(($form_type == "App-design")){
             ?>
             // 
             elements = document.getElementsByClassName('addItemBtn');
@@ -1681,51 +1700,87 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
                 elements[0].addEventListener("click", function(event){
                     event.preventDefault();
                     var error = "";
-                if ($("#designtype").val() == "") {
-                    $("#designtype").css('border-color', 'red');
-                    $("#designtype").css('border-width', '2px');
-                    $("#designtype").attr('placeholder', 'Required Field');
-                    error = error + 'designtype';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#organisation").val() == "") {
-                    $("#organisation").css('border-color', 'red');
-                    $("#organisation").css('border-width', '2px');
-                    $("#organisation").attr('placeholder', 'Required Field');
-                    error = error + 'organisation';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#projectdescription").val() == "") {
-                    $("#projectdescription").css('border-color', 'red');
-                    $("#projectdescription").css('border-width', '2px');
-                    $("#projectdescription").attr('placeholder', 'Required Field');
-                    error = error + 'projectdescription';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#projectdescriptionmain").val() == "") {
-                    $("#projectdescriptionmain").css('border-color', 'red');
-                    $("#projectdescriptionmain").css('border-width', '2px');
-                    $("#projectdescriptionmain").attr('placeholder', 'Required Field');
-                    error = error + 'projectdescriptionmain';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
-                if ($("#designused").val() == "") {
-                    $("#designused").css('border-color', 'red');
-                    $("#designused").css('border-width', '2px');
-                    $("#designused").attr('placeholder', 'Required Field');
-                    error = error + 'designused';
-                } else {
-                    // $("#wfirstName2").css('border-color','white');
-                    // $("#wfirstName2").css('border-width','1px');
-                }
+                    if ($("#designtype").val() == "") {
+                $("#designtype").css('border-color', 'red');
+                $("#designtype").css('border-width', '2px');
+                $("#designtype").attr('placeholder', 'Required Field');
+                error = error + 'designtype';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#devicetype").val() == "") {
+                $("#devicetype").css('border-color', 'red');
+                $("#devicetype").css('border-width', '2px');
+                $("#devicetype").attr('placeholder', 'Required Field');
+                error = error + 'devicetype';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#visualstyledescription").val() == "") {
+                $("#visualstyledescription").css('border-color', 'red');
+                $("#visualstyledescription").css('border-width', '2px');
+                $("#visualstyledescription").attr('placeholder', 'Required Field');
+                error = error + 'visualstyledescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#inspwebsitename").val() == "") {
+                $("#inspwebsitename").css('border-color', 'red');
+                $("#inspwebsitename").css('border-width', '2px');
+                $("#inspwebsitename").attr('placeholder', 'Required Field');
+                error = error + 'inspwebsitename';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#sitedescription").val() == "") {
+                $("#sitedescription").css('border-color', 'red');
+                $("#sitedescription").css('border-width', '2px');
+                $("#sitedescription").attr('placeholder', 'Required Field');
+                error = error + 'sitedescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#organisatintargetdescription").val() == "") {
+                $("#organisatintargetdescription").css('border-color', 'red');
+                $("#organisatintargetdescription").css('border-width', '2px');
+                $("#organisatintargetdescription").attr('placeholder', 'Required Field');
+                error = error + 'organisatintargetdescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#designused").val() == "") {
+                $("#designused").css('border-color', 'red');
+                $("#designused").css('border-width', '2px');
+                $("#designused").attr('placeholder', 'Required Field');
+                error = error + 'designused';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#eachpagedescription").val() == "") {
+                $("#eachpagedescription").css('border-color', 'red');
+                $("#eachpagedescription").css('border-width', '2px');
+                $("#eachpagedescription").attr('placeholder', 'Required Field');
+                error = error + 'eachpagedescription';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
+            if ($("#app_name").val() == "") {
+                $("#app_name").css('border-color', 'red');
+                $("#app_name").css('border-width', '2px');
+                $("#app_name").attr('placeholder', 'Required Field');
+                error = error + 'app_name';
+            } else {
+                // $("#wfirstName2").css('border-color','white');
+                // $("#wfirstName2").css('border-width','1px');
+            }
                 if (error !== "") {
                     alert('There are error in the form. Please check your submissions');
                     // return false;

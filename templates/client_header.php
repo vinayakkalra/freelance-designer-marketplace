@@ -9,21 +9,27 @@
                 <li class="nav-devider"></li>
                 <!-- <li class="nav-small-cap">PERSONAL</li> -->
                 <li id="dashboard" >
-                    <a href="client_dashboard.php" class="dashboard">
+                    <a href="client_dashboard" class="dashboard">
                         <i class="mdi mdi-gauge ">
                         </i><span class="hide-menu">Dashboard </span>
                     </a>
                 </li>
                 <li id="all_requests" >
-                    <a href="client_all_requests.php" class="all_requests">
+                    <a href="client_all_requests" class="all_requests">
                         <i class="mdi mdi-gauge ">
                         </i><span class="hide-menu">All Requests </span>
                     </a>
                 </li>
                 <li id="credits" >
-                    <a href="credits.php" class="credits">
+                    <a href="credits" class="credits">
                         <i class="mdi mdi-gauge ">
                         </i><span class="hide-menu">Credits </span>
+                    </a>
+                </li>
+                <li id="contact" >
+                    <a href="client_contact_us" class="contact">
+                        <i class="mdi mdi-gauge ">
+                        </i><span class="hide-menu">Contact Us </span>
                     </a>
                 </li>
                 <!-- <li id="">

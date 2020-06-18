@@ -2,10 +2,10 @@
 
     session_start();
     if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "client") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "client" )) {
-        header('location:client_dashboard.php');
+        header('location:client_dashboard');
     }
      elseif ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "designer") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "designer" )) {
-        header('location:designer_dashboard.php');
+        header('location:designer_dashboard');
     } 
     // 
 
@@ -86,9 +86,9 @@
 
                             } 
                             if($tablename == "client"){
-                            header("Location: client_dashboard.php");
+                            header("Location: client_dashboard");
                             }else{
-                                header("Location: designer_dashboard.php");
+                                header("Location: designer_dashboard");
                             }
                             
                         } else {
@@ -229,13 +229,13 @@
                         </div> -->
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div><a href="forgotpassword.php"
+                                        <div><a href="forgotpassword"
                                                 class="text-info m-l-5"><b>Forgot Password?</b></a></div>
                                     </div>
                                 </div>
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div>Don't have an account? <a href="index.php"
+                                        <div>Don't have an account? <a href="index"
                                                 class="text-info m-l-5"><b>Sign Up</b></a></div>
                                     </div>
                                 </div>
@@ -348,13 +348,13 @@
                         </div> -->
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div><a href="forgotpassword.php"
+                                        <div><a href="forgotpassword"
                                                 class="text-info m-l-5"><b>Forgot Password?</b></a></div>
                                     </div>
                                 </div>
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div>Don't have an account? <a href="index.php"
+                                        <div>Don't have an account? <a href="index"
                                                 class="text-info m-l-5"><b>Sign Up</b></a></div>
                                     </div>
                                 </div>

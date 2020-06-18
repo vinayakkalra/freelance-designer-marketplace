@@ -4,10 +4,10 @@
     include("./php/config.php");
     // $_SESSION['iddashboard'] $_SESSION['signupas']
     if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "client") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "client" )) {
-        header('location:client_dashboard.php');
+        header('location:client_dashboard');
     }
      elseif ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "designer") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "designer" )) {
-        header('location:designer_dashboard.php');
+        header('location:designer_dashboard');
     } 
     // 
 
@@ -133,9 +133,9 @@
 
                         } 
                         if($tablename == "client"){
-                            header("Location: client_dashboard.php");
+                            header("Location: client_dashboard");
                             }else{
-                                header("Location: designer_dashboard.php");
+                                header("Location: designer_dashboard");
                                
                             }
                         // header("Location: My_Courses");
@@ -291,7 +291,7 @@
                                 </div>
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div>Already have an account? <a href="login.php"
+                                        <div>Already have an account? <a href="login"
                                                 class="text-info m-l-5"><b>Log In</b></a></div>
                                     </div>
                                 </div>
@@ -408,7 +408,7 @@
                                 </div>
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div>Already have an account? <a href="login.php"
+                                        <div>Already have an account? <a href="login"
                                                 class="text-info m-l-5"><b>Log In</b></a></div>
                                     </div>
                                 </div>

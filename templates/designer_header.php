@@ -21,15 +21,21 @@
                     </a>designer_all_requests.php
                 </li> -->
                     <li id="dashboard" >
-                            <a href="designer_dashboard.php"  class="dashboard">
+                            <a href="designer_dashboard"  class="dashboard">
                                 <i class="mdi mdi-gauge ">
                                 </i><span class="hide-menu">Dashboard </span>
                             </a>
                         </li>
                         <li id="all_requests" >
-                            <a href="designer_all_requests.php" class="all_requests">
+                            <a href="designer_all_requests" class="all_requests">
                                 <i class="mdi mdi-gauge ">
                                 </i><span class="hide-menu">All Requests </span>
+                            </a>
+                        </li>
+                        <li id="contact" >
+                            <a href="desginer_contact_us" class="contact">
+                                <i class="mdi mdi-gauge ">
+                                </i><span class="hide-menu">Contact Us </span>
                             </a>
                         </li>
                         <!-- <li id="accepted_requests">

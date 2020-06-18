@@ -2,10 +2,10 @@
 
     session_start();
     if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "client") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "client" )) {
-        header('location:client_dashboard.php');
+        header('location:client_dashboard');
     }
      elseif ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and $_SESSION['signupas'] == "designer") or (array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']  and $_COOKIE['signupas'] == "designer" )) {
-        header('location:designer_dashboard.php');
+        header('location:designer_dashboard');
     } 
     // 
 
@@ -79,7 +79,7 @@
                         $hashedPassword = hash("sha512",$hashed_password2check);
                         $query = "UPDATE `$tablename` SET password = '".$hashedPassword."' WHERE email = '".mysqli_real_escape_string($conn, $_POST['email'])."' LIMIT 1";
                         mysqli_query($conn, $query);
-                        header("Location: login.php");
+                        header("Location: login");
                         // $hashedPassword = md5(md5($row['id']).$_POST['password']);
                         
                         
@@ -221,7 +221,7 @@
                         </div> -->
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div>Don't have an account? <a href="index.php"
+                                        <div>Don't have an account? <a href="index"
                                                 class="text-info m-l-5"><b>Sign Up</b></a></div>
                                     </div>
                                 </div>
@@ -340,7 +340,7 @@
                         </div> -->
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12 text-center">
-                                        <div>Don't have an account? <a href="index.php"
+                                        <div>Don't have an account? <a href="index"
                                                 class="text-info m-l-5"><b>Sign Up</b></a></div>
                                     </div>
                                 </div>

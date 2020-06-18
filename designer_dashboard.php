@@ -10,7 +10,7 @@ if (array_key_exists("logout", $_GET)) {
             
             setcookie("iddashboard", "", time() - 60*60);
             setcookie("signupas", "", time() - 60*60);
-            header("Refresh:0; url=designer_dashboard.php");
+            header("Refresh:0; url=designer_dashboard");
     //        $_COOKIE["id"] = "";  
     // destroy cookie and session
         }
@@ -21,7 +21,7 @@ if ((array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'] and
 }
  else {
     // echo '<script type="text/javascript">alert("hello!");</script>';
-    header('location:index.php');
+    header('location:index');
 }
 if(array_key_exists("iddashboard", $_COOKIE) and $_COOKIE['iddashboard']){
     // getting id of customer

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2020 at 03:48 PM
+-- Generation Time: Jun 18, 2020 at 07:38 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -157,6 +157,34 @@ INSERT INTO `client` (`id`, `email`, `password`, `name`, `phone`, `from_ip`, `fr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `client_contact_us`
+--
+
+CREATE TABLE `client_contact_us` (
+  `id` int(200) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` varchar(200) NOT NULL,
+  `message` varchar(200) NOT NULL,
+  `from_ip` varchar(200) NOT NULL,
+  `from_browser` varchar(200) NOT NULL,
+  `time` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `client_contact_us`
+--
+
+INSERT INTO `client_contact_us` (`id`, `name`, `email`, `phone`, `message`, `from_ip`, `from_browser`, `time`) VALUES
+(1, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', '', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:50:29 +0530'),
+(2, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', '', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:51:08 +0530'),
+(3, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', 'dfgbfg', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:52:17 +0530'),
+(4, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', 'cfhndf', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:52:37 +0530'),
+(5, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', 'cfb', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:59:54 +0530');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `clothing_requests`
 --
 
@@ -289,6 +317,36 @@ CREATE TABLE `designer_completed_requests` (
   `credits` int(22) NOT NULL,
   `client_table` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `designer_contact_us`
+--
+
+CREATE TABLE `designer_contact_us` (
+  `id` int(200) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` varchar(200) NOT NULL,
+  `message` varchar(200) NOT NULL,
+  `from_ip` varchar(200) NOT NULL,
+  `from_browser` varchar(200) NOT NULL,
+  `time` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `designer_contact_us`
+--
+
+INSERT INTO `designer_contact_us` (`id`, `name`, `email`, `phone`, `message`, `from_ip`, `from_browser`, `time`) VALUES
+(1, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', '', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:50:29 +0530'),
+(2, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', '', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:51:08 +0530'),
+(3, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', 'dfgbfg', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:52:17 +0530'),
+(4, 'testfinalmob', 'testfinalmob@gmail.com', '9898989898', 'cfhndf', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 22:52:37 +0530'),
+(5, 'testfinalmob', 'testfinalmob@gmail.com', '9877887878', 'xfbdf', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 23:00:22 +0530'),
+(6, 'testfinalmob', 'testfinalmob@gmail.com', '9877887878', 'cvn', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 23:01:01 +0530'),
+(7, 'testfinalmob', 'testfinalmob@gmail.com', '9877887878', 'vv', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36', 'Thu, 18 Jun 2020 23:08:13 +0530');
 
 -- --------------------------------------------------------
 
@@ -438,6 +496,12 @@ ALTER TABLE `client`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `client_contact_us`
+--
+ALTER TABLE `client_contact_us`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `clothing_requests`
 --
 ALTER TABLE `clothing_requests`
@@ -459,6 +523,12 @@ ALTER TABLE `designer`
 -- Indexes for table `designer_completed_requests`
 --
 ALTER TABLE `designer_completed_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `designer_contact_us`
+--
+ALTER TABLE `designer_contact_us`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -502,6 +572,12 @@ ALTER TABLE `client`
   MODIFY `id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `client_contact_us`
+--
+ALTER TABLE `client_contact_us`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `clothing_requests`
 --
 ALTER TABLE `clothing_requests`
@@ -524,6 +600,12 @@ ALTER TABLE `designer`
 --
 ALTER TABLE `designer_completed_requests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `designer_contact_us`
+--
+ALTER TABLE `designer_contact_us`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `logo_identity_requests`

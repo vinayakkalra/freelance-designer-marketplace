@@ -59,14 +59,14 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Admin Press Admin Template - The Ultimate Bootstrap 4 Admin Template</title>
     <!-- Bootstrap Core CSS -->
-    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/plugins/wizard/steps.css" rel="stylesheet">
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/plugins/wizard/steps.css" rel="stylesheet">
     <!--alerts CSS -->
-    <link rel="stylesheet" href="../assets/plugins/dropify/dist/css/dropify.min.css">
-    <link href="../assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/plugins/dropify/dist/css/dropify.min.css">
+    <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -192,16 +192,16 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo">
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo">
                             <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo">
+                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo">
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                             <!-- dark Logo text -->
-                            <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo">
+                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo">
                             <!-- Light Logo text -->
-                            <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage"></span>
+                            <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage"></span>
                     </a>
                 </div>
                 <!-- ============================================================== -->
@@ -1254,10 +1254,10 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <!-- All Jquery -->
             <!-- ============================================================== -->
-            <script src="../assets/plugins/jquery/jquery.min.js"></script>
+            <script src="assets/plugins/jquery/jquery.min.js"></script>
             <!-- Bootstrap tether Core JavaScript -->
-            <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-            <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+            <script src="assets/plugins/bootstrap/js/popper.min.js"></script>
+            <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
             <!-- slimscrollbar scrollbar JavaScript -->
             <script src="js/jquery.slimscroll.js"></script>
             <!--Wave Effects -->
@@ -1265,25 +1265,25 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!--Menu sidebar -->
             <script src="js/sidebarmenu.js"></script>
             <!--stickey kit -->
-            <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-            <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+            <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+            <script src="assets/plugins/sparkline/jquery.sparkline.min.js"></script>
             <!--Custom JavaScript -->
             <script src="js/custom.min.js"></script>
-            <!-- <script src="../assets/plugins/moment/min/moment.min.js"></script> -->
-            <script src="../assets/plugins/wizard/jquery.steps.min.js"></script>
-            <script src="../assets/plugins/wizard/jquery.validate.min.js"></script>
+            <!-- <script src="assets/plugins/moment/min/moment.min.js"></script> -->
+            <script src="assets/plugins/wizard/jquery.steps.min.js"></script>
+            <script src="assets/plugins/wizard/jquery.validate.min.js"></script>
             <!-- Sweet-Alert  -->
-            <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
-            <!-- <script src="../assets/plugins/wizard/steps.js"></script> -->
+            <script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
+            <!-- <script src="assets/plugins/wizard/steps.js"></script> -->
             <!-- ============================================================== -->
             <!-- Style switcher -->
 
             <!-- ============================================================== -->
-            <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+            <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
             <script type="text/javascript">
                 $("#header-desktop").load('templates/designer_header.php');
             </script>
-            <!-- <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script> -->
+            <!-- <script src="assets/plugins/dropify/dist/js/dropify.min.js"></script> -->
             <!-- <script>
         $(document).ready(function () {
             // Basic

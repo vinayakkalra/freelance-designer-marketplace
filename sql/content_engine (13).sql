@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2020 at 07:38 PM
+-- Generation Time: Jun 19, 2020 at 02:11 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -152,7 +152,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `email`, `password`, `name`, `phone`, `from_ip`, `from_browser`, `time`, `Credits`, `freetier`, `freelancer`, `startups`, `sme`, `no_requests`, `no_completed_requests`) VALUES
-(10, 'testfinalmob@gmail.com', '0b1541ff1c1d9569c68eded453ef32a4946bd2b720f506bf2759bf61748acd6c4e15f8702a837f30ad1ccd4f1358affd0d84701e07f377b9671429591038538b', 'testfinalmob', '9898989898', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 19:56:19 +0530', 132185, 1, 5, 1, 1, 11, 4);
+(10, 'testfinalmob@gmail.com', '0b1541ff1c1d9569c68eded453ef32a4946bd2b720f506bf2759bf61748acd6c4e15f8702a837f30ad1ccd4f1358affd0d84701e07f377b9671429591038538b', 'testfinalmob', '9898989898', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Tue, 26 May 2020 19:56:19 +0530', 127183, 1, 5, 1, 1, 29, 4);
 
 -- --------------------------------------------------------
 
@@ -557,13 +557,13 @@ ALTER TABLE `web_app_requests`
 -- AUTO_INCREMENT for table `art_illusion_advert_requests`
 --
 ALTER TABLE `art_illusion_advert_requests`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `business_advert_requests`
 --
 ALTER TABLE `business_advert_requests`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -581,7 +581,7 @@ ALTER TABLE `client_contact_us`
 -- AUTO_INCREMENT for table `clothing_requests`
 --
 ALTER TABLE `clothing_requests`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `credits`
@@ -611,7 +611,7 @@ ALTER TABLE `designer_contact_us`
 -- AUTO_INCREMENT for table `logo_identity_requests`
 --
 ALTER TABLE `logo_identity_requests`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `redo`
@@ -623,7 +623,7 @@ ALTER TABLE `redo`
 -- AUTO_INCREMENT for table `web_app_requests`
 --
 ALTER TABLE `web_app_requests`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

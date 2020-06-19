@@ -110,7 +110,9 @@ $tmpFilePath = $_FILES['images']['tmp_name'][$i];
 //Make sure we have a file path
 if ($tmpFilePath != ""){
 $img_folder = "upload_files/";
+$extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
 $img = $_FILES['images']['name'][$i];
+$img = $img.".".$customername.".".$extension ;
 $img_loc = $_FILES['images']['tmp_name'][$i];
 // $img = $_FILES['images']['name'][$i];
 // check upload file
@@ -131,7 +133,11 @@ $tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
 //Make sure we have a file path
 if ($tmpFilePath != ""){
 $img_folder = "upload_files/";
+// 
+$extension = pathinfo($_FILES['refimages']['name'][$i], PATHINFO_EXTENSION);
 $img = $_FILES['refimages']['name'][$i];
+$img = $img.".".$customername.".".$extension ;
+// 
 $img_loc = $_FILES['refimages']['tmp_name'][$i];
 // $img = $_FILES['images']['name'][$i];
 if(file_exists("upload_files/" . $img)){
@@ -158,15 +164,17 @@ $tmpFilePath = $_FILES['images']['tmp_name'][$i];
 //Make sure we have a file path
 if ($tmpFilePath != ""){
 $img_folder = "upload_files/";
+$extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
 $img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
+$img = $img.".".$customername.".".$extension ;
+$items[] = $img;
 $img_loc = $_FILES['images']['tmp_name'][$i];
 // $img = $_FILES['images']['name'][$i];
 // check upload file
 if(move_uploaded_file($img_loc,$img_folder.$img))
 {
     ?>
-<script>alert('file uploaded')</script>
+<!-- <script>alert('file uploaded')</script> -->
 <?php
 }
 else 
@@ -195,14 +203,16 @@ $tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
 //Make sure we have a file path
 if ($tmpFilePath != ""){
 $img_folder = "upload_files/";
+$extension = pathinfo($_FILES['refimages']['name'][$i], PATHINFO_EXTENSION);
 $img = $_FILES['refimages']['name'][$i];
-$itemss[] = $_FILES['refimages']['name'][$i];
+$img = $img.".".$customername.".".$extension ;
+$itemss[] = $img;
 $img_loc = $_FILES['refimages']['tmp_name'][$i];
 // $img = $_FILES['images']['name'][$i];
 if(move_uploaded_file($img_loc,$img_folder.$img))
 {
     ?>
-<script>alert('file uploaded')</script>
+<!-- <script>alert('file uploaded')</script> -->
 <?php
 }
 else 
@@ -277,41 +287,45 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
     $total = count($_FILES['images']['name']);
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-
-}
-}
+    $tmpFilePath = $_FILES['images']['tmp_name'][$i];
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    $extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['images']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    $img_loc = $_FILES['images']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    // check upload file
+    if(file_exists("upload_files/" . $img)){
+        $error = $img . " is already exists.<br>".$error;
+        // echo $upload . " is already exists.";
+    }
+    }
+    }
 // check inspiration file uploaded or not
 $total = count($_FILES['refimages']['name']);
 
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
 
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-}
-}
+    $tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    // 
+    $extension = pathinfo($_FILES['refimages']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['refimages']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    // 
+    $img_loc = $_FILES['refimages']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    if(file_exists("upload_files/" . $img)){
+        $error = $img . " is already exists.<br>".$error;
+        // echo $upload . " is already exists.";
+    }
+    }
+    }
 
 if ($error != "") {
 
@@ -326,29 +340,29 @@ $total = count($_FILES['images']['name']);
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
 
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-
-
+    $tmpFilePath = $_FILES['images']['tmp_name'][$i];
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    $extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['images']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    $items[] = $img;
+    $img_loc = $_FILES['images']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    // check upload file
+    if(move_uploaded_file($img_loc,$img_folder.$img))
+    {
+        ?>
+    <!-- <script>alert('file uploaded')</script> -->
+    <?php
+    }
+    else 
+    {
+        ?>
+    <script>alert('file not uploaded')</script>
+    <?php
+    }
 }
 }
 if (!empty($items)){
@@ -363,28 +377,30 @@ $total = count($_FILES['refimages']['name']);
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
 
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$itemss[] = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-}
-}
+    $tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    $extension = pathinfo($_FILES['refimages']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['refimages']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    $itemss[] = $img;
+    $img_loc = $_FILES['refimages']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    if(move_uploaded_file($img_loc,$img_folder.$img))
+    {
+        ?>
+    <!-- <script>alert('file uploaded')</script> -->
+    <?php
+    }
+    else 
+    {
+        ?>
+    <script>alert('file not uploaded')</script>
+    <?php
+    }
+    }
+    }
 if (!empty($itemss)){
 $inspimages = implode("++--", $itemss);
 }else{
@@ -447,41 +463,47 @@ $query = "INSERT INTO `clothing_requests` (`email`,`name`,`phone`,`project_name`
     $total = count($_FILES['images']['name']);
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-
-}
-}
+    $tmpFilePath = $_FILES['images']['tmp_name'][$i];
+    
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    $extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['images']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    $img_loc = $_FILES['images']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    // check upload file
+    if(file_exists("upload_files/" . $img)){
+        $error = $img . " is already exists.<br>".$error;
+        // echo $upload . " is already exists.";
+    }
+    
+    }
+    }
 // check inspiration file uploaded or not
 $total = count($_FILES['refimages']['name']);
 
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
 
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(file_exists("upload_files/" . $img)){
-    $error = $img . " is already exists.<br>".$error;
-    // echo $upload . " is already exists.";
-}
-}
-}
+    $tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    // 
+    $extension = pathinfo($_FILES['refimages']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['refimages']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    // 
+    $img_loc = $_FILES['refimages']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    if(file_exists("upload_files/" . $img)){
+        $error = $img . " is already exists.<br>".$error;
+        // echo $upload . " is already exists.";
+    }
+    }
+    }
 
 if ($error != "") {
 
@@ -496,31 +518,31 @@ $total = count($_FILES['images']['name']);
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
 
-$tmpFilePath = $_FILES['images']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-// check upload file
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-
-
-}
-}
+    $tmpFilePath = $_FILES['images']['tmp_name'][$i];
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    $extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['images']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    $items[] = $img;
+    $img_loc = $_FILES['images']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    // check upload file
+    if(move_uploaded_file($img_loc,$img_folder.$img))
+    {
+        ?>
+    <!-- <script>alert('file uploaded')</script> -->
+    <?php
+    }
+    else 
+    {
+        ?>
+    <script>alert('file not uploaded')</script>
+    <?php
+    }
+    }
+    }
 if (!empty($items)){
 $refimages = implode("++--", $items);
 }else{
@@ -533,28 +555,30 @@ $total = count($_FILES['refimages']['name']);
 // Loop through each file
 for( $i=0 ; $i < $total ; $i++ ) {
 
-$tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
-//Make sure we have a file path
-if ($tmpFilePath != ""){
-$img_folder = "upload_files/";
-$img = $_FILES['refimages']['name'][$i];
-$itemss[] = $_FILES['refimages']['name'][$i];
-$img_loc = $_FILES['refimages']['tmp_name'][$i];
-// $img = $_FILES['images']['name'][$i];
-if(move_uploaded_file($img_loc,$img_folder.$img))
-{
-    ?>
-<script>alert('file uploaded')</script>
-<?php
-}
-else 
-{
-    ?>
-<script>alert('file not uploaded')</script>
-<?php
-}
-}
-}
+    $tmpFilePath = $_FILES['refimages']['tmp_name'][$i];
+    //Make sure we have a file path
+    if ($tmpFilePath != ""){
+    $img_folder = "upload_files/";
+    $extension = pathinfo($_FILES['refimages']['name'][$i], PATHINFO_EXTENSION);
+    $img = $_FILES['refimages']['name'][$i];
+    $img = $img.".".$customername.".".$extension ;
+    $itemss[] = $img;
+    $img_loc = $_FILES['refimages']['tmp_name'][$i];
+    // $img = $_FILES['images']['name'][$i];
+    if(move_uploaded_file($img_loc,$img_folder.$img))
+    {
+        ?>
+    <!-- <script>alert('file uploaded')</script> -->
+    <?php
+    }
+    else 
+    {
+        ?>
+    <script>alert('file not uploaded')</script>
+    <?php
+    }
+    }
+    }
 if (!empty($itemss)){
 $inspimages = implode("++--", $itemss);
 }else{

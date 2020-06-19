@@ -101,9 +101,11 @@ $tmpFilePath = $_FILES['images']['tmp_name'][$i];
 //Make sure we have a file path
 if ($tmpFilePath != ""){
 $img_folder = "designed_files/";
-$img = $_FILES['images']['name'][$i];
-$img_loc = $_FILES['images']['tmp_name'][$i];
 // $img = $_FILES['images']['name'][$i];
+$extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
+$img = $_FILES['images']['name'][$i];
+$img = $img.".".$customername.".".$extension ;
+$img_loc = $_FILES['images']['tmp_name'][$i];
 // check upload file
 if(file_exists("designed_files/" . $img)){
     $error = $img . " is already exists.<br>".$error;
@@ -145,15 +147,19 @@ $tmpFilePath = $_FILES['images']['tmp_name'][$i];
 //Make sure we have a file path
 if ($tmpFilePath != ""){
 $img_folder = "designed_files/";
+// 
+$extension = pathinfo($_FILES['images']['name'][$i], PATHINFO_EXTENSION);
 $img = $_FILES['images']['name'][$i];
-$items[] = $_FILES['images']['name'][$i];
+$img = $img.".".$customername.".".$extension ;
+$items[] = $img;
+// 
 $img_loc = $_FILES['images']['tmp_name'][$i];
 // $img = $_FILES['images']['name'][$i];
 // check upload file
 if(move_uploaded_file($img_loc,$img_folder.$img))
 {
     ?>
-<script>alert('file uploaded')</script>
+<!-- <script>alert('file uploaded')</script> -->
 <?php
 }
 else 

@@ -10,7 +10,8 @@ if (array_key_exists("logout", $_GET)) {
             
             setcookie("iddashboard", "", time() - 60*60);
             setcookie("signupas", "", time() - 60*60);
-            header("Refresh:0; url=designer_dashboard");
+            header('location:index');
+            // header("Refresh:0; url=designer_dashboard");
     //        $_COOKIE["id"] = "";  
     // destroy cookie and session
         }
@@ -1137,9 +1138,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer">
-                © 2019 Admin Press Admin by themedesigner.in
-            </footer>
+            <div id="footer_designer" ></div>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -1182,6 +1181,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
     <script type="text/javascript">
         $("#header-desktop").load('templates/designer_header.php');
+        $("#footer_designer").load('templates/designer_footer.php');
     </script>
     <script>
          $(document).ready(function () {

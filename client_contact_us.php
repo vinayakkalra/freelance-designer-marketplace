@@ -347,9 +347,7 @@ if ($error != "") {
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer">
-                © 2019 Admin Press Admin by themedesigner.in
-            </footer>
+            <div id="footer_client" ></div>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -392,6 +390,8 @@ if ($error != "") {
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
     <script type="text/javascript">
         $("#header-desktop").load('templates/client_header.php');
+        $("#footer_client").load('templates/client_footer.php');
+        
     </script>
     <!-- <script src="assets/plugins/dropify/dist/js/dropify.min.js"></script> -->
     <script>

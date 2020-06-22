@@ -867,9 +867,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer">
-                © 2019 Admin Press Admin by themedesigner.in
-            </footer>
+            <div id="footer_client" ></div>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -934,6 +932,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     </script>
      <script type="text/javascript">
         $("#header-desktop").load('templates/client_header.php');
+        $("#footer_client").load('templates/client_footer.php');
     </script>
     <script>
     // free tier

@@ -10,7 +10,8 @@ if (array_key_exists("logout", $_GET)) {
             
             setcookie("iddashboard", "", time() - 60*60);
             setcookie("signupas", "", time() - 60*60);
-            header("Refresh:0; url=client_dashboard");
+            header('location:index');
+            // header("Refresh:0; url=client_dashboard");
     //        $_COOKIE["id"] = "";  
     // destroy cookie and session
         }
@@ -3208,9 +3209,10 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer">
+            <div id="footer_client" ></div>
+            <!-- <footer class="footer">
                 © 2019 Admin Press Admin by themedesigner.in
-            </footer>
+            </footer> -->
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -3274,6 +3276,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
     </script>
      <script type="text/javascript">
         $("#header-desktop").load('templates/client_header.php');
+        $("#footer_client").load('templates/client_footer.php');
     </script>
 
 </body>

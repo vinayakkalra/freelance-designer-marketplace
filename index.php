@@ -102,7 +102,7 @@
                     } else {
 
 
-                        // setting password with md5
+                        // setting password with hash
                         $currentrowid = mysqli_insert_id($conn) ;
                         $hashed_password1 = hash("sha512", $currentrowid);
                         $hashed_password2 =  $hashed_password1.$_POST['password'];

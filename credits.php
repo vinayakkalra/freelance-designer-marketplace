@@ -1029,7 +1029,7 @@ elseif (array_key_exists("iddashboard", $_SESSION) and $_SESSION['iddashboard'])
                             // alert("checked out");
                             var order_id = data.id;
                             var options = {
-                                "key": "rzp_test_BAnreND3t2AMOK", // test key // Enter the Key ID generated from the Dashboard rzp_test_Deii5btTqdfYUu rzp_live_LSedTe83FzVuTe
+                                "key": "", 
                                 "amount": (data.money)*100,
                                 // "amount": (moneytotal)*100,
                                  // Amount is in currency subunits. Default currency is INR. Hence, 29935 refers to 29935 paise or INR 299.35.    
